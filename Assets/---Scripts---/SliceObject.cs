@@ -13,17 +13,37 @@ public class SliceObject : MonoBehaviour
     [SerializeField] private VelocityEstimator _velocityEstimator;
     [SerializeField] private Material _sliceMat;
     [SerializeField] private float _cutForce;
+    [SerializeField] private float _angleToDestroy;
 
+    private Vector3 _previousPos;
 
     void FixedUpdate()
     {
         bool hasHit = Physics.Linecast(_startSlicePoint.position, _endSlicePoint.position, out RaycastHit hit, _sliceable);
 
-        if(hasHit )
+        if (hasHit)
         {
-            GameObject target = hit.transform.gameObject;
-            Slice(target);
+            //GameObject target = hit.transform.gameObject;
+            //Slice(target);
+                print(Vector3.Angle(transform.position - _previousPos, hit.transform.up));
+            if (Vector3.Angle(transform.position - _previousPos, hit.transform.up) > _angleToDestroy)
+            {
+                GameObject target = hit.transform.gameObject;
+                Slice(target);
+                //Destroy(hit.transform.gameObject);
+            }
         }
+
+        //RaycastHit hit;
+        //if (Physics.Raycast(transform.position, transform.forward, out hit, _sliceable))
+        //{
+        //    if(Vector3.Angle(transform.position - _previousPos, hit.transform.up) > 130)
+        //    {
+        //        Destroy(hit.transform.gameObject);
+        //    }
+        //}
+
+        _previousPos = transform.position;
     }
 
     public void Slice(GameObject target)
@@ -43,6 +63,8 @@ public class SliceObject : MonoBehaviour
             SetupSliceComponent(lowerHull);
 
             Destroy(target);
+            Destroy(upperHull, 5);
+            Destroy(lowerHull, 5);
         }
     }
 
