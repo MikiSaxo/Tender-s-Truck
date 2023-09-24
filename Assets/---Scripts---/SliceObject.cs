@@ -23,25 +23,15 @@ public class SliceObject : MonoBehaviour
 
         if (hasHit)
         {
-            //GameObject target = hit.transform.gameObject;
-            //Slice(target);
-                print(Vector3.Angle(transform.position - _previousPos, hit.transform.up));
-            if (Vector3.Angle(transform.position - _previousPos, hit.transform.up) > _angleToDestroy)
+            Vector3 firstPos = transform.position - _previousPos;
+            Vector3 secondPos = hit.transform.up;
+
+            if (Vector3.Angle(firstPos, secondPos) > _angleToDestroy || Vector3.Angle(firstPos, -secondPos) > _angleToDestroy)
             {
                 GameObject target = hit.transform.gameObject;
                 Slice(target);
-                //Destroy(hit.transform.gameObject);
             }
         }
-
-        //RaycastHit hit;
-        //if (Physics.Raycast(transform.position, transform.forward, out hit, _sliceable))
-        //{
-        //    if(Vector3.Angle(transform.position - _previousPos, hit.transform.up) > 130)
-        //    {
-        //        Destroy(hit.transform.gameObject);
-        //    }
-        //}
 
         _previousPos = transform.position;
     }
@@ -54,7 +44,7 @@ public class SliceObject : MonoBehaviour
 
         SlicedHull hull = target.Slice(_endSlicePoint.position, planeNormal);
 
-        if(hull != null)
+        if (hull != null)
         {
             GameObject upperHull = hull.CreateUpperHull(target, _sliceMat);
             SetupSliceComponent(upperHull);
@@ -74,6 +64,6 @@ public class SliceObject : MonoBehaviour
         MeshCollider collider = sliceObj.AddComponent<MeshCollider>();
         collider.convex = true;
 
-;        rb.AddExplosionForce(_cutForce, sliceObj.transform.position, 1);
+        ; rb.AddExplosionForce(_cutForce, sliceObj.transform.position, 1);
     }
 }
