@@ -53,8 +53,8 @@ public class SliceObject : MonoBehaviour
             SetupSliceComponent(lowerHull);
 
             Destroy(target);
-            Destroy(upperHull, 5);
-            Destroy(lowerHull, 5);
+            Destroy(upperHull, 3);
+            Destroy(lowerHull, 3);
         }
     }
 
@@ -63,7 +63,8 @@ public class SliceObject : MonoBehaviour
         Rigidbody rb = sliceObj.AddComponent<Rigidbody>();
         MeshCollider collider = sliceObj.AddComponent<MeshCollider>();
         collider.convex = true;
+        collider.isTrigger = true;
 
-        ; rb.AddExplosionForce(_cutForce, sliceObj.transform.position, 1);
+        rb.AddExplosionForce(_cutForce, sliceObj.transform.position, 1);
     }
 }
