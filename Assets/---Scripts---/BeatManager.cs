@@ -42,4 +42,8 @@ public class Intervals
             _trigger.Invoke();
         }
     }
+    //public UnityEvent GetTrigger()
+    //{
+    //    return _trigger;
+    //}
 }
