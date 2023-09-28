@@ -19,30 +19,30 @@ public class FriesSpawner : MonoBehaviour
     {
         return;
 
-        if (_intervalIndex >= _intervals.Length)
-            return;
+        //if (_intervalIndex >= _intervals.Length)
+        //    return;
 
-        var interval = _intervals[_intervalIndex];
+        //var interval = _intervals[_intervalIndex];
 
-        _currentTime += Time.deltaTime;
+        //_currentTime += Time.deltaTime;
 
-        if(_currentTime >= interval.GetIntervalLength(_bpm))
-        {
-            _currentTime -= _currentTime;
+        //if(_currentTime >= interval.GetIntervalLength(_bpm))
+        //{
+        //    _currentTime -= _currentTime;
 
-            SpawnFrite(_intervals[_intervalIndex].GetDirections()[_dirIndex]);
-            _dirIndex++;
-
-
-            if(_dirIndex >= _intervals[_intervalIndex].GetDirections().Length || _intervals[_intervalIndex].GetDirections().Length == 0)
-            {
-                _intervalIndex++;
-                _dirIndex = 0;
-            }
+        //    SpawnFrite(_intervals[_intervalIndex].GetDirections()[_dirIndex]);
+        //    _dirIndex++;
 
 
-            //print("oui : " + _intervalIndex + " interval " + interval.GetIntervalLength(_bpm));
-        }
+        //    if(_dirIndex >= _intervals[_intervalIndex].GetDirections().Length || _intervals[_intervalIndex].GetDirections().Length == 0)
+        //    {
+        //        _intervalIndex++;
+        //        _dirIndex = 0;
+        //    }
+
+
+        //    //print("oui : " + _intervalIndex + " interval " + interval.GetIntervalLength(_bpm));
+        //}
 
     }
 

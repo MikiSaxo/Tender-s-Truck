@@ -10,25 +10,31 @@ public class Spawner : MonoBehaviour
     [SerializeField] private float _force;
 
 
-    public void SpawnHorizontalFrite()
+    public void SpawnRedHorizontal()
     {
-        SpawnFrite(Direction.Horizontal);
+        SpawnFrite(Direction.Horizontal, WhichType.Red);
     }
-    public void SpawnVerticalFrite()
+    public void SpawnRedVertical()
     {
-        SpawnFrite(Direction.Vertical);
+        SpawnFrite(Direction.Vertical, WhichType.Red);
     }
-    private void SpawnFrite(Direction side)
+    public void SpawnYellowHorizontal()
+    {
+        SpawnFrite(Direction.Horizontal, WhichType.Yellow);
+    }
+    public void SpawnYellowVertical()
+    {
+        SpawnFrite(Direction.Vertical, WhichType.Yellow);
+    }
+    private void SpawnFrite(Direction side, WhichType type)
     {
         GameObject go = Instantiate(_fritePrefab, transform);
 
         var rb = go.GetComponent<Rigidbody>();
         rb.AddForce(_impulseDir * _force);
 
-        if(side == Direction.Vertical)
-        {
-            go.transform.DORotate(new Vector3(0, 0, -90), 0);
-        }
+
+        go.GetComponent<Frite>().Init(side, type);
 
         Destroy(go, 10);
     }

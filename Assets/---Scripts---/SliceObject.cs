@@ -14,6 +14,8 @@ public class SliceObject : MonoBehaviour
     [SerializeField] private Material _sliceMat;
     [SerializeField] private float _cutForce;
     [SerializeField] private float _angleToDestroy;
+    [SerializeField] private WhichType _currentType;
+    [SerializeField] private GameObject _sauceStick;
 
     private Vector3 _previousPos;
 
@@ -26,7 +28,9 @@ public class SliceObject : MonoBehaviour
             Vector3 firstPos = transform.position - _previousPos;
             Vector3 secondPos = hit.transform.up;
 
-            if (Vector3.Angle(firstPos, secondPos) > _angleToDestroy || Vector3.Angle(firstPos, -secondPos) > _angleToDestroy)
+            var friteType = hit.transform.gameObject.GetComponent<Frite>().GetFriteType();
+
+            if (Vector3.Angle(firstPos, secondPos) > _angleToDestroy || Vector3.Angle(firstPos, -secondPos) > _angleToDestroy && _currentType == friteType)
             {
                 GameObject target = hit.transform.gameObject;
                 Slice(target);
@@ -66,5 +70,11 @@ public class SliceObject : MonoBehaviour
         collider.isTrigger = true;
 
         rb.AddExplosionForce(_cutForce, sliceObj.transform.position, 1);
+    }
+
+    public void ChangeSauceType(WhichType newType)
+    {
+        _currentType = newType;
+        _sauceStick.GetComponent<MeshRenderer>().material = PartyManager.Instance.GetFriteType((int)newType);
     }
 }
