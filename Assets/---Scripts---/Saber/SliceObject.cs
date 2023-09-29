@@ -30,7 +30,7 @@ public class SliceObject : MonoBehaviour
 
             var friteType = hit.transform.gameObject.GetComponent<Frite>().GetFriteType();
 
-            if (Vector3.Angle(firstPos, secondPos) > _angleToDestroy || Vector3.Angle(firstPos, -secondPos) > _angleToDestroy && _currentType == friteType)
+            if ((Vector3.Angle(firstPos, secondPos) > _angleToDestroy || Vector3.Angle(firstPos, -secondPos) > _angleToDestroy) && _currentType == friteType)
             {
                 GameObject target = hit.transform.gameObject;
                 Slice(target);
@@ -50,6 +50,7 @@ public class SliceObject : MonoBehaviour
 
         if (hull != null)
         {
+            // Be careful to not spawn frite in a object but in the world. Otherwise the hull won't have the good position
             GameObject upperHull = hull.CreateUpperHull(target, _sliceMat);
             SetupSliceComponent(upperHull);
 
@@ -67,9 +68,9 @@ public class SliceObject : MonoBehaviour
         Rigidbody rb = sliceObj.AddComponent<Rigidbody>();
         MeshCollider collider = sliceObj.AddComponent<MeshCollider>();
         collider.convex = true;
-        collider.isTrigger = true;
+        // collider.isTrigger = true;
 
-        rb.AddExplosionForce(_cutForce, sliceObj.transform.position, 1);
+        //rb.AddExplosionForce(_cutForce, sliceObj.transform.position, 1);
     }
 
     public void ChangeSauceType(WhichType newType)

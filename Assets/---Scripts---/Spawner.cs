@@ -28,8 +28,9 @@ public class Spawner : MonoBehaviour
     }
     private void SpawnFrite(Direction side, WhichType type)
     {
-        GameObject go = Instantiate(_fritePrefab, transform);
-
+        GameObject go = Instantiate(_fritePrefab);
+        go.transform.position = transform.position;
+        
         // var rb = go.GetComponent<Rigidbody>();
         // rb.AddForce(_impulseDir * _force);
 

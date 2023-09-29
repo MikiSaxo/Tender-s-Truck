@@ -147,6 +147,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _friteMesh: {fileID: 6310798365177458038}
-  _meshes: []
   _meshRenderer: {fileID: 1021504757631366774}
-  _direction: {x: 0, y: 0, z: -0.1}
+  _meshes: []
+  _direction: {x: 0, y: 0, z: -0.05}
