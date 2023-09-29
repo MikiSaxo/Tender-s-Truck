@@ -10,23 +10,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private float _force;
 
 
-    public void SpawnRedHorizontal()
-    {
-        SpawnFrite(Direction.Horizontal, WhichType.Red);
-    }
-    public void SpawnRedVertical()
-    {
-        SpawnFrite(Direction.Vertical, WhichType.Red);
-    }
-    public void SpawnYellowHorizontal()
-    {
-        SpawnFrite(Direction.Horizontal, WhichType.Yellow);
-    }
-    public void SpawnYellowVertical()
-    {
-        SpawnFrite(Direction.Vertical, WhichType.Yellow);
-    }
-    private void SpawnFrite(Direction side, WhichType type)
+    private void SpawnFrite(int index)
     {
         GameObject go = Instantiate(_fritePrefab);
         go.transform.position = transform.position;
@@ -35,14 +19,8 @@ public class Spawner : MonoBehaviour
         // rb.AddForce(_impulseDir * _force);
 
 
-        go.GetComponent<Frite>().Init(side, type);
+        go.GetComponent<Frite>().Init((ElementType)index, false);
 
         Destroy(go, 10);
     }
-}
-
-public enum Direction
-{
-    Horizontal = 0,
-    Vertical = 1,
 }

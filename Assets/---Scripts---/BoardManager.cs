@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 
-public class ObjectZoom : MonoBehaviour
+public class BoardManager : MonoBehaviour
 {
     [Header("Controls")]
     [SerializeField] private float _zoomIn = .05f;

@@ -14,14 +14,15 @@ public class SliceObject : MonoBehaviour
     [SerializeField] private Material _sliceMat;
     [SerializeField] private float _cutForce;
     [SerializeField] private float _angleToDestroy;
-    [SerializeField] private WhichType _currentType;
+    [SerializeField] private ElementType _currentType;
     [SerializeField] private GameObject _sauceStick;
 
     private Vector3 _previousPos;
 
     void FixedUpdate()
     {
-        bool hasHit = Physics.Linecast(_startSlicePoint.position, _endSlicePoint.position, out RaycastHit hit, _sliceable);
+        bool hasHit = Physics.Linecast(_startSlicePoint.position, _endSlicePoint.position, out RaycastHit hit,
+            _sliceable);
 
         if (hasHit)
         {
@@ -30,10 +31,17 @@ public class SliceObject : MonoBehaviour
 
             var friteType = hit.transform.gameObject.GetComponent<Frite>().GetFriteType();
 
-            if ((Vector3.Angle(firstPos, secondPos) > _angleToDestroy || Vector3.Angle(firstPos, -secondPos) > _angleToDestroy) && _currentType == friteType)
+            if (Vector3.Angle(firstPos, secondPos) > _angleToDestroy ||
+                 Vector3.Angle(firstPos, -secondPos) > _angleToDestroy)
             {
-                GameObject target = hit.transform.gameObject;
-                Slice(target);
+                if ((friteType is ElementType.RedHorizontal or ElementType.RedVertical
+                     && _currentType is ElementType.RedHorizontal or ElementType.RedVertical)
+                    || (friteType is ElementType.YellowVertical or ElementType.YellowHorizontal
+                        && _currentType is ElementType.YellowVertical or ElementType.YellowHorizontal))
+                {
+                    GameObject target = hit.transform.gameObject;
+                    Slice(target);
+                }
             }
         }
 
@@ -68,12 +76,12 @@ public class SliceObject : MonoBehaviour
         Rigidbody rb = sliceObj.AddComponent<Rigidbody>();
         MeshCollider collider = sliceObj.AddComponent<MeshCollider>();
         collider.convex = true;
-        // collider.isTrigger = true;
+        collider.isTrigger = true;
 
-        //rb.AddExplosionForce(_cutForce, sliceObj.transform.position, 1);
+        rb.AddExplosionForce(_cutForce, sliceObj.transform.position, 1);
     }
 
-    public void ChangeSauceType(WhichType newType)
+    public void ChangeSauceType(ElementType newType)
     {
         _currentType = newType;
         _sauceStick.GetComponent<MeshRenderer>().material = PartyManager.Instance.GetFriteType((int)newType);

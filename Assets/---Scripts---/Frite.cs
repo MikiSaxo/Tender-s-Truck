@@ -12,7 +12,8 @@ public class Frite : MonoBehaviour
     [SerializeField] private Mesh[] _meshes;
     [SerializeField] private Vector3 _direction;
 
-    private WhichType _currentType;
+    private ElementType _currentType;
+    private bool _isEditor;
 
     private void Start()
     {
@@ -23,24 +24,30 @@ public class Frite : MonoBehaviour
         }
     }
 
-    public void Init(Direction side, WhichType initType)
+    public void Init(ElementType elementToSpawn, bool isEditor)
     {
-        if (side == Direction.Vertical)
+        _isEditor = isEditor;
+        if (elementToSpawn is ElementType.RedVertical or ElementType.YellowVertical)
         {
             transform.DORotate(new Vector3(0, 0, -90), 0);
         }
 
-        _currentType = initType;
+        _currentType = elementToSpawn;
         _meshRenderer = GetComponent<MeshRenderer>();
-        _meshRenderer.material = PartyManager.Instance.GetFriteType((int)_currentType);
+        
+        if(PartyManager.Instance != null)
+            _meshRenderer.material = PartyManager.Instance.GetFriteType((int)_currentType);
+        else if(EditorManager.Instance != null)
+            _meshRenderer.material = EditorManager.Instance.GetFriteType((int)_currentType);
     }
 
     private void Update()
     {
-        transform.Translate(_direction, Space.World);
+        if(!_isEditor)
+            transform.Translate(_direction, Space.World);
     }
 
-    public WhichType GetFriteType()
+    public ElementType GetFriteType()
     {
         return _currentType;
     }

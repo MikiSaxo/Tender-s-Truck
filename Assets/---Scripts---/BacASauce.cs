@@ -5,15 +5,15 @@ using UnityEngine.Rendering.Universal;
 
 public class BacASauce : MonoBehaviour
 {
-    [SerializeField] private WhichType _currentType;
+    [SerializeField] private ElementType _currentType;
     [SerializeField] private SliceObject _saber;
-    public void ChangeSauce(WhichType whichFrite)
+    public void ChangeSauce(ElementType whichFrite)
     {
         _currentType = whichFrite;
         gameObject.GetComponent<MeshRenderer>().material = PartyManager.Instance.GetFriteType((int)_currentType);
     }
 
-    public WhichType GetCurrentType()
+    public ElementType GetCurrentType()
     {
         return _currentType;
     }

@@ -46,11 +46,11 @@ public class FriesSpawner : MonoBehaviour
 
     }
 
-    public void SpawnFrite(Direction side)
-    {
-        GameObject go = Instantiate(_fritePrefab);
-        print("spawn frite : " + side);
-    }
+    // public void SpawnFrite(Direction side)
+    // {
+    //     GameObject go = Instantiate(_fritePrefab);
+    //     print("spawn frite : " + side);
+    // }
 }
 
 
@@ -58,7 +58,7 @@ public class FriesSpawner : MonoBehaviour
 public class FriteIntervals
 {
     [SerializeField] private float _steps;
-    [SerializeField] private Direction[] _directions;
+    // [SerializeField] private Direction[] _directions;
     //[SerializeField] private UnityEvent _trigger;
     private int _lastInterval;
 
@@ -80,8 +80,8 @@ public class FriteIntervals
     //{
     //    return _trigger;
     //}
-    public Direction[] GetDirections()
-    {
-        return _directions;
-    }
+    // public Direction[] GetDirections()
+    // {
+    //     return _directions;
+    // }
 }

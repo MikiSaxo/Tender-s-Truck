@@ -11,6 +11,6 @@ public class BoardEditor : MonoBehaviour
     public void Init(int numberBoard, int numberBPM)
     {
         _numberBoard.text = $"n°{numberBoard}";
-        _numberBPM.text = $"1/{numberBPM}";
+        _numberBPM.text = $"{++numberBPM}/4";
     }
 }
