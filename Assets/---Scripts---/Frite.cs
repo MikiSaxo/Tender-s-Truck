@@ -3,13 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Random = UnityEngine.Random;
 
 public class Frite : MonoBehaviour
 {
+    [SerializeField] private MeshFilter _friteMesh;
     [SerializeField] private MeshRenderer _meshRenderer;
+    [SerializeField] private Mesh[] _meshes;
     [SerializeField] private Vector3 _direction;
 
     private WhichType _currentType;
+
+    private void Start()
+    {
+        if (_meshes.Length > 0)
+        {
+            int randomNumber = Random.Range(0, _meshes.Length);
+            _friteMesh.mesh = _meshes[randomNumber];
+        }
+    }
 
     public void Init(Direction side, WhichType initType)
     {
