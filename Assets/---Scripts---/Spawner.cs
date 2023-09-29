@@ -30,8 +30,8 @@ public class Spawner : MonoBehaviour
     {
         GameObject go = Instantiate(_fritePrefab, transform);
 
-        var rb = go.GetComponent<Rigidbody>();
-        rb.AddForce(_impulseDir * _force);
+        // var rb = go.GetComponent<Rigidbody>();
+        // rb.AddForce(_impulseDir * _force);
 
 
         go.GetComponent<Frite>().Init(side, type);
