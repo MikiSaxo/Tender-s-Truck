@@ -40,3 +40,13 @@ public class BoardSign : MonoBehaviour
         }
     }
 }
+
+public enum BoardPosition
+{
+    LeftTop = 0,
+    LeftDown = 1,
+    MidTop = 2,
+    MidDown = 3,
+    RightTop = 4,
+    RightDown = 5,
+}
