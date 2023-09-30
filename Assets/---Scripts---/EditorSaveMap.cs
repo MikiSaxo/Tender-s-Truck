@@ -13,7 +13,6 @@ public class EditorSaveMap : MonoBehaviour
 {
     public static EditorSaveMap Instance;
 
-    [FormerlySerializedAs("_inputFieldMapName")]
     [Header("Setup Save")] 
     [SerializeField] private TMP_InputField _inputMapName;
     [SerializeField] private TMP_InputField _inputMusicName;
@@ -26,12 +25,15 @@ public class EditorSaveMap : MonoBehaviour
     [SerializeField] private Color _colorNotGood;
 
     private string _mapName;
+    private string _musicName;
+    private int _musicBPM;
     public MapConstructData _currentMapConstructData;
     private string _hexColorGood;
     private string _hexColorNotGood;
-    private GameObject _currentFBTextPrefab;
 
-    private const string _saveNoName = "No map name written";
+    private const string _saveNoName = "No MAP name written";
+    private const string _saveNoMusicName = "No MUSIC name written";
+    private const string _saveNoMusicBPM = "No BPM number written";
     private const string _saveSucceed = "saved";
     private const float _durationDispawnText = 5f;
 
@@ -58,53 +60,69 @@ public class EditorSaveMap : MonoBehaviour
             SaveJson();
     }
 
-    private void UpdateMapName(char[,] mapGrid)
+    private void UpdateMapName()
     {
         _mapName = _inputMapName.text;
 
         if (_inputMapName.text == "")
         {
             SpawnFbText($"{_hexColorNotGood}{_saveNoName}");
-            return;
         }
 
+    }
+    
+    private void UpdateMusicName()
+    {
+        _musicName = _inputMusicName.text;
+
+        if (_inputMusicName.text == "")
+        {
+            SpawnFbText($"{_hexColorNotGood}{_saveNoMusicName}");
+        }
+        else
+        {
+            _currentMapConstructData.MusicName = _musicName;
+        }
+
+    }
+    private void UpdateMusicBPM()
+    {
+        if (_inputMusicBPM.text != "")
+            _musicBPM = int.Parse(_inputMusicBPM.text);
+
+        if (_musicBPM <= 0 || _inputMusicBPM.text == "")
+        {
+            SpawnFbText($"{_hexColorNotGood}{_saveNoMusicBPM}");
+        }
+        else
+        {
+            _currentMapConstructData.MusicBPM = _musicBPM;
+        }
+    }
+
+    private void ResetInputField()
+    {
         _inputMapName.text = "";
+        _inputMusicName.text = "";
+        _inputMusicBPM.text = "";
     }
 
     public void UpdateInputField(string newName)
     {
+        // Used for load map
         _inputMapName.text = newName;
     }
 
     public void SpawnFbText(string text)
     {
-        if (_currentFBTextPrefab != null)
-        {
-            _currentFBTextPrefab.GetComponent<TMP_Text>().DOKill();
-            Destroy(_currentFBTextPrefab);
-        }
-        
+        // Message warning of success
         GameObject go = Instantiate(_fBTextPrefab, _fBTextParent.transform);
-        _currentFBTextPrefab = go;
-        var fBText = _currentFBTextPrefab.GetComponent<TMP_Text>();
+        var fBText = go.GetComponent<TMP_Text>();
         fBText.DOFade(1, 0);
         fBText.text = text;
         fBText.DOFade(0, _durationDispawnText);
         
-        Destroy(_currentFBTextPrefab, _durationDispawnText);
-    }
-
-    private void CreateTextFile(char[,] mapGrid)
-    {
-        string textName = $"{Application.streamingAssetsPath}/{_folderDestination}/{_mapName}.txt";
-
-        if (File.Exists(textName))
-            File.Delete(textName);
-
-        // string map = ConvertMapGridToString(mapGrid);
-        // File.WriteAllText(textName, map);
-        // if (map != null)
-        //     _currentMapConstructData.Map = map;
+        Destroy(go, _durationDispawnText);
     }
 
     // private void GetMap()
@@ -135,10 +153,14 @@ public class EditorSaveMap : MonoBehaviour
     
     public void SaveMap()
     {
-        //UpdateMapName(EditorMapManager.Instance.GetMapGrid());
+        UpdateMapName();
+        UpdateMusicName();
+        UpdateMusicBPM();
         //GetMap();
+        
+        if (_mapName == "" || _musicName == "" || _musicBPM <= 0) return;
 
-        if (_mapName == "") return;
+        ResetInputField();
         
         SaveJson();
         
