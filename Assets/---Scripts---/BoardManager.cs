@@ -61,4 +61,15 @@ public class BoardManager : MonoBehaviour
             }
         }
     }
+
+    public void ResetPos()
+    {
+        transform.position = new Vector3(0, transform.position.y, 0);
+        
+        for (int i = 0; i < _objectsToMove.Count; i++)
+        {
+            var position = transform.position;
+            _objectsToMove[i].transform.position = new Vector3(position.x, position.y, position.z + (i * 5f));
+        }
+    }
 }
