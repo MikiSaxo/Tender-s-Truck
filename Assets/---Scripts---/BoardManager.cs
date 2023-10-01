@@ -17,23 +17,23 @@ public class BoardManager : MonoBehaviour
     private List<GameObject> _objectsToMove = new List<GameObject>();
     private int _counter;
     private const float StartDistance = 5f;
-    
+
     private void Start()
     {
         for (int i = 0; i < _numberToSpawn; i++)
         {
-            SpawnFourBoard();
+            AddFourBoard();
         }
     }
 
-    private void SpawnFourBoard()
+    public void AddFourBoard()
     {
         for (int j = 0; j < 4; j++)
         {
             // Instantiate the board
             GameObject go = Instantiate(_boardEditorPrefab, transform);
             // Init the numbers
-            go.GetComponent<BoardEditor>().Init(_counter+1, j % 4);
+            go.GetComponent<BoardEditor>().Init(_counter + 1, j % 4);
             // Get position of spawner and move it  
             var position = transform.position;
             go.transform.position = new Vector3(position.x, position.y, position.z + (_counter * StartDistance));
@@ -41,6 +41,16 @@ public class BoardManager : MonoBehaviour
             _objectsToMove.Add(go);
             // Add to the counter
             _counter++;
+        }
+    }
+
+    public void RemoveFourBoard()
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            Destroy(_objectsToMove[^1]);
+            _objectsToMove.RemoveAt(_objectsToMove.Count - 1);
+            _counter--;
         }
     }
 

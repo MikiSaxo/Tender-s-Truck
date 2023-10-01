@@ -1,1 +1,1 @@
-{"MusicName":"","MusicBPM":0,"ElementTypes":[]}
+{"MusicName":"","MusicBPM":0,"ElementsIndex":[1,2,3,5],"ElementsPosition":[1,3,2,3],"ElementsType":[2,2,3,1]}

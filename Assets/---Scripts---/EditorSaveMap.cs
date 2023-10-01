@@ -114,14 +114,14 @@ public class EditorSaveMap : MonoBehaviour
         }
     }
 
-    public void AddElement(int elementIndex, BoardPosition boardPos, ElementType elementType)
+    public void AddElement(int elementIndex, BoardPosition elementPos, ElementType elementType)
     {
         // _currentMCD.ElementByPosIndex[0][0].Add(elementIndex, posType);
         //
         // if(_currentMCD.ElementByPosIndex.ContainsKey())
 
         _currentMCD.ElementsIndex.Add(elementIndex);
-        _currentMCD.ElementsPosition.Add(boardPos);
+        _currentMCD.ElementsPosition.Add(elementPos);
         _currentMCD.ElementsType.Add(elementType);
     }
 
