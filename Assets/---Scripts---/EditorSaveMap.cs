@@ -158,6 +158,20 @@ public class EditorSaveMap : MonoBehaviour
         }
     }
 
+    public void DeleteElement(int elementIndex)
+    {
+        for (int i = 0; i < _currentMCD.ElementsIndex.Count; i++)
+        {
+            if (_currentMCD.ElementsIndex[i] == elementIndex)
+            {
+                _currentMCD.ElementsIndex.RemoveAt(i);
+                _currentMCD.ElementsPosition.RemoveAt(i);
+                _currentMCD.ElementsType.RemoveAt(i);
+                DeleteElement(elementIndex);
+            }
+        }
+    }
+
     private void ResetInputField()
     {
         _inputMapName.text = "";

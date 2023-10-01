@@ -48,6 +48,7 @@ public class BoardManager : MonoBehaviour
     {
         for (int j = 0; j < 4; j++)
         {
+            _objectsToMove[^1].GetComponent<BoardEditor>().OnDestroyElement();
             Destroy(_objectsToMove[^1]);
             _objectsToMove.RemoveAt(_objectsToMove.Count - 1);
             _counter--;

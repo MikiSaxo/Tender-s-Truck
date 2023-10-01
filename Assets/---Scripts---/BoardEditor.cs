@@ -26,4 +26,9 @@ public class BoardEditor : MonoBehaviour
     {
         EditorSaveMap.Instance.RemoveElement(_numberBoard, boardPos, elementType);
     }
+
+    public void OnDestroyElement()
+    {
+        EditorSaveMap.Instance.DeleteElement(_numberBoard);
+    }
 }
