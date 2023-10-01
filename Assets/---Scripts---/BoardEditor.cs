@@ -20,10 +20,10 @@ public class BoardEditor : MonoBehaviour
 
     public void AddElementToSave(BoardPosition boardPos, ElementType elementType)
     {
-        EditorSaveMap.Instance.UpdateElement(_numberBoard, boardPos, elementType, true);
+        EditorSaveMap.Instance.AddElement(_numberBoard, boardPos, elementType);
     }
     public void RemoveElementToSave(BoardPosition boardPos, ElementType elementType)
     {
-        EditorSaveMap.Instance.UpdateElement(_numberBoard, boardPos, elementType, false);
+        EditorSaveMap.Instance.RemoveElement(_numberBoard, boardPos, elementType);
     }
 }

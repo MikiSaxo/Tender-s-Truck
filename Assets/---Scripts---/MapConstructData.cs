@@ -9,9 +9,12 @@ public class MapConstructData
     [Header("Music Infos")]
     public string MusicName;
     public int MusicBPM;
-    
+
     [Header("Elements Infos")]
-    public Dictionary<int, BoardPosType> ElementByPosIndex = new Dictionary<int, BoardPosType>();
+    // public Dictionary<List<int>, List<BoardPosType>> ElementByPosIndex = new Dictionary<List<int>, List<BoardPosType>>();
+    public List<int> ElementsIndex;
+    public List<BoardPosition> ElementsPosition;
+    public List<ElementType> ElementsType;
 }
 
 public class BoardPosType

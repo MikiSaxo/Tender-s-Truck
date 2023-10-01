@@ -54,9 +54,11 @@ public class EditorSaveMap : MonoBehaviour
 
     private void PrintDico()
     {
-        foreach (var kvp in _currentMCD.ElementByPosIndex)
+        for (int i = 0; i < _currentMCD.ElementsIndex.Count; i++)
         {
-            Debug.Log($"Clé : {kvp.Key}, Valeur : {kvp.Value}");
+            Debug.Log($"Index : {_currentMCD.ElementsIndex[i]}" +
+                      $", Pos : {_currentMCD.ElementsPosition[i]}" +
+                      $", Type : {_currentMCD.ElementsType[i]}");
         }
     }
 
@@ -112,46 +114,47 @@ public class EditorSaveMap : MonoBehaviour
         }
     }
 
-    public void UpdateElement(int elementIndex, BoardPosition boardPos, ElementType elementType, bool isAdd)
+    public void AddElement(int elementIndex, BoardPosition boardPos, ElementType elementType)
     {
-        BoardPosType posType = new BoardPosType
-        {
-            BoardPosition = boardPos,
-            ElementType = elementType
-        };
+        // _currentMCD.ElementByPosIndex[0][0].Add(elementIndex, posType);
+        //
+        // if(_currentMCD.ElementByPosIndex.ContainsKey())
 
-        if (isAdd)
-        {
-            AddElement(elementIndex, posType);
-        }
-        else
-        {
-            RemoveElement(elementIndex, posType);
-        }
+        _currentMCD.ElementsIndex.Add(elementIndex);
+        _currentMCD.ElementsPosition.Add(boardPos);
+        _currentMCD.ElementsType.Add(elementType);
     }
 
-    private void AddElement(int elementIndex, BoardPosType posType)
+    public void RemoveElement(int elementIndex, BoardPosition elementPos, ElementType elementType)
     {
-        _currentMCD.ElementByPosIndex.Add(elementIndex, posType);
-    }
+        // List<int> keyToRemove = new List<int>();
+        //
+        // foreach (var element in _currentMCD.ElementByPosIndex)
+        // {
+        //     if (element.Key == elementIndex 
+        //         && element.Value.ElementType == posType.ElementType 
+        //         && element.Value.BoardPosition == posType.BoardPosition)
+        //     {
+        //         keyToRemove.Add(elementIndex);
+        //     }
+        // }
+        //
+        // foreach (int element in keyToRemove)
+        // {
+        //     _currentMCD.ElementByPosIndex.Remove(element);
+        // }
 
-    private void RemoveElement(int elementIndex, BoardPosType posType)
-    {
-        List<int> keyToRemove = new List<int>();
-
-        foreach (var element in _currentMCD.ElementByPosIndex)
+        for (int i = 0; i < _currentMCD.ElementsIndex.Count; i++)
         {
-            if (element.Key == elementIndex 
-                && element.Value.ElementType == posType.ElementType 
-                && element.Value.BoardPosition == posType.BoardPosition)
+            if (_currentMCD.ElementsIndex[i] == elementIndex
+                && _currentMCD.ElementsPosition[i] == elementPos
+                && _currentMCD.ElementsType[i] == elementType)
             {
-                keyToRemove.Add(elementIndex);
+                _currentMCD.ElementsIndex.RemoveAt(i);
+                _currentMCD.ElementsPosition.RemoveAt(i);
+                _currentMCD.ElementsType.RemoveAt(i);
+                break;
             }
-        }
-
-        foreach (int element in keyToRemove)
-        {
-            _currentMCD.ElementByPosIndex.Remove(element);
         }
     }
 
