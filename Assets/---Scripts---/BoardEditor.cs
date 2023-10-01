@@ -8,6 +8,7 @@ public class BoardEditor : MonoBehaviour
 {
     [SerializeField] private TMP_Text _numberBoardText;
     [SerializeField] private TMP_Text _numberBPMText;
+    [SerializeField] private BoardSign[] _boardSigns;
     
     private int _numberBoard;
 
@@ -30,5 +31,10 @@ public class BoardEditor : MonoBehaviour
     public void OnDestroyElement()
     {
         EditorSaveMap.Instance.DeleteElement(_numberBoard);
+    }
+
+    public BoardSign GetBoardSign(int index)
+    {
+        return _boardSigns[index];
     }
 }

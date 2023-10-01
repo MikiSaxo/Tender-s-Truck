@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BoardSign : MonoBehaviour
@@ -39,17 +40,8 @@ public class BoardSign : MonoBehaviour
 
         if (EditorManager.Instance.GetCurrentElement() != ElementType.Nothing)
         {
-            GameObject frite = Instantiate(_fritePrefab);
-            _stockFrite = frite;
-
-            _elementType = EditorManager.Instance.GetCurrentElement();
-            frite.transform.position = transform.position;
-            frite.transform.DOScale(frite.transform.localScale * 2, 0);
-            frite.GetComponent<Frite>().Init(_elementType, true);
-            frite.GetComponent<Rigidbody>().isKinematic = true;
-            frite.transform.SetParent(transform);
-            
-            _boardEditor.AddElementToSave(_boardPosition, _elementType);
+            AddElement();
+            SaveElement();
         }
         else
         {
@@ -59,6 +51,25 @@ public class BoardSign : MonoBehaviour
             _boardEditor.RemoveElementToSave(_boardPosition, _elementType);
             _elementType = ElementType.Nothing;
         }
+    }
+
+    public void AddElement()
+    {
+        GameObject frite = Instantiate(_fritePrefab);
+        _stockFrite = frite;
+
+        _elementType = EditorManager.Instance.GetCurrentElement();
+        frite.transform.position = transform.position;
+        frite.transform.DOScale(frite.transform.localScale * 2, 0);
+        frite.GetComponent<Frite>().Init(_elementType, true);
+        frite.GetComponent<Rigidbody>().isKinematic = true;
+        frite.transform.SetParent(transform);
+            
+    }
+
+    private void SaveElement()
+    {
+        _boardEditor.AddElementToSave(_boardPosition, _elementType);
     }
 }
 

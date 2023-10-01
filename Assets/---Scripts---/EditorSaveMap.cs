@@ -19,6 +19,7 @@ public class EditorSaveMap : MonoBehaviour
 
     [SerializeField] private TMP_InputField _inputMusicName;
     [SerializeField] private TMP_InputField _inputMusicBPM;
+    [SerializeField] private TMP_InputField _inputLoapMap;
     [SerializeField] private string _folderDestination;
 
     [Header("FB Text")] [SerializeField] private GameObject _fBTextPrefab;
@@ -44,7 +45,6 @@ public class EditorSaveMap : MonoBehaviour
     {
         Instance = this;
     }
-
 
     private void Start()
     {
@@ -179,10 +179,78 @@ public class EditorSaveMap : MonoBehaviour
         _inputMusicBPM.text = "";
     }
 
-    public void UpdateInputField(string newName)
+    private void UpdateInputField(string mapName, string musicName, int BPM_Number)
     {
-        // Used for load map
-        _inputMapName.text = newName;
+        // Reset input field Load Map
+        _inputLoapMap.text = "";
+        // Update other input field
+        _inputMapName.text = mapName;
+        _inputMusicName.text = musicName;
+        _inputMusicBPM.text = $"{BPM_Number}";
+    }
+
+    public void LoadMap()
+    {
+        // Get the input field text
+        string mapName = String.Empty;
+        mapName = _inputLoapMap.text;
+        if (mapName == "")
+        {
+            SpawnFbText($"{GetColorNotGood()}No map name written");
+            return;
+        }
+
+        // Get the file
+        var mapPath = $"{Application.streamingAssetsPath}/{_folderDestination}/{mapName}.txt";
+        if (!File.Exists(mapPath))
+        {
+            // Debug.LogErrorFormat("Streaming asset not found: {0}", mapPath);
+            SpawnFbText($"{GetColorNotGood()}This map doesn't exist");
+            return;
+        }
+
+        // Reset old Map
+        BoardManager.Instance.ResetMap();
+
+        // Put the file on the current Construct Data
+        var lineJson = File.ReadAllText(mapPath);
+        _currentMCD = JsonUtility.FromJson<MapConstructData>(lineJson);
+
+        // Update all map
+        for (int i = 0; i < _currentMCD.ElementsIndex[^1] / 4 + 1; i++)
+        {
+            BoardManager.Instance.AddFourBoard();
+        }
+
+
+        StartCoroutine(MakeItSlowly());
+
+        // Update Input Field to save the same map
+        UpdateInputField(mapName, _currentMCD.MusicName, _currentMCD.MusicBPM);
+
+        // Reset the position
+        BoardManager.Instance.ResetPos();
+    }
+
+    IEnumerator MakeItSlowly()
+    {
+        var getAllPanel = BoardManager.Instance.GetObjectList();
+
+        for (int i = 0; i < getAllPanel.Count; i++)
+        {
+            for (int j = 0; j < _currentMCD.ElementsIndex.Count; j++)
+            {
+                if (_currentMCD.ElementsIndex[j] == i + 1)
+                {
+                    // print($"Element Number: {i+1} | Change element : {_currentMCD.ElementsType[j]} | Add element with this pos : {_currentMCD.ElementsPosition[j]}");
+                    gameObject.GetComponent<EditorManager>().ChangeElement((int)_currentMCD.ElementsType[j]);
+                    yield return new WaitForSeconds(.01f);
+                    getAllPanel[i].GetComponent<BoardEditor>().GetBoardSign((int)_currentMCD.ElementsPosition[j]).AddElement();
+                }
+            }
+        }
+        
+        print("Load Done!");
     }
 
     public void SpawnFbText(string text)
@@ -220,18 +288,6 @@ public class EditorSaveMap : MonoBehaviour
         UnityEditor.AssetDatabase.Refresh();
 #endif
     }
-
-    // public void AddCoordsEnergy(Vector2Int coords)
-    // {
-    //     if(!_currentMapConstructData.Coords.Contains(coords))
-    //         _currentMapConstructData.Coords.Add(coords);
-    // }
-    //
-    // public void DestroyCoordsEnergy(Vector2Int coords)
-    // {
-    //     if(_currentMapConstructData.Coords.Contains(coords))
-    //         _currentMapConstructData.Coords.Remove(coords);
-    // }
 
     private void SaveJson()
     {
