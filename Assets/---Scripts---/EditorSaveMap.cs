@@ -6,6 +6,7 @@ using System.IO;
 using DG.Tweening;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -13,8 +14,9 @@ public class EditorSaveMap : MonoBehaviour
 {
     public static EditorSaveMap Instance;
 
-    [Header("Setup Save")] 
-    [SerializeField] private TMP_InputField _inputMapName;
+    [Header("Setup Save")] [SerializeField]
+    private TMP_InputField _inputMapName;
+
     [SerializeField] private TMP_InputField _inputMusicName;
     [SerializeField] private TMP_InputField _inputMusicBPM;
     [SerializeField] private string _folderDestination;
@@ -27,7 +29,7 @@ public class EditorSaveMap : MonoBehaviour
     private string _mapName;
     private string _musicName;
     private int _musicBPM;
-    public MapConstructData _currentMapConstructData;
+    public MapConstructData _currentMCD;
     private string _hexColorGood;
     private string _hexColorNotGood;
 
@@ -43,10 +45,19 @@ public class EditorSaveMap : MonoBehaviour
         Instance = this;
     }
 
+
     private void Start()
     {
         _hexColorGood = $"<color=#{_colorGood.ToHexString()}>";
         _hexColorNotGood = $"<color=#{_colorNotGood.ToHexString()}>";
+    }
+
+    private void PrintDico()
+    {
+        foreach (var kvp in _currentMCD.ElementByPosIndex)
+        {
+            Debug.Log($"Clé : {kvp.Key}, Valeur : {kvp.Value}");
+        }
     }
 
     public string GetColorNotGood()
@@ -58,6 +69,8 @@ public class EditorSaveMap : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.O))
             SaveJson();
+        if (Input.GetKeyDown(KeyCode.P))
+            PrintDico();
     }
 
     private void UpdateMapName()
@@ -68,9 +81,8 @@ public class EditorSaveMap : MonoBehaviour
         {
             SpawnFbText($"{_hexColorNotGood}{_saveNoName}");
         }
-
     }
-    
+
     private void UpdateMusicName()
     {
         _musicName = _inputMusicName.text;
@@ -81,10 +93,10 @@ public class EditorSaveMap : MonoBehaviour
         }
         else
         {
-            _currentMapConstructData.MusicName = _musicName;
+            _currentMCD.MusicName = _musicName;
         }
-
     }
+
     private void UpdateMusicBPM()
     {
         if (_inputMusicBPM.text != "")
@@ -96,7 +108,50 @@ public class EditorSaveMap : MonoBehaviour
         }
         else
         {
-            _currentMapConstructData.MusicBPM = _musicBPM;
+            _currentMCD.MusicBPM = _musicBPM;
+        }
+    }
+
+    public void UpdateElement(int elementIndex, BoardPosition boardPos, ElementType elementType, bool isAdd)
+    {
+        BoardPosType posType = new BoardPosType
+        {
+            BoardPosition = boardPos,
+            ElementType = elementType
+        };
+
+        if (isAdd)
+        {
+            AddElement(elementIndex, posType);
+        }
+        else
+        {
+            RemoveElement(elementIndex, posType);
+        }
+    }
+
+    private void AddElement(int elementIndex, BoardPosType posType)
+    {
+        _currentMCD.ElementByPosIndex.Add(elementIndex, posType);
+    }
+
+    private void RemoveElement(int elementIndex, BoardPosType posType)
+    {
+        List<int> keyToRemove = new List<int>();
+
+        foreach (var element in _currentMCD.ElementByPosIndex)
+        {
+            if (element.Key == elementIndex 
+                && element.Value.ElementType == posType.ElementType 
+                && element.Value.BoardPosition == posType.BoardPosition)
+            {
+                keyToRemove.Add(elementIndex);
+            }
+        }
+
+        foreach (int element in keyToRemove)
+        {
+            _currentMCD.ElementByPosIndex.Remove(element);
         }
     }
 
@@ -121,49 +176,23 @@ public class EditorSaveMap : MonoBehaviour
         fBText.DOFade(1, 0);
         fBText.text = text;
         fBText.DOFade(0, _durationDispawnText);
-        
+
         Destroy(go, _durationDispawnText);
     }
 
-    // private void GetMap()
-    // {
-    //     string map = ConvertMapGridToString(EditorMapManager.Instance.GetMapGrid());
-    //     if (map != null)
-    //         _currentMapConstructData.Map = map;
-    // }
-    // private string ConvertMapGridToString(char[,] mapGrid)
-    // {
-    //     var str = String.Empty;
-    //
-    //     for (int y = 0; y < mapGrid.GetLength(1); y++)
-    //     {
-    //         for (int x = 0; x < mapGrid.GetLength(0); x++)
-    //         {
-    //             str += mapGrid[x, y];
-    //         }
-    //
-    //         if(y == mapGrid.GetLength(1)-1)
-    //             continue;
-    //         
-    //         str += "\n";
-    //     }
-    //
-    //     return str;
-    // }
-    
     public void SaveMap()
     {
         UpdateMapName();
         UpdateMusicName();
         UpdateMusicBPM();
         //GetMap();
-        
+
         if (_mapName == "" || _musicName == "" || _musicBPM <= 0) return;
 
         ResetInputField();
-        
+
         SaveJson();
-        
+
         SpawnFbText($"{_hexColorGood}{_mapName} {_saveSucceed} in {_folderDestination} folder!");
         RefreshEditorProjectWindow();
     }
@@ -190,11 +219,10 @@ public class EditorSaveMap : MonoBehaviour
     private void SaveJson()
     {
         MapConstructData mapConstructData = new MapConstructData();
-        mapConstructData = _currentMapConstructData;
+        mapConstructData = _currentMCD;
 
         string json = JsonUtility.ToJson(mapConstructData);
         File.WriteAllText($"{Application.streamingAssetsPath}/{_folderDestination}/{_mapName}.txt", json);
         RefreshEditorProjectWindow();
     }
-    
 }

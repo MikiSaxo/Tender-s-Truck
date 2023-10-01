@@ -2,15 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class BoardEditor : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _numberBoard;
-    [SerializeField] private TMP_Text _numberBPM;
+    [SerializeField] private TMP_Text _numberBoardText;
+    [SerializeField] private TMP_Text _numberBPMText;
+    
+    private int _numberBoard;
 
     public void Init(int numberBoard, int numberBPM)
     {
-        _numberBoard.text = $"n°{numberBoard}";
-        _numberBPM.text = $"{++numberBPM}/4";
+        _numberBoardText.text = $"n°{numberBoard}";
+        _numberBPMText.text = $"{++numberBPM}/4";
+        _numberBoard = numberBoard;
+    }
+
+    public void AddElementToSave(BoardPosition boardPos, ElementType elementType)
+    {
+        EditorSaveMap.Instance.UpdateElement(_numberBoard, boardPos, elementType, true);
+    }
+    public void RemoveElementToSave(BoardPosition boardPos, ElementType elementType)
+    {
+        EditorSaveMap.Instance.UpdateElement(_numberBoard, boardPos, elementType, false);
     }
 }

@@ -6,11 +6,21 @@ using UnityEngine;
 
 public class BoardSign : MonoBehaviour
 {
+    [Header("Setup")]
+    [SerializeField] private BoardEditor _boardEditor;
+    [SerializeField] private BoardPosition _boardPosition;
+    [SerializeField] private GameObject _fritePrefab;
+    [Header("Board Sign")]
     [SerializeField] private MeshRenderer _renderer;
     [SerializeField] private Material[] _materials;
-    [SerializeField] private GameObject _fritePrefab;
 
     private GameObject _stockFrite;
+    private ElementType _elementType;
+
+    private void Start()
+    {
+        _elementType = ElementType.Nothing;
+    }
 
     private void OnMouseEnter()
     {
@@ -32,11 +42,22 @@ public class BoardSign : MonoBehaviour
             GameObject frite = Instantiate(_fritePrefab);
             _stockFrite = frite;
 
+            _elementType = EditorManager.Instance.GetCurrentElement();
             frite.transform.position = transform.position;
             frite.transform.DOScale(frite.transform.localScale * 2, 0);
-            frite.GetComponent<Frite>().Init(EditorManager.Instance.GetCurrentElement(), true);
+            frite.GetComponent<Frite>().Init(_elementType, true);
             frite.GetComponent<Rigidbody>().isKinematic = true;
             frite.transform.SetParent(transform);
+            
+            _boardEditor.AddElementToSave(_boardPosition, _elementType);
+        }
+        else
+        {
+            if (_elementType == ElementType.Nothing)
+                return;
+            
+            _boardEditor.RemoveElementToSave(_boardPosition, _elementType);
+            _elementType = ElementType.Nothing;
         }
     }
 }

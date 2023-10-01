@@ -11,6 +11,11 @@ public class MapConstructData
     public int MusicBPM;
     
     [Header("Elements Infos")]
-    public Dictionary<int, BoardPosition> NbOfElementByPosition = new Dictionary<int, BoardPosition>();
-    public List<ElementType> ElementTypes;
+    public Dictionary<int, BoardPosType> ElementByPosIndex = new Dictionary<int, BoardPosType>();
+}
+
+public class BoardPosType
+{
+    public BoardPosition BoardPosition { get; set; }
+    public ElementType ElementType { get; set; }
 }
