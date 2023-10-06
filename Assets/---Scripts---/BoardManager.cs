@@ -9,13 +9,14 @@ using UnityEngine.Serialization;
 public class BoardManager : MonoBehaviour
 {
     public static BoardManager Instance;
-    
+
     public int SignNbByBPM { get; set; }
-    
-    [Header("Controls")] 
+
+    [Header("Controls")]
     //[SerializeField] private float _zoomIn = .05f;
     //[Range(1.1f, 2f)] [SerializeField] private float _zoomOut = 1.2f;
-    [SerializeField] private float _dragSpeed;
+    [SerializeField]
+    private float _dragSpeed;
 
     [Header("Board")] [SerializeField] private int _numberToSpawn;
     [SerializeField] private GameObject _boardEditorPrefab;
@@ -23,7 +24,8 @@ public class BoardManager : MonoBehaviour
     private List<GameObject> _boardsPanel = new List<GameObject>();
     private int _counter;
     private int _currentVisibility;
-    
+    private float _distanceToEnd;
+
     // private const float StartDistance = 1.33f;
 
     private void Awake()
@@ -35,7 +37,7 @@ public class BoardManager : MonoBehaviour
     {
         SignNbByBPM = 4;
         _currentVisibility = 4;
-        
+
         for (int i = 0; i < _numberToSpawn; i++)
         {
             AddMultipleBoard();
@@ -74,6 +76,8 @@ public class BoardManager : MonoBehaviour
             // Subtract to _counter
             _counter--;
         }
+        
+        _distanceToEnd = _counter * _currentVisibility;
     }
 
     private void SetPositionBoards(GameObject board, int index)
@@ -102,7 +106,7 @@ public class BoardManager : MonoBehaviour
                 _boardsPanel[i].SetActive(i % 2 == 0);
             }
         }
-        
+
         else if (number == 4)
         {
             for (int i = 0; i < _boardsPanel.Count; i++)
@@ -111,6 +115,8 @@ public class BoardManager : MonoBehaviour
                 _boardsPanel[i].SetActive(true);
             }
         }
+
+        _distanceToEnd = _counter * _currentVisibility;
 
         // ResetPos();
     }
@@ -122,6 +128,14 @@ public class BoardManager : MonoBehaviour
             float mouseYInput = Input.GetAxis("Mouse Y");
             transform.Translate(Vector3.forward * mouseYInput * _dragSpeed);
         }
+    }
+
+    public void MoveBoards(float percent)
+    {
+        var pos = transform.position;
+        // transform.position = new Vector3(pos.x, pos.y, -index);
+
+        transform.position = new Vector3(pos.x, pos.y, -_distanceToEnd * percent / 100);
     }
 
     private void Zoom()
@@ -160,8 +174,10 @@ public class BoardManager : MonoBehaviour
             SetPositionBoards(_boardsPanel[i], i);
             // _boardsPanel[i].transform.position = new Vector3(position.x, position.y, position.z + (i * 5f));
         }
+        
+        _distanceToEnd = _counter * _currentVisibility;
     }
-    
+
     public void ResetMap()
     {
         foreach (var obj in _boardsPanel)
@@ -169,9 +185,10 @@ public class BoardManager : MonoBehaviour
             obj.GetComponent<BoardPanel>().OnDestroyElement();
             Destroy(obj);
         }
+
         _boardsPanel.Clear();
         _counter = 0;
-        
+
         AddMultipleBoard();
     }
 
