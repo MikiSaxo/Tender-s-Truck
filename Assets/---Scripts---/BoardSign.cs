@@ -4,18 +4,19 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class BoardSign : MonoBehaviour
 {
     [Header("Setup")]
     [SerializeField] private BoardEditor _boardEditor;
     [SerializeField] private BoardPosition _boardPosition;
-    [SerializeField] private GameObject _fritePrefab;
+    [FormerlySerializedAs("_fritePrefab")] [SerializeField] private GameObject _elementPrefab;
     [Header("Board Sign")]
     [SerializeField] private MeshRenderer _renderer;
     [SerializeField] private Material[] _materials;
 
-    private GameObject _stockFrite;
+    private GameObject _stockElement;
     private ElementType _elementType;
 
     private void Start()
@@ -35,8 +36,8 @@ public class BoardSign : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(_stockFrite != null)
-            Destroy(_stockFrite);
+        if(_stockElement != null)
+            Destroy(_stockElement);
 
         if (EditorManager.Instance.GetCurrentElement() != ElementType.Nothing)
         {
@@ -55,15 +56,14 @@ public class BoardSign : MonoBehaviour
 
     public void AddElement()
     {
-        GameObject frite = Instantiate(_fritePrefab);
-        _stockFrite = frite;
+        GameObject element = Instantiate(_elementPrefab);
+        _stockElement = element;
 
         _elementType = EditorManager.Instance.GetCurrentElement();
-        frite.transform.position = transform.position;
-        frite.transform.DOScale(frite.transform.localScale * 2, 0);
-        frite.GetComponent<Frite>().Init(_elementType, true);
-        frite.GetComponent<Rigidbody>().isKinematic = true;
-        frite.transform.SetParent(transform);
+        element.transform.position = transform.position;
+        element.transform.DOScale(element.transform.localScale * 2, 0);
+        element.GetComponent<Element>().Init(_elementType, true);
+        element.transform.SetParent(transform);
             
     }
 

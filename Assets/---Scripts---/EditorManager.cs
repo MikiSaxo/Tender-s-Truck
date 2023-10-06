@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class EditorManager : MonoBehaviour
 {
@@ -9,10 +10,10 @@ public class EditorManager : MonoBehaviour
 
     [SerializeField] private ElementType _currentElement;
     [SerializeField] private GameObject _fritePrefab;
-    [SerializeField] private Material[] _friteMaterials;
+    [FormerlySerializedAs("_friteMaterials")] [SerializeField] private Material[] _ElementMaterials;
     [SerializeField] private GameObject[] _leftButtonsHighlight;
 
-    private int _currentBtnHglt;
+    private int _currentBtnHighlight;
 
     private void Awake()
     {
@@ -35,9 +36,9 @@ public class EditorManager : MonoBehaviour
 
     public void ClickOnBtnHighlight(int index)
     {
-        _leftButtonsHighlight[_currentBtnHglt].SetActive(false);
-        _currentBtnHglt = index;
-        _leftButtonsHighlight[_currentBtnHglt].SetActive(true);
+        _leftButtonsHighlight[_currentBtnHighlight].SetActive(false);
+        _currentBtnHighlight = index;
+        _leftButtonsHighlight[_currentBtnHighlight].SetActive(true);
     }
 
     public ElementType GetCurrentElement()
@@ -50,9 +51,9 @@ public class EditorManager : MonoBehaviour
         return _fritePrefab;
     }
 
-    public Material GetFriteType(int index)
+    public Material GetElementType(int index)
     {
-        return _friteMaterials[index];
+        return _ElementMaterials[index];
     }
 }
 
@@ -62,5 +63,6 @@ public enum ElementType
     YellowVertical = 1,
     RedHorizontal = 2,
     RedVertical = 3,
-    Nothing = 4
+    Nothing = 4,
+    Point = 5
 }

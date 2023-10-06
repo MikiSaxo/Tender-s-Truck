@@ -38,7 +38,7 @@ public class Frite : MonoBehaviour
         if(PartyManager.Instance != null)
             _meshRenderer.material = PartyManager.Instance.GetFriteType((int)_currentType);
         else if(EditorManager.Instance != null)
-            _meshRenderer.material = EditorManager.Instance.GetFriteType((int)_currentType);
+            _meshRenderer.material = EditorManager.Instance.GetElementType((int)_currentType);
     }
 
     private void Update()
