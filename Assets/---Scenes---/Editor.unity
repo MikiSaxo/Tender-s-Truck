@@ -2341,7 +2341,7 @@ GameObject:
   - component: {fileID: 544989954}
   - component: {fileID: 544989953}
   m_Layer: 0
-  m_Name: --Objects--
+  m_Name: --BoardManager--
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2362,7 +2362,7 @@ MonoBehaviour:
   _zoomIn: 0.05
   _zoomOut: 1.2
   _dragSpeed: 1
-  _numberToSpawn: 10
+  _numberToSpawn: 1
   _boardEditorPrefab: {fileID: 734058903267269118, guid: c3f101311a4894648bf2dc0d60b715c6,
     type: 3}
 --- !u!4 &544989954
