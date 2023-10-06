@@ -2,24 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Serialization;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private GameObject _fritePrefab;
-    [SerializeField] private Vector3 _impulseDir;
-    [SerializeField] private float _force;
+    [FormerlySerializedAs("_fritePrefab")] [SerializeField] private GameObject _elementPrefab;
 
 
-    private void SpawnFrite(int index)
+    private void SpawnElement(int index)
     {
-        GameObject go = Instantiate(_fritePrefab);
+        GameObject go = Instantiate(_elementPrefab);
         go.transform.position = transform.position;
         
         // var rb = go.GetComponent<Rigidbody>();
         // rb.AddForce(_impulseDir * _force);
 
 
-        go.GetComponent<Frite>().Init((ElementType)index, false);
+        go.GetComponent<ElementToSpawn>().Init((ElementType)index, false);
 
         Destroy(go, 10);
     }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1021504757631366774}
   - component: {fileID: 839020100820099768}
   - component: {fileID: 4595062594494097772}
-  - component: {fileID: 2881633969379451959}
+  - component: {fileID: 9020393273838215532}
   m_Layer: 7
   m_Name: Frite
   m_TagString: Untagged
@@ -134,7 +134,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &2881633969379451959
+--- !u!114 &9020393273838215532
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,10 +143,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4921909391265782869}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 891e8961667237441a297dfb435f4105, type: 3}
+  m_Script: {fileID: 11500000, guid: 08a2c3ff4b2b23b48b79270ed9830cfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _friteMesh: {fileID: 6310798365177458038}
-  _meshRenderer: {fileID: 1021504757631366774}
   _meshes: []
-  _direction: {x: 0, y: 0, z: -0.05}
+  _elementMesh: {fileID: 0}
+  _meshRenderer: {fileID: 1021504757631366774}

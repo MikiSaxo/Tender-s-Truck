@@ -29,15 +29,20 @@ public class SliceObject : MonoBehaviour
             Vector3 firstPos = transform.position - _previousPos;
             Vector3 secondPos = hit.transform.up;
 
-            var friteType = hit.transform.gameObject.GetComponent<Frite>().GetFriteType();
+            var elementType = hit.transform.gameObject.GetComponent<ElementToSpawn>().GetElementType();
 
-            if (Vector3.Angle(firstPos, secondPos) > _angleToDestroy ||
-                 Vector3.Angle(firstPos, -secondPos) > _angleToDestroy)
+            if (elementType == ElementType.Point)
             {
-                if ((friteType is ElementType.RedHorizontal or ElementType.RedVertical
-                     && _currentType is ElementType.RedHorizontal or ElementType.RedVertical)
-                    || (friteType is ElementType.YellowVertical or ElementType.YellowHorizontal
-                        && _currentType is ElementType.YellowVertical or ElementType.YellowHorizontal))
+                GameObject target = hit.transform.gameObject;
+                Slice(target);
+            }
+            else if ((elementType is ElementType.RedHorizontal or ElementType.RedVertical
+                      && _currentType is ElementType.RedHorizontal or ElementType.RedVertical)
+                     || (elementType is ElementType.YellowVertical or ElementType.YellowHorizontal
+                         && _currentType is ElementType.YellowVertical or ElementType.YellowHorizontal))
+            {
+                if (Vector3.Angle(firstPos, secondPos) > _angleToDestroy ||
+                    Vector3.Angle(firstPos, -secondPos) > _angleToDestroy)
                 {
                     GameObject target = hit.transform.gameObject;
                     Slice(target);
@@ -84,6 +89,6 @@ public class SliceObject : MonoBehaviour
     public void ChangeSauceType(ElementType newType)
     {
         _currentType = newType;
-        _sauceStick.GetComponent<MeshRenderer>().material = PartyManager.Instance.GetFriteType((int)newType);
+        _sauceStick.GetComponent<MeshRenderer>().material = PartyManager.Instance.GetElementTypeMat((int)newType);
     }
 }

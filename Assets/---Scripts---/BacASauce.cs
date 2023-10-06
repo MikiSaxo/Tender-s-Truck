@@ -10,7 +10,7 @@ public class BacASauce : MonoBehaviour
     public void ChangeSauce(ElementType whichFrite)
     {
         _currentType = whichFrite;
-        gameObject.GetComponent<MeshRenderer>().material = PartyManager.Instance.GetFriteType((int)_currentType);
+        gameObject.GetComponent<MeshRenderer>().material = PartyManager.Instance.GetElementTypeMat((int)_currentType);
     }
 
     public ElementType GetCurrentType()
