@@ -214,7 +214,7 @@ public class EditorSaveMap : MonoBehaviour
         _currentMCD = JsonUtility.FromJson<MapConstructData>(lineJson);
 
         // Update all map
-        for (int i = 0; i < _currentMCD.ElementsIndex[^1] / 2 + 1; i++)
+        for (int i = 0; i < _currentMCD.ElementsIndex[^1] / 4 + 1; i++)
         {
             BoardManager.Instance.AddMultipleBoard();
         }
@@ -242,7 +242,7 @@ public class EditorSaveMap : MonoBehaviour
                     print($"Element Number: {i} | Change element : {_currentMCD.ElementsType[j]} | Add element with this pos : {_currentMCD.ElementsPosition[j]}");
                     gameObject.GetComponent<EditorManager>().ChangeElement((int)_currentMCD.ElementsType[j]);
                     yield return new WaitForSeconds(.01f);
-                    getAllPanel[i].GetComponent<BoardEditor>().GetBoardSign((int)_currentMCD.ElementsPosition[j]).AddElement();
+                    getAllPanel[i].GetComponent<BoardPanel>().GetBoardSign((int)_currentMCD.ElementsPosition[j]).AddElement();
                 }
             }
         }

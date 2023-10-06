@@ -4,10 +4,13 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
+using UnityEngine.Serialization;
 
 public class BoardManager : MonoBehaviour
 {
     public static BoardManager Instance;
+    
+    public int SignNbByBPM { get; set; }
     
     [Header("Controls")] [SerializeField] private float _zoomIn = .05f;
     [Range(1.1f, 2f)] [SerializeField] private float _zoomOut = 1.2f;
@@ -19,7 +22,7 @@ public class BoardManager : MonoBehaviour
     private List<GameObject> _panelElements = new List<GameObject>();
     private int _counter;
     private const float StartDistance = 5f;
-    private const int NbByBPM = 2;
+
 
     private void Awake()
     {
@@ -28,6 +31,8 @@ public class BoardManager : MonoBehaviour
 
     private void Start()
     {
+        SignNbByBPM = 4;
+        
         for (int i = 0; i < _numberToSpawn; i++)
         {
             AddMultipleBoard();
@@ -36,12 +41,12 @@ public class BoardManager : MonoBehaviour
 
     public void AddMultipleBoard()
     {
-        for (int j = 0; j < NbByBPM; j++)
+        for (int j = 0; j < SignNbByBPM; j++)
         {
             // Instantiate the board
             GameObject go = Instantiate(_boardEditorPrefab, transform);
             // Init the numbers
-            go.GetComponent<BoardEditor>().Init(_counter, j % NbByBPM);
+            go.GetComponent<BoardPanel>().Init(_counter, j % SignNbByBPM);
             // Get position of spawner and move it  
             var position = transform.position;
             go.transform.position = new Vector3(position.x, position.y, position.z + (_counter * StartDistance));
@@ -54,10 +59,10 @@ public class BoardManager : MonoBehaviour
 
     public void RemoveMultipleBoard()
     {
-        for (int j = 0; j < NbByBPM; j++)
+        for (int j = 0; j < SignNbByBPM; j++)
         {
             // Call this function to remove on the save
-            _panelElements[^1].GetComponent<BoardEditor>().OnDestroyElement();
+            _panelElements[^1].GetComponent<BoardPanel>().OnDestroyElement();
             // Destroy last at last index
             Destroy(_panelElements[^1]);
             // Remove this destroyed object in the list
@@ -71,7 +76,7 @@ public class BoardManager : MonoBehaviour
     {
         foreach (var obj in _panelElements)
         {
-            obj.GetComponent<BoardEditor>().OnDestroyElement();
+            obj.GetComponent<BoardPanel>().OnDestroyElement();
             Destroy(obj);
         }
         _panelElements.Clear();

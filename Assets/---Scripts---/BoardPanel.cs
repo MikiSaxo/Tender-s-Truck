@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class BoardEditor : MonoBehaviour
+public class BoardPanel : MonoBehaviour
 {
     [SerializeField] private TMP_Text _numberBoardText;
     [SerializeField] private TMP_Text _numberBPMText;
@@ -14,9 +14,9 @@ public class BoardEditor : MonoBehaviour
 
     public void Init(int numberBoard, int numberBPM)
     {
-        if(numberBoard % 2 == 0)
-            _numberBoardText.text = $"BPM {numberBoard*.5f}";
-        _numberBPMText.text = $"{++numberBPM}/2";
+        if(numberBoard % BoardManager.Instance.SignNbByBPM == 0)
+            _numberBoardText.text = $"BPM {numberBoard * (1f / BoardManager.Instance.SignNbByBPM) + 1}";
+        _numberBPMText.text = $"{++numberBPM}";
         _numberBoard = numberBoard;
     }
 

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7978425304570813457}
   - component: {fileID: 7421256472261206406}
   - component: {fileID: 1581912363519318594}
+  - component: {fileID: 206846208123831002}
   m_Layer: 9
   m_Name: Point
   m_TagString: Untagged
@@ -82,6 +83,21 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &206846208123831002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3339532100541236026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08a2c3ff4b2b23b48b79270ed9830cfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _meshes: []
+  _elementMesh: {fileID: 8311247365447832904}
+  _meshRenderer: {fileID: 5275823106575219430}
 --- !u!1 &3846047011676672868
 GameObject:
   m_ObjectHideFlags: 0

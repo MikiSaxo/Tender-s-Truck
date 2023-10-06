@@ -10,7 +10,7 @@ public class EditorManager : MonoBehaviour
 
     [SerializeField] private ElementType _currentElement;
     [SerializeField] private GameObject _fritePrefab;
-    [FormerlySerializedAs("_friteMaterials")] [SerializeField] private Material[] _ElementMaterials;
+    [SerializeField] private Material[] _ElementMaterials;
     [SerializeField] private GameObject[] _leftButtonsHighlight;
 
     private int _currentBtnHighlight;

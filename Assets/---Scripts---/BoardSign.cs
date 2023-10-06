@@ -8,8 +8,9 @@ using UnityEngine.Serialization;
 
 public class BoardSign : MonoBehaviour
 {
+    [FormerlySerializedAs("_boardEditor")]
     [Header("Setup")]
-    [SerializeField] private BoardEditor _boardEditor;
+    [SerializeField] private BoardPanel boardPanel;
     [SerializeField] private BoardPosition _boardPosition;
     [SerializeField] private GameObject _elementPrefab;
     [Header("Board Sign")]
@@ -41,6 +42,7 @@ public class BoardSign : MonoBehaviour
 
         if (EditorManager.Instance.GetCurrentElement() != ElementType.Nothing)
         {
+            RemoveElement();
             AddElement();
             SaveElement();
         }
@@ -49,8 +51,7 @@ public class BoardSign : MonoBehaviour
             if (_elementType == ElementType.Nothing)
                 return;
             
-            _boardEditor.RemoveElementToSave(_boardPosition, _elementType);
-            _elementType = ElementType.Nothing;
+            RemoveElement();
         }
     }
 
@@ -66,9 +67,15 @@ public class BoardSign : MonoBehaviour
         element.transform.SetParent(transform);
     }
 
+    private void RemoveElement()
+    {
+        boardPanel.RemoveElementToSave(_boardPosition, _elementType);
+        _elementType = ElementType.Nothing;
+    }
+
     private void SaveElement()
     {
-        _boardEditor.AddElementToSave(_boardPosition, _elementType);
+        boardPanel.AddElementToSave(_boardPosition, _elementType);
     }
 }
 

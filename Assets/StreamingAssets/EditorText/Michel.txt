@@ -1,1 +1,1 @@
-{"MusicName":"Alan","MusicBPM":60,"ElementsIndex":[0,2,4,6,8,10],"ElementsPosition":[0,2,4,1,3,5],"ElementsType":[0,5,1,3,5,3]}
+{"MusicName":"Alan","MusicBPM":120,"ElementsIndex":[0,2,6,0,2,3,5,4,1],"ElementsPosition":[2,1,5,3,3,3,3,3,3],"ElementsType":[5,3,3,0,0,0,0,0,3]}

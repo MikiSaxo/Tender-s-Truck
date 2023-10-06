@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8154646189187639782}
   - component: {fileID: 8732499143251774128}
   m_Layer: 0
-  m_Name: Board
+  m_Name: BoardPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,8 +57,8 @@ MonoBehaviour:
   _boardSigns:
   - {fileID: 3877260474162930158}
   - {fileID: 3049932608519524146}
-  - {fileID: 2059361358862986163}
   - {fileID: 5179036656899316450}
+  - {fileID: 2059361358862986163}
   - {fileID: 722628129711947263}
   - {fileID: 674255562315438833}
 --- !u!1 &3749039703548863264
@@ -475,6 +475,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3554173327282610540, guid: 5ff2fa46849700e4f98eacefb891144f,
         type: 3}
+      propertyPath: boardPanel
+      value: 
+      objectReference: {fileID: 8732499143251774128}
+    - target: {fileID: 3554173327282610540, guid: 5ff2fa46849700e4f98eacefb891144f,
+        type: 3}
       propertyPath: _boardEditor
       value: 
       objectReference: {fileID: 8732499143251774128}
@@ -569,6 +574,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3554173327282610540, guid: 5ff2fa46849700e4f98eacefb891144f,
+        type: 3}
+      propertyPath: boardPanel
+      value: 
+      objectReference: {fileID: 8732499143251774128}
     - target: {fileID: 3554173327282610540, guid: 5ff2fa46849700e4f98eacefb891144f,
         type: 3}
       propertyPath: _boardEditor
@@ -672,6 +682,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3554173327282610540, guid: 5ff2fa46849700e4f98eacefb891144f,
         type: 3}
+      propertyPath: boardPanel
+      value: 
+      objectReference: {fileID: 8732499143251774128}
+    - target: {fileID: 3554173327282610540, guid: 5ff2fa46849700e4f98eacefb891144f,
+        type: 3}
       propertyPath: _boardEditor
       value: 
       objectReference: {fileID: 8732499143251774128}
@@ -771,6 +786,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3554173327282610540, guid: 5ff2fa46849700e4f98eacefb891144f,
+        type: 3}
+      propertyPath: boardPanel
+      value: 
+      objectReference: {fileID: 8732499143251774128}
     - target: {fileID: 3554173327282610540, guid: 5ff2fa46849700e4f98eacefb891144f,
         type: 3}
       propertyPath: _boardEditor
@@ -889,6 +909,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3554173327282610540, guid: 5ff2fa46849700e4f98eacefb891144f,
         type: 3}
+      propertyPath: boardPanel
+      value: 
+      objectReference: {fileID: 8732499143251774128}
+    - target: {fileID: 3554173327282610540, guid: 5ff2fa46849700e4f98eacefb891144f,
+        type: 3}
       propertyPath: _boardEditor
       value: 
       objectReference: {fileID: 8732499143251774128}
@@ -988,6 +1013,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3554173327282610540, guid: 5ff2fa46849700e4f98eacefb891144f,
+        type: 3}
+      propertyPath: boardPanel
+      value: 
+      objectReference: {fileID: 8732499143251774128}
     - target: {fileID: 3554173327282610540, guid: 5ff2fa46849700e4f98eacefb891144f,
         type: 3}
       propertyPath: _boardEditor

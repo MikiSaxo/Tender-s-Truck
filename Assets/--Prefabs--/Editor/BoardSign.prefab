@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1743411842322870943}
   - component: {fileID: 3554173327282610540}
   m_Layer: 0
-  m_Name: Board Panel
+  m_Name: BoardSign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c4b7078806bdac4a953f4a0c2393d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _boardEditor: {fileID: 0}
+  boardPanel: {fileID: 0}
   _boardPosition: 0
   _elementPrefab: {fileID: 7567471014024582925, guid: 87afb98278b7fd045b3f15279751bd74,
     type: 3}
