@@ -12,17 +12,19 @@ public class BoardManager : MonoBehaviour
     
     public int SignNbByBPM { get; set; }
     
-    [Header("Controls")] [SerializeField] private float _zoomIn = .05f;
-    [Range(1.1f, 2f)] [SerializeField] private float _zoomOut = 1.2f;
+    [Header("Controls")] 
+    //[SerializeField] private float _zoomIn = .05f;
+    //[Range(1.1f, 2f)] [SerializeField] private float _zoomOut = 1.2f;
     [SerializeField] private float _dragSpeed;
 
     [Header("Board")] [SerializeField] private int _numberToSpawn;
     [SerializeField] private GameObject _boardEditorPrefab;
 
-    private List<GameObject> _panelElements = new List<GameObject>();
+    private List<GameObject> _boardsPanel = new List<GameObject>();
     private int _counter;
-    private const float StartDistance = 5f;
-
+    private int _currentVisibility;
+    
+    // private const float StartDistance = 1.33f;
 
     private void Awake()
     {
@@ -32,6 +34,7 @@ public class BoardManager : MonoBehaviour
     private void Start()
     {
         SignNbByBPM = 4;
+        _currentVisibility = 4;
         
         for (int i = 0; i < _numberToSpawn; i++)
         {
@@ -48,13 +51,14 @@ public class BoardManager : MonoBehaviour
             // Init the numbers
             go.GetComponent<BoardPanel>().Init(_counter, j % SignNbByBPM);
             // Get position of spawner and move it  
-            var position = transform.position;
-            go.transform.position = new Vector3(position.x, position.y, position.z + (_counter * StartDistance));
+            SetPositionBoards(go, _counter);
             // Add to list
-            _panelElements.Add(go);
+            _boardsPanel.Add(go);
             // Add to the counter
             _counter++;
         }
+        
+        ChangeVisibility(_currentVisibility);
     }
 
     public void RemoveMultipleBoard()
@@ -62,27 +66,53 @@ public class BoardManager : MonoBehaviour
         for (int j = 0; j < SignNbByBPM; j++)
         {
             // Call this function to remove on the save
-            _panelElements[^1].GetComponent<BoardPanel>().OnDestroyElement();
+            _boardsPanel[^1].GetComponent<BoardPanel>().OnDestroyElement();
             // Destroy last at last index
-            Destroy(_panelElements[^1]);
+            Destroy(_boardsPanel[^1]);
             // Remove this destroyed object in the list
-            _panelElements.RemoveAt(_panelElements.Count - 1);
+            _boardsPanel.RemoveAt(_boardsPanel.Count - 1);
             // Subtract to _counter
             _counter--;
         }
     }
 
-    public void ResetMap()
+    private void SetPositionBoards(GameObject board, int index)
     {
-        foreach (var obj in _panelElements)
+        var position = transform.position;
+        board.transform.position = new Vector3(position.x, position.y, position.z + (index * _currentVisibility));
+    }
+
+    public void ChangeVisibility(int number)
+    {
+        _currentVisibility = number;
+        if (number == 1)
         {
-            obj.GetComponent<BoardPanel>().OnDestroyElement();
-            Destroy(obj);
+            for (int i = 0; i < _boardsPanel.Count; i++)
+            {
+                SetPositionBoards(_boardsPanel[i], i);
+                _boardsPanel[i].SetActive(i % 4 == 0);
+            }
         }
-        _panelElements.Clear();
-        _counter = 0;
+
+        else if (number == 2)
+        {
+            for (int i = 0; i < _boardsPanel.Count; i++)
+            {
+                SetPositionBoards(_boardsPanel[i], i);
+                _boardsPanel[i].SetActive(i % 2 == 0);
+            }
+        }
         
-        AddMultipleBoard();
+        else if (number == 4)
+        {
+            for (int i = 0; i < _boardsPanel.Count; i++)
+            {
+                SetPositionBoards(_boardsPanel[i], i);
+                _boardsPanel[i].SetActive(true);
+            }
+        }
+
+        // ResetPos();
     }
 
     void Update()
@@ -92,44 +122,61 @@ public class BoardManager : MonoBehaviour
             float mouseYInput = Input.GetAxis("Mouse Y");
             transform.Translate(Vector3.forward * mouseYInput * _dragSpeed);
         }
+    }
 
-        float zoomInput = Input.GetAxis("Mouse ScrollWheel");
-
-        if (zoomInput == 0)
-            return;
-
-        foreach (var obj in _panelElements)
-        {
-            var position = obj.transform.position;
-
-            if (zoomInput < 0)
-            {
-                var newZ = Vector3.Lerp(position, transform.position, _zoomIn);
-                position = new Vector3(position.x, position.y, newZ.z);
-                obj.transform.position = position;
-            }
-            else
-            {
-                var newZ = Vector3.Lerp(position, transform.position, _zoomIn);
-                position = new Vector3(position.x, position.y, newZ.z * _zoomOut);
-                obj.transform.position = position;
-            }
-        }
+    private void Zoom()
+    {
+        // float zoomInput = Input.GetAxis("Mouse ScrollWheel");
+        //
+        // if (zoomInput == 0)
+        //     return;
+        //
+        // foreach (var obj in _boardsPanel)
+        // {
+        //     var position = obj.transform.position;
+        //
+        //     if (zoomInput < 0)
+        //     {
+        //         var newZ = Vector3.Lerp(position, transform.position, _zoomIn);
+        //         position = new Vector3(position.x, position.y, newZ.z);
+        //         obj.transform.position = position;
+        //     }
+        //     else
+        //     {
+        //         var newZ = Vector3.Lerp(position, transform.position, _zoomIn);
+        //         position = new Vector3(position.x, position.y, newZ.z * _zoomOut);
+        //         obj.transform.position = position;
+        //     }
+        // }
     }
 
     public void ResetPos()
     {
         transform.position = new Vector3(0, transform.position.y, 0);
 
-        for (int i = 0; i < _panelElements.Count; i++)
+        for (int i = 0; i < _boardsPanel.Count; i++)
         {
             var position = transform.position;
-            _panelElements[i].transform.position = new Vector3(position.x, position.y, position.z + (i * 5f));
+            SetPositionBoards(_boardsPanel[i], i);
+            // _boardsPanel[i].transform.position = new Vector3(position.x, position.y, position.z + (i * 5f));
         }
+    }
+    
+    public void ResetMap()
+    {
+        foreach (var obj in _boardsPanel)
+        {
+            obj.GetComponent<BoardPanel>().OnDestroyElement();
+            Destroy(obj);
+        }
+        _boardsPanel.Clear();
+        _counter = 0;
+        
+        AddMultipleBoard();
     }
 
     public List<GameObject> GetObjectList()
     {
-        return _panelElements;
+        return _boardsPanel;
     }
 }
