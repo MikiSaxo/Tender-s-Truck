@@ -1,13 +1,10 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using DG.Tweening;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class EditorSaveMap : MonoBehaviour
@@ -219,7 +216,7 @@ public class EditorSaveMap : MonoBehaviour
         // Update all map
         for (int i = 0; i < _currentMCD.ElementsIndex[^1] / 4 + 1; i++)
         {
-            BoardManager.Instance.AddFourBoard();
+            BoardManager.Instance.AddMultipleBoard();
         }
 
 
@@ -258,9 +255,9 @@ public class EditorSaveMap : MonoBehaviour
         // Message warning of success
         GameObject go = Instantiate(_fBTextPrefab, _fBTextParent.transform);
         var fBText = go.GetComponent<TMP_Text>();
-        fBText.DOFade(1, 0);
+        // fBText.DOFade(1, 0);
         fBText.text = text;
-        fBText.DOFade(0, _durationDispawnText);
+        // fBText.DOFade(0, _durationDispawnText);
 
         Destroy(go, _durationDispawnText);
     }

@@ -1808,7 +1808,7 @@ PrefabInstance:
     - target: {fileID: 2368773098735784774, guid: d7f1182f99bc9834da5caa5dc0e67d3d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RemoveFourBoard
+      value: RemoveMultipleBoard
       objectReference: {fileID: 0}
     - target: {fileID: 2368773098735784774, guid: d7f1182f99bc9834da5caa5dc0e67d3d,
         type: 3}
@@ -2362,7 +2362,7 @@ MonoBehaviour:
   _zoomIn: 0.05
   _zoomOut: 1.2
   _dragSpeed: 1
-  _numberToSpawn: 1
+  _numberToSpawn: 10
   _boardEditorPrefab: {fileID: 734058903267269118, guid: c3f101311a4894648bf2dc0d60b715c6,
     type: 3}
 --- !u!4 &544989954
@@ -2432,7 +2432,7 @@ PrefabInstance:
     - target: {fileID: 2368773098735784774, guid: d7f1182f99bc9834da5caa5dc0e67d3d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: AddFourBoard
+      value: AddMultipleBoard
       objectReference: {fileID: 0}
     - target: {fileID: 2368773098735784774, guid: d7f1182f99bc9834da5caa5dc0e67d3d,
         type: 3}

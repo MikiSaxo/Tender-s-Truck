@@ -19,6 +19,7 @@ public class BoardManager : MonoBehaviour
     private List<GameObject> _panelElements = new List<GameObject>();
     private int _counter;
     private const float StartDistance = 5f;
+    private const int NbByBPM = 2;
 
     private void Awake()
     {
@@ -29,18 +30,18 @@ public class BoardManager : MonoBehaviour
     {
         for (int i = 0; i < _numberToSpawn; i++)
         {
-            AddFourBoard();
+            AddMultipleBoard();
         }
     }
 
-    public void AddFourBoard()
+    public void AddMultipleBoard()
     {
-        for (int j = 0; j < 4; j++)
+        for (int j = 0; j < NbByBPM; j++)
         {
             // Instantiate the board
             GameObject go = Instantiate(_boardEditorPrefab, transform);
             // Init the numbers
-            go.GetComponent<BoardEditor>().Init(_counter + 1, j % 4);
+            go.GetComponent<BoardEditor>().Init(_counter, j % NbByBPM);
             // Get position of spawner and move it  
             var position = transform.position;
             go.transform.position = new Vector3(position.x, position.y, position.z + (_counter * StartDistance));
@@ -51,9 +52,9 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    public void RemoveFourBoard()
+    public void RemoveMultipleBoard()
     {
-        for (int j = 0; j < 4; j++)
+        for (int j = 0; j < NbByBPM; j++)
         {
             // Call this function to remove on the save
             _panelElements[^1].GetComponent<BoardEditor>().OnDestroyElement();
@@ -76,7 +77,7 @@ public class BoardManager : MonoBehaviour
         _panelElements.Clear();
         _counter = 0;
         
-        AddFourBoard();
+        AddMultipleBoard();
     }
 
     void Update()
