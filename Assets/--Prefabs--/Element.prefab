@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 891e8961667237441a297dfb435f4105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _direction: {x: 0, y: 0, z: -0.05}
+  _direction: {x: 0, y: 0, z: -0.005}
   _frite: {fileID: 7210353537072566835}
   _point: {fileID: 6327500624823510529}
 --- !u!1001 &2332425715296718438

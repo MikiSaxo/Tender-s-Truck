@@ -11,7 +11,7 @@ public class BoardSign : MonoBehaviour
     [Header("Setup")]
     [SerializeField] private BoardEditor _boardEditor;
     [SerializeField] private BoardPosition _boardPosition;
-    [FormerlySerializedAs("_fritePrefab")] [SerializeField] private GameObject _elementPrefab;
+    [SerializeField] private GameObject _elementPrefab;
     [Header("Board Sign")]
     [SerializeField] private MeshRenderer _renderer;
     [SerializeField] private Material[] _materials;
@@ -64,7 +64,6 @@ public class BoardSign : MonoBehaviour
         element.transform.DOScale(element.transform.localScale * 2, 0);
         element.GetComponent<ElementToSpawn>().Init(_elementType, true);
         element.transform.SetParent(transform);
-            
     }
 
     private void SaveElement()
