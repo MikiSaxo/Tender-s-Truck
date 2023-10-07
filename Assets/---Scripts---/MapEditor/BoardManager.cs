@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
@@ -77,7 +78,7 @@ public class BoardManager : MonoBehaviour
             _counter--;
         }
         
-        _distanceToEnd = _counter * _currentVisibility;
+        CalculateDistanceToEnd();
     }
 
     private void SetPositionBoards(GameObject board, int index)
@@ -116,7 +117,7 @@ public class BoardManager : MonoBehaviour
             }
         }
 
-        _distanceToEnd = _counter * _currentVisibility;
+        CalculateDistanceToEnd();
 
         // ResetPos();
     }
@@ -127,6 +128,13 @@ public class BoardManager : MonoBehaviour
         {
             float mouseYInput = Input.GetAxis("Mouse Y");
             transform.Translate(Vector3.forward * mouseYInput * _dragSpeed);
+
+            float posClamped = Mathf.Clamp(transform.position.z, -_distanceToEnd, 0);
+
+            transform.DOMoveZ(posClamped,0);
+
+            var percent = -posClamped / _distanceToEnd * 100;
+            TimelineDownBar.Instance.MoveCursor(percent);
         }
     }
 
@@ -174,7 +182,12 @@ public class BoardManager : MonoBehaviour
             SetPositionBoards(_boardsPanel[i], i);
             // _boardsPanel[i].transform.position = new Vector3(position.x, position.y, position.z + (i * 5f));
         }
-        
+
+        CalculateDistanceToEnd();
+    }
+
+    private void CalculateDistanceToEnd()
+    {
         _distanceToEnd = _counter * _currentVisibility;
     }
 
