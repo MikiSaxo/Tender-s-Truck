@@ -26,6 +26,7 @@ public class BoardManager : MonoBehaviour
     private int _counter;
     private int _currentVisibility;
     private float _distanceToEnd;
+    private bool _launchTimeline;
 
     // private const float StartDistance = 1.33f;
 
@@ -126,16 +127,33 @@ public class BoardManager : MonoBehaviour
     {
         if (Input.GetMouseButton(2))
         {
-            float mouseYInput = Input.GetAxis("Mouse Y");
-            transform.Translate(Vector3.forward * mouseYInput * _dragSpeed);
-
-            float posClamped = Mathf.Clamp(transform.position.z, -_distanceToEnd, 0);
-
-            transform.DOMoveZ(posClamped,0);
-
-            var percent = -posClamped / _distanceToEnd * 100;
-            TimelineDownBar.Instance.MoveCursor(percent);
+           MoveBoardsWithMouse();
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _launchTimeline = !_launchTimeline;
+        }
+        
+        if(_launchTimeline)
+            MoveTimeline();
+    }
+
+    private void MoveTimeline()
+    {
+        
+    }
+    private void MoveBoardsWithMouse()
+    {
+        float mouseYInput = Input.GetAxis("Mouse Y");
+        transform.Translate(Vector3.forward * mouseYInput * _dragSpeed);
+
+        float posClamped = Mathf.Clamp(transform.position.z, -_distanceToEnd, 0);
+
+        transform.DOMoveZ(posClamped,0);
+
+        var percent = -posClamped / _distanceToEnd * 100;
+        TimelineDownBar.Instance.MoveCursor(percent);
     }
 
     public void MoveBoards(float percent)
