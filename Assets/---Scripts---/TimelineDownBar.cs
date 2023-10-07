@@ -20,6 +20,7 @@ public class TimelineDownBar : MonoBehaviour
     private void Start()
     {
         _elementRectTransform = gameObject.GetComponent<RectTransform>();
+        MoveCursor(0);
     }
 
     public void MoveBoards()

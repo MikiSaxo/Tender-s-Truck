@@ -14,19 +14,23 @@ public class BoardManager : MonoBehaviour
     public int SignNbByBPM { get; set; }
 
     [Header("Controls")]
-    //[SerializeField] private float _zoomIn = .05f;
-    //[Range(1.1f, 2f)] [SerializeField] private float _zoomOut = 1.2f;
-    [SerializeField]
-    private float _dragSpeed;
+    [SerializeField] private float _dragSpeed;
 
     [Header("Board")] [SerializeField] private int _numberToSpawn;
     [SerializeField] private GameObject _boardEditorPrefab;
-
+    [Space(10f)]
+    [SerializeField] private int _bpm;
+    
     private List<GameObject> _boardsPanel = new List<GameObject>();
     private int _counter;
     private int _currentVisibility;
     private float _distanceToEnd;
     private bool _launchTimeline;
+    
+    private float _timeToBPM;
+    private float _timeBetweenTwoBPM;
+    private float _speed;
+    private float _startTime;
 
     // private const float StartDistance = 1.33f;
 
@@ -44,6 +48,9 @@ public class BoardManager : MonoBehaviour
         {
             AddMultipleBoard();
         }
+
+        _timeBetweenTwoBPM = 1f / (_bpm / 60f);
+        _startTime = Time.time;
     }
 
     public void AddMultipleBoard()
@@ -132,16 +139,31 @@ public class BoardManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            gameObject.GetComponent<AudioSource>().Play();
             _launchTimeline = !_launchTimeline;
         }
-        
-        if(_launchTimeline)
+
+        if (_launchTimeline)
+        {
             MoveTimeline();
+        }
     }
 
     private void MoveTimeline()
     {
+        CalculateDistanceToEnd();
         
+        _speed = 4f * _currentVisibility;
+
+        float distanceCovered = (Time.time - _startTime) * _speed;
+        float totalDistance = Mathf.Abs(_distanceToEnd); 
+
+        if (distanceCovered < totalDistance)
+        {
+            float newPosition = distanceCovered / totalDistance;
+
+            transform.position = Vector3.Lerp(Vector3.zero, Vector3.back * totalDistance, newPosition);
+        }
     }
     private void MoveBoardsWithMouse()
     {
@@ -206,7 +228,7 @@ public class BoardManager : MonoBehaviour
 
     private void CalculateDistanceToEnd()
     {
-        _distanceToEnd = _counter * _currentVisibility;
+        _distanceToEnd = (_counter-1) * _currentVisibility;
     }
 
     public void ResetMap()
