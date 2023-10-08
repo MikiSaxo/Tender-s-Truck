@@ -164,7 +164,7 @@ public class BoardManager : MonoBehaviour
     {
         CalculateDistanceToEnd();
 
-        _speed = 4f * _currentVisibility;
+        _speed = 4f * _currentVisibility / _timeBetweenTwoBPM;
 
         float distanceCovered = (Time.time - _startTime) * _speed;
         float totalDistance = Mathf.Abs(_distanceToEnd);

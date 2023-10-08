@@ -2445,7 +2445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dragSpeed: 2
-  _numberToSpawn: 60
+  _numberToSpawn: 120
   _boardEditorPrefab: {fileID: 734058903267269118, guid: c3f101311a4894648bf2dc0d60b715c6,
     type: 3}
   _bpm: 120
