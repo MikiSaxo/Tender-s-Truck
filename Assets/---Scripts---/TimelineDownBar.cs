@@ -39,6 +39,7 @@ public class TimelineDownBar : MonoBehaviour
         MoveCursor(normalizedPositionX);
     }
 
+    // Value between 0 and 100
     public void MoveCursor(float value)
     {
         // float test = Mathf.Clamp(value, -_elementRectTransform.rect.width*.5f, _elementRectTransform.rect.width*.5f);

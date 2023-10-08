@@ -13,20 +13,18 @@ public class BoardManager : MonoBehaviour
 
     public int SignNbByBPM { get; set; }
 
-    [Header("Controls")]
-    [SerializeField] private float _dragSpeed;
+    [Header("Controls")] [SerializeField] private float _dragSpeed;
 
     [Header("Board")] [SerializeField] private int _numberToSpawn;
     [SerializeField] private GameObject _boardEditorPrefab;
-    [Space(10f)]
-    [SerializeField] private int _bpm;
-    
+    [Space(10f)] [SerializeField] private int _bpm;
+
     private List<GameObject> _boardsPanel = new List<GameObject>();
     private int _counter;
     private int _currentVisibility;
     private float _distanceToEnd;
     private bool _launchTimeline;
-    
+
     private float _timeToBPM;
     private float _timeBetweenTwoBPM;
     private float _speed;
@@ -51,6 +49,8 @@ public class BoardManager : MonoBehaviour
 
         _timeBetweenTwoBPM = 1f / (_bpm / 60f);
         _startTime = Time.time;
+        print(_startTime);
+
     }
 
     public void AddMultipleBoard()
@@ -68,7 +68,7 @@ public class BoardManager : MonoBehaviour
             // Add to the counter
             _counter++;
         }
-        
+
         ChangeVisibility(_currentVisibility);
     }
 
@@ -85,7 +85,7 @@ public class BoardManager : MonoBehaviour
             // Subtract to _counter
             _counter--;
         }
-        
+
         CalculateDistanceToEnd();
     }
 
@@ -134,13 +134,20 @@ public class BoardManager : MonoBehaviour
     {
         if (Input.GetMouseButton(2))
         {
-           MoveBoardsWithMouse();
+            MoveBoardsWithMouse();
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            gameObject.GetComponent<AudioSource>().Play();
             _launchTimeline = !_launchTimeline;
+
+            if (_launchTimeline)
+                gameObject.GetComponent<AudioSource>().Play();
+            else
+            {
+                gameObject.GetComponent<AudioSource>().Stop();
+                _startTime = Time.time;
+            }
         }
 
         if (_launchTimeline)
@@ -152,19 +159,22 @@ public class BoardManager : MonoBehaviour
     private void MoveTimeline()
     {
         CalculateDistanceToEnd();
-        
+
         _speed = 4f * _currentVisibility;
 
         float distanceCovered = (Time.time - _startTime) * _speed;
-        float totalDistance = Mathf.Abs(_distanceToEnd); 
+        float totalDistance = Mathf.Abs(_distanceToEnd);
 
         if (distanceCovered < totalDistance)
         {
             float newPosition = distanceCovered / totalDistance;
 
             transform.position = Vector3.Lerp(Vector3.zero, Vector3.back * totalDistance, newPosition);
+            
+            TimelineDownBar.Instance.MoveCursor(newPosition*100);
         }
     }
+
     private void MoveBoardsWithMouse()
     {
         float mouseYInput = Input.GetAxis("Mouse Y");
@@ -172,7 +182,7 @@ public class BoardManager : MonoBehaviour
 
         float posClamped = Mathf.Clamp(transform.position.z, -_distanceToEnd, 0);
 
-        transform.DOMoveZ(posClamped,0);
+        transform.DOMoveZ(posClamped, 0);
 
         var percent = -posClamped / _distanceToEnd * 100;
         TimelineDownBar.Instance.MoveCursor(percent);
@@ -228,7 +238,7 @@ public class BoardManager : MonoBehaviour
 
     private void CalculateDistanceToEnd()
     {
-        _distanceToEnd = (_counter-1) * _currentVisibility;
+        _distanceToEnd = (_counter - 1) * _currentVisibility;
     }
 
     public void ResetMap()
