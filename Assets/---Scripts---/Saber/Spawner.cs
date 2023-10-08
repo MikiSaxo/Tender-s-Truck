@@ -24,7 +24,7 @@ public class Spawner : MonoBehaviour
     private bool _canGo;
     private int _currentBPM;
     private int _countBPM;
-    private int _countByTwoBPM;
+    private int _countByFourBPM;
     private int _countElementIndex;
     private float _timeBetweenEachTwoBPM;
 
@@ -65,20 +65,23 @@ public class Spawner : MonoBehaviour
         {
             _timeToBPM -= _timeToBPM;
 
-            if (_countByTwoBPM % 2 == 0)
+            if (_countByFourBPM % 4 == 0)
                 _countBPM++;
 
             if (_countElementIndex == _mapConstructData.ElementsIndex.Count)
                 return;
 
-            if (_mapConstructData.ElementsIndex[_countElementIndex] == _countByTwoBPM)
+            for (int i = 0; i < _mapConstructData.ElementsIndex.Count; i++)
             {
-                SpawnElement(_mapConstructData.ElementsType[_countElementIndex],
-                    _mapConstructData.ElementsPosition[_countElementIndex]);
-                _countElementIndex++;
+                if (_mapConstructData.ElementsIndex[i] == _countByFourBPM)
+                {
+                    SpawnElement(_mapConstructData.ElementsType[i],
+                        _mapConstructData.ElementsPosition[i]);
+                    _countElementIndex++;
+                }
             }
 
-            _countByTwoBPM++;
+            _countByFourBPM++;
         }
     }
 
