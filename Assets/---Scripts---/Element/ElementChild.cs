@@ -9,6 +9,7 @@ public class ElementChild : MonoBehaviour
     [SerializeField] private MeshFilter _elementMesh;
     [SerializeField] private MeshRenderer _meshRenderer;
 
+    public ElementType CurrentType => _currentType;
     
     private ElementType _currentType;
 
@@ -38,10 +39,5 @@ public class ElementChild : MonoBehaviour
             _meshRenderer.material = PartyManager.Instance.GetElementTypeMat((int)_currentType);
         else if(EditorManager.Instance != null)
             _meshRenderer.material = EditorManager.Instance.GetElementType((int)_currentType);
-    }
-    
-    public ElementType GetElementType()
-    {
-        return _currentType;
     }
 }

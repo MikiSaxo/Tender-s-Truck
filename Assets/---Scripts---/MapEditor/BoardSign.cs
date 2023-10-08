@@ -63,7 +63,7 @@ public class BoardSign : MonoBehaviour
         _elementType = EditorManager.Instance.GetCurrentElement();
         element.transform.position = transform.position;
         element.transform.DOScale(element.transform.localScale * 2, 0);
-        element.GetComponent<ElementToSpawn>().Init(_elementType, true);
+        element.GetComponent<ElementToSpawn>().Init(_elementType, true, 0);
         element.transform.SetParent(transform);
     }
 

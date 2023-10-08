@@ -18,8 +18,10 @@ public class ElementToSpawn : MonoBehaviour
     private bool _isEditor;
 
     
-    public void Init(ElementType element, bool isEditor)
+    public void Init(ElementType element, bool isEditor, float speed)
     {
+        _direction.z *= speed;
+        
         if (element == ElementType.Nothing)
             return;
         if (element == ElementType.Point)
@@ -44,10 +46,5 @@ public class ElementToSpawn : MonoBehaviour
     {
         if(!_isEditor)
             transform.Translate(_direction, Space.World);
-    }
-
-    public ElementType GetElementType()
-    {
-        return _currentType;
     }
 }

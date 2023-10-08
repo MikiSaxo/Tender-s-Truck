@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,11 @@ public class SliceObject : MonoBehaviour
 
     private Vector3 _previousPos;
 
+    private void Start()
+    {
+        BacASauce.Instance.StickInSauceAction += ChangeSauceType;
+    }
+
     void FixedUpdate()
     {
         bool hasHit = Physics.Linecast(_startSlicePoint.position, _endSlicePoint.position, out RaycastHit hit,
@@ -29,7 +35,7 @@ public class SliceObject : MonoBehaviour
             Vector3 firstPos = transform.position - _previousPos;
             Vector3 secondPos = hit.transform.up;
 
-            var elementType = hit.transform.gameObject.GetComponent<ElementChild>().GetElementType();
+            var elementType = hit.transform.gameObject.GetComponent<ElementChild>().CurrentType;
 
             if ((elementType is ElementType.RedHorizontal or ElementType.RedVertical
                       && _currentType is ElementType.RedHorizontal or ElementType.RedVertical)
@@ -79,15 +85,20 @@ public class SliceObject : MonoBehaviour
         collider.convex = true;
         // collider.isTrigger = true;
 
-        rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
-        sliceObj.transform.position = target.position;
+        //rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
         // rb.velocity = Vector3.zero;
-        rb.AddExplosionForce(_cutForce, sliceObj.transform.position*1.1f, 1);
+        sliceObj.transform.position = target.position;
+        rb.AddExplosionForce(_cutForce, sliceObj.transform.position, 1);
     }
 
-    public void ChangeSauceType(ElementType newType)
+    public void ChangeSauceType()
     {
-        _currentType = newType;
-        _sauceStick.GetComponent<MeshRenderer>().material = PartyManager.Instance.GetElementTypeMat((int)newType);
+        _currentType = BacASauce.Instance.CurrentType;
+        _sauceStick.GetComponent<MeshRenderer>().material = PartyManager.Instance.GetElementTypeMat((int)_currentType);
+    }
+
+    private void OnDisable()
+    {
+        BacASauce.Instance.StickInSauceAction -= ChangeSauceType;
     }
 }

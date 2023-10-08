@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObject _elementPrefab;
+    [SerializeField] private float _elementSpeed;
 
     [Header("Level Infos")] [SerializeField]
     private string _levelName;
@@ -88,14 +89,22 @@ public class Spawner : MonoBehaviour
     private void SpawnElement(ElementType element, BoardPosition spawnerIndex)
     {
         GameObject go = Instantiate(_elementPrefab);
+
+        if (PartyManager.Instance.WhichHanded == WhichHanded.Left)
+        {
+            if (spawnerIndex == BoardPosition.LeftTop)
+                spawnerIndex = BoardPosition.RightTop;
+            else if (spawnerIndex == BoardPosition.LeftDown)
+                spawnerIndex = BoardPosition.RightDown;
+            else if (spawnerIndex == BoardPosition.RightTop)
+                spawnerIndex = BoardPosition.LeftTop;
+            else if (spawnerIndex == BoardPosition.RightDown)
+                spawnerIndex = BoardPosition.LeftDown;
+        }
+        
         go.transform.position = _spawnersPos[(int)spawnerIndex].position;
 
-        // var rb = go.GetComponent<Rigidbody>();
-        // rb.AddForce(_impulseDir * _force);
-
-        print("spawn : " + element);
-
-        go.GetComponent<ElementToSpawn>().Init(element, false);
+        go.GetComponent<ElementToSpawn>().Init(element, false, _elementSpeed);
 
         Destroy(go, 100);
     }
