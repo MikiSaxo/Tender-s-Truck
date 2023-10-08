@@ -66,10 +66,10 @@ public class EditorSaveMap : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.O))
-            SaveJson();
-        if (Input.GetKeyDown(KeyCode.P))
-            PrintDico();
+        // if (Input.GetKeyDown(KeyCode.O))
+        //     SaveJson();
+        // if (Input.GetKeyDown(KeyCode.P))
+        //     PrintDico();
     }
 
     private void UpdateMapName()

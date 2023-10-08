@@ -11,6 +11,8 @@ public class BoardManager : MonoBehaviour
 {
     public static BoardManager Instance;
 
+    public event Action LaunchTimeline; 
+
     public int SignNbByBPM { get; set; }
 
     [Header("Controls")] [SerializeField] private float _dragSpeed;
@@ -49,7 +51,7 @@ public class BoardManager : MonoBehaviour
 
         _timeBetweenTwoBPM = 1f / (_bpm / 60f);
         _startTime = Time.time;
-        print(_startTime);
+        // print(_startTime);
 
     }
 
@@ -140,6 +142,8 @@ public class BoardManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             _launchTimeline = !_launchTimeline;
+            
+            LaunchTimeline?.Invoke();
 
             if (_launchTimeline)
                 gameObject.GetComponent<AudioSource>().Play();

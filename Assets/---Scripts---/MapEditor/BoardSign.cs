@@ -77,6 +77,21 @@ public class BoardSign : MonoBehaviour
     {
         boardPanel.AddElementToSave(_boardPosition, _elementType);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponent<EditorRailCross>())
+        {
+            StartCoroutine(WhiteMat());
+        }
+    }
+
+    IEnumerator WhiteMat()
+    {
+        _renderer.material = _materials[2];
+        yield return new WaitForSeconds(1.5f);
+        _renderer.material = _materials[1];
+    }
 }
 
 public enum BoardPosition

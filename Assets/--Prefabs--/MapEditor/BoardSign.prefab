@@ -49,7 +49,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -75,6 +75,7 @@ MonoBehaviour:
   _materials:
   - {fileID: 2100000, guid: 49c4bb7ea9dfd6c4198264a0585deafe, type: 2}
   - {fileID: 2100000, guid: faf9c6de3372103439bf995c69d0158d, type: 2}
+  - {fileID: 2100000, guid: 5bf963994dbc35248a81b72be8544777, type: 2}
 --- !u!1 &802256276598831951
 GameObject:
   m_ObjectHideFlags: 0
