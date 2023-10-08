@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 891e8961667237441a297dfb435f4105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _direction: {x: 0, y: 0, z: -0.005}
+  _direction: {x: 0, y: 0, z: -0.01}
   _frite: {fileID: 7210353537072566835}
   _point: {fileID: 6327500624823510529}
 --- !u!65 &990144521443881522
@@ -79,6 +79,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6365154980118258169}
     m_Modifications:
+    - target: {fileID: 839020100820099768, guid: b4d89add84e6893468d286c13b03fa53,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.9132962
+      objectReference: {fileID: 0}
     - target: {fileID: 4921909391265782869, guid: b4d89add84e6893468d286c13b03fa53,
         type: 3}
       propertyPath: m_Name
@@ -175,6 +180,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6365154980118258169}
     m_Modifications:
+    - target: {fileID: 1581912363519318594, guid: 2d38a7ebe3dfc9e458c0f6488e5d37ca,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3339532100541236026, guid: 2d38a7ebe3dfc9e458c0f6488e5d37ca,
         type: 3}
       propertyPath: m_Name

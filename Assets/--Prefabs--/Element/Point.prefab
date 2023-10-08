@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7421256472261206406}
   - component: {fileID: 1581912363519318594}
   - component: {fileID: 206846208123831002}
+  - component: {fileID: 1762981201521602205}
   m_Layer: 9
   m_Name: Point
   m_TagString: Untagged
@@ -33,7 +34,7 @@ Transform:
   m_Children:
   - {fileID: 6311818954516324011}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &7421256472261206406
 Rigidbody:
@@ -98,6 +99,18 @@ MonoBehaviour:
   _meshes: []
   _elementMesh: {fileID: 8311247365447832904}
   _meshRenderer: {fileID: 5275823106575219430}
+--- !u!114 &1762981201521602205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3339532100541236026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4960a816a93ede148af4ca61d4793bc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3846047011676672868
 GameObject:
   m_ObjectHideFlags: 0

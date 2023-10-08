@@ -39,4 +39,9 @@ public class ElementChild : MonoBehaviour
         else if(EditorManager.Instance != null)
             _meshRenderer.material = EditorManager.Instance.GetElementType((int)_currentType);
     }
+    
+    public ElementType GetElementType()
+    {
+        return _currentType;
+    }
 }

@@ -47,7 +47,7 @@ public class Spawner : MonoBehaviour
         _mapConstructData = JsonUtility.FromJson<MapConstructData>(lineJson);
         _currentBPM = _mapConstructData.MusicBPM;
         _timeBetweenEachTwoBPM = 1f / (_currentBPM / 60f);
-        print("bpm : " + _currentBPM + " / " + _timeBetweenEachTwoBPM);
+        // print("bpm : " + _currentBPM + " / " + _timeBetweenEachTwoBPM);
 
         _canGo = true;
         // InitializeMap();
@@ -90,9 +90,10 @@ public class Spawner : MonoBehaviour
         // var rb = go.GetComponent<Rigidbody>();
         // rb.AddForce(_impulseDir * _force);
 
+        print("spawn : " + element);
 
         go.GetComponent<ElementToSpawn>().Init(element, false);
 
-        Destroy(go, 10);
+        Destroy(go, 100);
     }
 }

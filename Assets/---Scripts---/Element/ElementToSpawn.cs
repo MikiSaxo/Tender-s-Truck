@@ -40,7 +40,7 @@ public class ElementToSpawn : MonoBehaviour
         _currentType = element;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if(!_isEditor)
             transform.Translate(_direction, Space.World);
