@@ -69,6 +69,7 @@ public class ScoreManager : MonoBehaviour
         _comboText.text = $"x{_currentCombo}";
         _scoreText.text = $"{_currentScore}";
 
+        transform.DOScale(1, 0);
         transform.DOPunchScale(Vector3.one, .25f);
     }
 

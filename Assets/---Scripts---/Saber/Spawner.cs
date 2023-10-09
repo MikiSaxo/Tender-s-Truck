@@ -62,7 +62,7 @@ public class Spawner : MonoBehaviour
         _timeSinceStart += Time.deltaTime;
         _timeToBPM += Time.deltaTime;
 
-        if (_timeToBPM >= _timeBetweenEachTwoBPM)
+        if (_timeToBPM >= _timeBetweenEachTwoBPM * .25f)
         {
             _timeToBPM -= _timeToBPM;
 
