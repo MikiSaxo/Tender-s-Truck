@@ -64,5 +64,6 @@ public enum ElementType
     RedHorizontal = 2,
     RedVertical = 3,
     Nothing = 4,
-    Point = 5
+    Croquette = 5,
+    Mozza = 6
 }

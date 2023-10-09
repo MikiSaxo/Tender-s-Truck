@@ -9,6 +9,8 @@ using Random = UnityEngine.Random;
 
 public class ElementToSpawn : MonoBehaviour
 {
+    public static event Action LoseLife;
+    
     [SerializeField] private Vector3 _direction;
     [Header("Objects")]
     [SerializeField] private GameObject _frite;
@@ -17,14 +19,17 @@ public class ElementToSpawn : MonoBehaviour
     private ElementType _currentType;
     private bool _isEditor;
 
-    
+    private void Start()
+    {
+    }
+
     public void Init(ElementType element, bool isEditor, float speed)
     {
         _direction.z *= speed;
         
         if (element == ElementType.Nothing)
             return;
-        if (element == ElementType.Point)
+        if (element == ElementType.Croquette)
         {
             _point.SetActive(true);
             _frite.SetActive(false);
@@ -46,5 +51,18 @@ public class ElementToSpawn : MonoBehaviour
     {
         if(!_isEditor)
             transform.Translate(_direction, Space.World);
+    }
+
+    public void OnDeathElementTrigger()
+    {
+        if (_frite != null && _point != null)
+        {
+            LoseLife?.Invoke();
+        }
+        Destroy(gameObject);
+    }
+
+    private void OnDisable()
+    {
     }
 }

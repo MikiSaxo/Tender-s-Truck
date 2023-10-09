@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class LifeManager : MonoBehaviour
 {
+    public static LifeManager Instance;
+    
     [SerializeField] private int _maxLife;
     [SerializeField] private GameObject _lifeBarPrefab;
     [SerializeField] private GameObject _lifeBarParent;
@@ -15,8 +17,15 @@ public class LifeManager : MonoBehaviour
 
     [SerializeField] private float OffsetLifeBar = .07f;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void Start()
     {
+        ElementToSpawn.LoseLife += LoseLife;
+        
         _currentLife = _maxLife;
         
         for (int i = 0; i < _maxLife; i++)
@@ -29,14 +38,35 @@ public class LifeManager : MonoBehaviour
         }
     }
 
+    public void WinLife()
+    {
+        _currentLife++;
+
+        if (_currentLife > _maxLife)
+            _currentLife = _maxLife;
+        print("c winwin la life");
+        
+        _lifeBars[_currentLife].SetActive(true);
+    }
+
     private void LoseLife()
     {
         _currentLife--;
-        _lifeBars[^1].SetActive(false);
         
-        if (_currentLife <= 0)
+        
+        if (_currentLife > 0)
         {
-            // c'est ciao
+            _lifeBars[_currentLife].SetActive(false);
         }
+        else
+        {
+            _lifeBars[0].SetActive(false);
+            Debug.LogWarning("t mort mon gadjo");
+        }
+    }
+
+    private void OnDisable()
+    {
+        ElementToSpawn.LoseLife -= LoseLife;
     }
 }

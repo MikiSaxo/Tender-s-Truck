@@ -75,6 +75,9 @@ public class SliceObject : MonoBehaviour
             Destroy(target);
             Destroy(upperHull, 5);
             Destroy(lowerHull, 5);
+            
+            LifeManager.Instance.WinLife();
+            ScoreManager.Instance.AddPoints(ElementType.RedHorizontal);
         }
     }
 
