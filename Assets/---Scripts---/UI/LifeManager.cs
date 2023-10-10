@@ -46,7 +46,7 @@ public class LifeManager : MonoBehaviour
             _currentLife = _maxLife;
         print("c winwin la life");
         
-        _lifeBars[_currentLife].SetActive(true);
+        _lifeBars[_currentLife-1].SetActive(true);
     }
 
     private void LoseLife()

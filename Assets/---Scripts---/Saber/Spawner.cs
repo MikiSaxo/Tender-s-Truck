@@ -5,17 +5,22 @@ using System.IO;
 using DG.Tweening;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.InputSystem.Interactions;
 using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour
 {
+    [Header("Element")]
+    [SerializeField] private Transform _target;
+    [SerializeField] private float _timeToReachTarget;
     [SerializeField] private GameObject _elementPrefab;
-    [SerializeField] private float _elementSpeed;
 
     [Header("Level Infos")] [SerializeField]
     private string _levelName;
 
     [SerializeField] private string _levelFolder;
+    
+    
     [Header("Spawners")] [SerializeField] private Transform[] _spawnersPos;
 
     private MapConstructData _mapConstructData;
@@ -28,10 +33,14 @@ public class Spawner : MonoBehaviour
     private int _countByFourBPM;
     private int _countElementIndex;
     private float _timeBetweenEachTwoBPM;
+    
+    private float _distanceTarget;
 
     private void Start()
     {
         LoadFileMap();
+        
+        _distanceTarget = Vector3.Distance(_target.position, transform.position);
     }
 
     private void LoadFileMap()
@@ -104,7 +113,7 @@ public class Spawner : MonoBehaviour
         
         go.transform.position = _spawnersPos[(int)spawnerIndex].position;
 
-        go.GetComponent<ElementToSpawn>().Init(element, false, _elementSpeed);
+        go.GetComponent<ElementToSpawn>().Init(element, false, _target, _timeToReachTarget, _distanceTarget);
 
         Destroy(go, 100);
     }

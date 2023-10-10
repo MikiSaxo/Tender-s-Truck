@@ -11,21 +11,24 @@ public class ElementToSpawn : MonoBehaviour
 {
     public static event Action LoseLife;
     
-    [SerializeField] private Vector3 _direction;
+    // [SerializeField] private Vector3 _direction;
     [Header("Objects")]
     [SerializeField] private GameObject _frite;
     [SerializeField] private GameObject _point;
 
     private ElementType _currentType;
     private bool _isEditor;
+    private Transform _target;
+    private float _timeToReachTarget;
+    
+    private Vector3 _direction;
+    private float _distanceTarget;
 
-    private void Start()
+    public void Init(ElementType element, bool isEditor, Transform target, float timeToReachTarget, float distanceTarget)
     {
-    }
-
-    public void Init(ElementType element, bool isEditor, float speed)
-    {
-        _direction.z *= speed;
+        // _direction.z *= speed;
+        _target = target;
+        _timeToReachTarget = timeToReachTarget;
         
         if (element == ElementType.Nothing)
             return;
@@ -45,13 +48,30 @@ public class ElementToSpawn : MonoBehaviour
         _isEditor = isEditor;
         
         _currentType = element;
+        
+        _direction = _target.position - transform.position;
+        _distanceTarget = distanceTarget;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        if(!_isEditor)
-            transform.Translate(_direction, Space.World);
+        if (!_isEditor)
+        {
+            if (_target != null)
+            {
+                float distanceTotale = _direction.magnitude;
+                float vitesse = distanceTotale / _timeToReachTarget;
+
+                if (distanceTotale < _distanceTarget)
+                {
+                    vitesse = _distanceTarget / _timeToReachTarget;
+                }
+                transform.position += _direction.normalized * vitesse * Time.deltaTime;
+            }
+        }
+        // transform.Translate(_direction, Space.World);
     }
+    
 
     public void OnDeathElementTrigger()
     {

@@ -55,6 +55,7 @@ public class ScoreManager : MonoBehaviour
         }
         
         UpdateTexts();
+        PunchTexts();
     }
 
     public void LoseCombo()
@@ -62,15 +63,25 @@ public class ScoreManager : MonoBehaviour
         _currentCombo = 1;
         
         UpdateTexts();
+        RedTextCombo();
     }
 
     private void UpdateTexts()
     {
         _comboText.text = $"x{_currentCombo}";
         _scoreText.text = $"{_currentScore}";
+    }
 
+    private void PunchTexts()
+    {
         transform.DOScale(1, 0);
         transform.DOPunchScale(Vector3.one, .25f);
+    }
+
+    private void RedTextCombo()
+    {
+        _comboText.DOColor(Color.red, 0);
+        _comboText.DOColor(Color.white, 1);
     }
 
     private void OnDisable()
