@@ -6,14 +6,12 @@ using UnityEngine.Serialization;
 
 public class MapHeight : MonoBehaviour
 {
-    [SerializeField] private Transform _target;
+    [SerializeField] private Transform _targetHeight;
     [SerializeField] private float _height;
     void Start()
     {
-        float startPos = Vector3.Distance(transform.position, _target.position);
+        float startPosY = _targetHeight.position.y - _height;
 
-        transform.DOMoveY(startPos - _height, 0);
+        transform.DOMove(new Vector3(_targetHeight.position.x, startPosY, _targetHeight.position.z), 0);
     }
-
-   
 }

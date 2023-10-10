@@ -5,6 +5,7 @@ using System.IO;
 using DG.Tweening;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 using UnityEngine.UI;
 
@@ -16,6 +17,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private Transform _target;
     [SerializeField] private float _timeToReachTarget;
     [SerializeField] private GameObject _elementPrefab;
+    [SerializeField] private InputAction _action;
 
     [Header("Level Infos")] [SerializeField]
     private string _levelName;
@@ -30,6 +32,7 @@ public class Spawner : MonoBehaviour
     private float _timeSinceStart;
     private float _timeToBPM;
     private bool _canGo;
+    private bool _hasLaunchMusic;
     private int _currentBPM;
     private int _countBPM;
     private int _countByFourBPM;
@@ -45,8 +48,13 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-        LoadFileMap();
+        _action.Enable();
+        _action.performed += context =>
+        {
+            LaunchMap();
+        };
         
+        LoadFileMap();
         _distanceTarget = Vector3.Distance(_target.position, transform.position);
     }
 
@@ -72,6 +80,7 @@ public class Spawner : MonoBehaviour
 
     public void LaunchMap()
     {
+        print("allo");
         _canGo = true;
     }
 
@@ -79,10 +88,22 @@ public class Spawner : MonoBehaviour
     {
         if (!_canGo)
             return;
+        
+        PrepareLaunchMusic();
+        SpawnByTime();
 
-        _timeSinceStart += Time.deltaTime;
+        // if (Input.GetKeyDown(KeyCode.A))
+        // if(_action.triggered)
+        // {
+        //     print("allo");
+        //     LaunchMap();
+        // }
+    }
+
+    private void SpawnByTime()
+    {
         _timeToBPM += Time.deltaTime;
-
+        
         if (_timeToBPM >= _timeBetweenEachTwoBPM * .25f)
         {
             _timeToBPM -= _timeToBPM;
@@ -102,9 +123,25 @@ public class Spawner : MonoBehaviour
                     _countElementIndex++;
                 }
             }
-
             _countByFourBPM++;
         }
+    }
+
+    private void PrepareLaunchMusic()
+    {
+        if(_timeSinceStart < _timeToReachTarget)
+            _timeSinceStart += Time.deltaTime;
+        else
+            LaunchMusic();
+    }
+    
+    private void LaunchMusic()
+    {
+        if (_hasLaunchMusic)
+            return;
+        print("Launch la musica");
+        _hasLaunchMusic = true;
+        AudioManager.Instance.PlaySound("120bpm");
     }
 
     private void SpawnElement(ElementType element, BoardPosition spawnerIndex)
