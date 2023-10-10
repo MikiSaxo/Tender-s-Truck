@@ -7,8 +7,10 @@ using UnityEngine.Rendering.Universal;
 public class BacASauce : MonoBehaviour
 {
     public static BacASauce Instance;
-    public event Action StickInSauceAction;
+    // public event Action StickInSauceAction;
 
+    [SerializeField] private GameObject[] _sliceObj;
+    
     public ElementType CurrentType => _currentType;
     
     [SerializeField] private ElementType _currentType;
@@ -28,7 +30,9 @@ public class BacASauce : MonoBehaviour
     {
         if (other.gameObject.GetComponent<SauceStick>() != null)
         {
-            StickInSauceAction?.Invoke();
+            _sliceObj[0].GetComponent<SliceObject>().ChangeSauceType(_currentType);
+            _sliceObj[1].GetComponent<SliceObject>().ChangeSauceType(_currentType);
+            // StickInSauceAction?.Invoke();
         }
     }
 }

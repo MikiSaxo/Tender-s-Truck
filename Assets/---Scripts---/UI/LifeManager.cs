@@ -44,7 +44,7 @@ public class LifeManager : MonoBehaviour
 
         if (_currentLife > _maxLife)
             _currentLife = _maxLife;
-        print("c winwin la life");
+        // print("c winwin la life");
         
         _lifeBars[_currentLife-1].SetActive(true);
     }
@@ -61,7 +61,7 @@ public class LifeManager : MonoBehaviour
         else
         {
             _lifeBars[0].SetActive(false);
-            Debug.LogWarning("t mort mon gadjo");
+            // Debug.LogWarning("t mort mon gadjo");
         }
     }
 
