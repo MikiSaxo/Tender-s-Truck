@@ -11,6 +11,7 @@ public class MapHeight : MonoBehaviour
     void Start()
     {
         float startPosY = _targetHeight.position.y - _height;
+        // print(startPosY);
 
         transform.DOMove(new Vector3(_targetHeight.position.x, startPosY, _targetHeight.position.z), 0);
     }

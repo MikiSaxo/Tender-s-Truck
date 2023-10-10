@@ -22,10 +22,17 @@ public class SliceObject : MonoBehaviour
 
     private void Start()
     {
-        BacASauce.Instance.StickInSauceAction += ChangeSauceType;
+        // BacASauce.Instance.StickInSauceAction += ChangeSauceType;
+        print("pos : " + Vector3.Distance(_startSlicePoint.position, _endSlicePoint.position));
+
     }
 
     void FixedUpdate()
+    {
+        //CutAngle();
+    }
+
+    void CutAngle()
     {
         bool hasHit = Physics.Linecast(_startSlicePoint.position, _endSlicePoint.position, out RaycastHit hit,
             _sliceable);
@@ -37,11 +44,13 @@ public class SliceObject : MonoBehaviour
 
             var elementType = hit.transform.gameObject.GetComponent<ElementChild>().CurrentType;
 
+            // print($"mine : {_currentType} / other : {elementType}");
             if ((elementType is ElementType.RedHorizontal or ElementType.RedVertical
-                      && _currentType is ElementType.RedHorizontal or ElementType.RedVertical)
-                     || (elementType is ElementType.YellowVertical or ElementType.YellowHorizontal
-                         && _currentType is ElementType.YellowVertical or ElementType.YellowHorizontal))
+                 && _currentType is ElementType.RedHorizontal or ElementType.RedVertical)
+                || (elementType is ElementType.YellowVertical or ElementType.YellowHorizontal
+                    && _currentType is ElementType.YellowVertical or ElementType.YellowHorizontal))
             {
+                print("angle : " + Vector3.Angle(firstPos, secondPos));
                 if (Vector3.Angle(firstPos, secondPos) > _angleToDestroy ||
                     Vector3.Angle(firstPos, -secondPos) > _angleToDestroy)
                 {
@@ -54,9 +63,19 @@ public class SliceObject : MonoBehaviour
         _previousPos = transform.position;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponent<Frite>())
+        {
+            print("brr brr ça touche la frite");
+            Slice(other.gameObject);
+        }
+    }
+
     public void Slice(GameObject target)
     {
         Vector3 velocity = _velocityEstimator.GetVelocityEstimate();
+        print("slice velo : " + velocity);
         Vector3 planeNormal = Vector3.Cross(_endSlicePoint.position - _startSlicePoint.position, velocity);
         planeNormal.Normalize();
 
@@ -94,14 +113,14 @@ public class SliceObject : MonoBehaviour
         rb.AddExplosionForce(_cutForce, sliceObj.transform.position, 1);
     }
 
-    public void ChangeSauceType()
+    public void ChangeSauceType(ElementType newType)
     {
-        _currentType = BacASauce.Instance.CurrentType;
+        _currentType = newType;
         _sauceStick.GetComponent<MeshRenderer>().material = PartyManager.Instance.GetElementTypeMat((int)_currentType);
     }
 
     private void OnDisable()
     {
-        BacASauce.Instance.StickInSauceAction -= ChangeSauceType;
+        // BacASauce.Instance.StickInSauceAction -= ChangeSauceType;
     }
 }
