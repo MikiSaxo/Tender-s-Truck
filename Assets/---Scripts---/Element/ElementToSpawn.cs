@@ -28,6 +28,7 @@ public class ElementToSpawn : MonoBehaviour
     {
         // _direction.z *= speed;
         _target = target;
+        _target.position = new Vector3(transform.position.x, transform.position.y, _target.position.z);
         _timeToReachTarget = timeToReachTarget;
         
         if (element == ElementType.Nothing)

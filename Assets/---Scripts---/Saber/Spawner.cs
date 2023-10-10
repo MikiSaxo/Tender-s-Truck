@@ -10,6 +10,8 @@ using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour
 {
+    public static Spawner Instance;
+    
     [Header("Element")]
     [SerializeField] private Transform _target;
     [SerializeField] private float _timeToReachTarget;
@@ -36,6 +38,11 @@ public class Spawner : MonoBehaviour
     
     private float _distanceTarget;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void Start()
     {
         LoadFileMap();
@@ -59,8 +66,13 @@ public class Spawner : MonoBehaviour
         _timeBetweenEachTwoBPM = 1f / (_currentBPM / 60f);
         // print("bpm : " + _currentBPM + " / " + _timeBetweenEachTwoBPM);
 
-        _canGo = true;
+        // _canGo = true;
         // InitializeMap();
+    }
+
+    public void LaunchMap()
+    {
+        _canGo = true;
     }
 
     private void Update()
