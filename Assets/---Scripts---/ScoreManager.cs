@@ -8,14 +8,13 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
-        
-    [Header("Setup")]
-    [SerializeField] private TMP_Text _scoreText;
+
+    [Header("Setup")] [SerializeField] private TMP_Text _scoreText;
     [SerializeField] private TMP_Text _comboText;
-    [Header("Combos Values")]
-    [SerializeField] private float _frite;
-    [SerializeField] private float _croquette;
-    [SerializeField] private float _mozza;
+
+    private float _frite;
+    private float _croquette;
+    private float _mozza;
 
     private float _currentScore;
     private float _currentCombo;
@@ -28,18 +27,22 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         ElementToSpawn.LoseLife += LoseCombo;
+
+        _frite = PartyManager.Instance.FriteScore;
+        _croquette = PartyManager.Instance.CroquetteScore;
+        _mozza = PartyManager.Instance.MozzaScore;
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.J))
             AddPoints(ElementType.RedHorizontal);
     }
 
     public void AddPoints(ElementType type)
     {
         _currentCombo++;
-        
+
         if (type == ElementType.Croquette)
         {
             _currentScore += _croquette * _currentCombo;
@@ -49,11 +52,11 @@ public class ScoreManager : MonoBehaviour
         {
             _currentScore += _frite * _currentCombo;
         }
-        else if (type == ElementType.Mozza_ClockWise ||type == ElementType.Mozza_Anti_ClockWise)
+        else if (type == ElementType.Mozza_ClockWise || type == ElementType.Mozza_Anti_ClockWise)
         {
             _currentScore += _mozza * _currentCombo;
         }
-        
+
         UpdateTexts();
         PunchTexts();
     }
@@ -61,7 +64,7 @@ public class ScoreManager : MonoBehaviour
     public void LoseCombo()
     {
         _currentCombo = 1;
-        
+
         UpdateTexts();
         RedTextCombo();
     }

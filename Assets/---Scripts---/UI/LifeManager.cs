@@ -26,7 +26,14 @@ public class LifeManager : MonoBehaviour
     {
         ElementToSpawn.LoseLife += LoseLife;
         
+        SetupLife();
+    }
+
+    public void SetupLife()
+    {
         _currentLife = _maxLife;
+        
+        ResetLife();
         
         for (int i = 0; i < _maxLife; i++)
         {
@@ -36,6 +43,18 @@ public class LifeManager : MonoBehaviour
             go.transform.localPosition = new Vector3(i * OffsetLifeBar, position.y, position.z);
             _lifeBars.Add(go);
         }
+    }
+
+    private void ResetLife()
+    {
+        if (_lifeBars.Count <= 0)
+            return;
+        
+        foreach (var bar in _lifeBars)
+        {
+            Destroy(bar);
+        }
+        _lifeBars.Clear();
     }
 
     public void WinLife()
@@ -53,7 +72,6 @@ public class LifeManager : MonoBehaviour
     {
         _currentLife--;
         
-        
         if (_currentLife > 0)
         {
             _lifeBars[_currentLife].SetActive(false);
@@ -61,6 +79,7 @@ public class LifeManager : MonoBehaviour
         else
         {
             _lifeBars[0].SetActive(false);
+            Spawner.Instance.StopMusic();
             // Debug.LogWarning("t mort mon gadjo");
         }
     }

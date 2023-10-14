@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using DG.Tweening;
@@ -16,7 +17,7 @@ public class Spawner : MonoBehaviour
     [Header("Element")] 
     [SerializeField] private GameObject _elementPrefab;
     [SerializeField] private InputAction _action;
-
+    
     [Header("Spawners")] [SerializeField] private Transform[] _spawnersPos;
 
     private Transform _target;
@@ -35,8 +36,10 @@ public class Spawner : MonoBehaviour
     private int _countByFourBPM;
     private int _countElementIndex;
     private float _timeBetweenEachTwoBPM;
-
     private float _distanceTarget;
+    private string _musicName;
+    private List<GameObject> _spawnElements = new List<GameObject>();
+
 
     private void Awake()
     {
@@ -56,6 +59,8 @@ public class Spawner : MonoBehaviour
 
         LoadFileMap();
         _distanceTarget = Vector3.Distance(_target.position, transform.position);
+
+        _musicName = "120bpm";
     }
 
     private void LoadFileMap()
@@ -82,6 +87,26 @@ public class Spawner : MonoBehaviour
     {
         print("allo");
         _canGo = true;
+        
+        LifeManager.Instance.SetupLife();
+    }
+
+    public void StopMusic()
+    {
+        _canGo = false;
+        _timeToBPM = 0;
+        _countByFourBPM = 0;
+        _countBPM = 0;
+        _countElementIndex = 0;
+        
+        AudioManager.Instance.StopSound(_musicName);
+
+        foreach (var element in _spawnElements)
+        {
+            if(element != null)
+                Destroy(element);
+        }
+        _spawnElements.Clear();
     }
 
     private void Update()
@@ -142,12 +167,13 @@ public class Spawner : MonoBehaviour
             return;
         print("Launch la musica");
         _hasLaunchMusic = true;
-        AudioManager.Instance.PlaySound("120bpm");
+        AudioManager.Instance.PlaySound(_musicName);
     }
 
     private void SpawnElement(ElementType element, BoardPosition spawnerIndex)
     {
         GameObject go = Instantiate(_elementPrefab);
+        _spawnElements.Add(go);
 
         if (PartyManager.Instance.WhichHanded == WhichHanded.Left)
         {
@@ -165,6 +191,6 @@ public class Spawner : MonoBehaviour
 
         go.GetComponent<ElementToSpawn>().Init(element, false, _target, _timeToReachTarget, _distanceTarget);
 
-        Destroy(go, 100);
+        Destroy(go, 30);
     }
 }

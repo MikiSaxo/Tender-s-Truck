@@ -326,7 +326,7 @@ MonoBehaviour:
   _visualTarget: {fileID: 6290116005898126362}
   _localAxis: {x: 0, y: -1, z: 0}
   _resetSpeed: 5
-  _foolowAngleTreshold: 45
+  _followAngleTreshold: 90
 --- !u!1 &4056660900091357988
 GameObject:
   m_ObjectHideFlags: 0

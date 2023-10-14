@@ -12,6 +12,4 @@ public class TriggerLaunchMap : MonoBehaviour
             Spawner.Instance.LaunchMap();
         }
     }
-
-    
 }

@@ -37,6 +37,10 @@ public class PartyManager : MonoBehaviour
     [Header("Level Infos")]
     [SerializeField] private string _levelName;
     [SerializeField] private string _levelFolder;
+    [Header("Score")]
+    [SerializeField] private int _friteScore;
+    [FormerlySerializedAs("_pointScore")] [SerializeField] private int croquetteScore;
+    [SerializeField] private int _mozzaScore;
 
     public Transform MapTarget => _mapTarget;
     public Transform SpawnTarget => _spawnTarget;
@@ -45,6 +49,9 @@ public class PartyManager : MonoBehaviour
     public float TimeToReachTarget => _timeToReachTarget;
     public string LevelName => _levelName;
     public string LevelFolder => _levelFolder;
+    public int FriteScore => _friteScore;
+    public int CroquetteScore => croquetteScore;
+    public int MozzaScore => _mozzaScore;
 
     private void Awake()
     {
@@ -53,21 +60,13 @@ public class PartyManager : MonoBehaviour
 
     private void Start()
     {
-        if (_whichHanded == WhichHanded.Left)
-        {
-            _leftHand[0].SetActive(true);
-           _leftHand[1].SetActive(false);
-           _rightHand[0].SetActive(false);
-           _rightHand[1].SetActive(true);
-        }
-        else
-        {
-           _leftHand[0].SetActive(false);
-           _leftHand[1].SetActive(true);
-           _rightHand[0].SetActive(true);
-           _rightHand[1].SetActive(false);
-        }
+       SwitchHand((int)_whichHanded);
 
+        UpdateBacASauce();
+    }
+
+    private void UpdateBacASauce()
+    {
         if (_sauceType == GameplaySauceType.BacASauce)
         {
             _bacASauce.SetActive(true);
@@ -78,6 +77,32 @@ public class PartyManager : MonoBehaviour
             _bacASauce.SetActive(false);
             _buttonsSauce.SetActive(true);
             _buttonsSauce.transform.position = _buttonsSaucePos[(int)_whichHanded].position;
+        } 
+    }
+
+    public void SwitchHandButton()
+    {
+        _whichHanded = _whichHanded == WhichHanded.Left ? WhichHanded.Right : WhichHanded.Left;
+
+        SwitchHand((int)_whichHanded);
+    }
+
+    private void SwitchHand(int index)
+    {
+        _whichHanded = (WhichHanded)index;
+        if (_whichHanded == WhichHanded.Left)
+        {
+            _leftHand[0].SetActive(true);
+            _leftHand[1].SetActive(false);
+            _rightHand[0].SetActive(false);
+            _rightHand[1].SetActive(true);
+        }
+        else
+        {
+            _leftHand[0].SetActive(false);
+            _leftHand[1].SetActive(true);
+            _rightHand[0].SetActive(true);
+            _rightHand[1].SetActive(false);
         }
     }
 
