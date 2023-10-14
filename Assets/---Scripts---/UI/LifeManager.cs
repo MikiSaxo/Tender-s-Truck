@@ -17,6 +17,8 @@ public class LifeManager : MonoBehaviour
 
     [SerializeField] private float OffsetLifeBar = .07f;
 
+    public int CurrentLife => _currentLife;
+
     private void Awake()
     {
         Instance = this;

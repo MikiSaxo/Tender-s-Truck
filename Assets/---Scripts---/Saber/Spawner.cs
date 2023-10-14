@@ -39,7 +39,7 @@ public class Spawner : MonoBehaviour
     private float _distanceTarget;
     private string _musicName;
     private List<GameObject> _spawnElements = new List<GameObject>();
-
+    private bool _firstCheckWin = false;
 
     private void Awake()
     {
@@ -85,7 +85,11 @@ public class Spawner : MonoBehaviour
 
     public void LaunchMap()
     {
-        print("allo");
+        if (!_canGo)
+        {
+            StopMusic();
+        }
+
         _canGo = true;
         
         LifeManager.Instance.SetupLife();
@@ -137,7 +141,10 @@ public class Spawner : MonoBehaviour
                 _countBPM++;
 
             if (_countElementIndex == _mapConstructData.ElementsIndex.Count)
+            {
+                _firstCheckWin = true;
                 return;
+            }
 
             for (int i = 0; i < _mapConstructData.ElementsIndex.Count; i++)
             {
@@ -192,5 +199,26 @@ public class Spawner : MonoBehaviour
         go.GetComponent<ElementToSpawn>().Init(element, false, _target, _timeToReachTarget, _distanceTarget);
 
         Destroy(go, 30);
+    }
+
+    public void CheckIfVictory()
+    {
+        if (!_firstCheckWin)
+            return;
+
+        // print("check victory " + _spawnElements[^1]);
+
+        StartCoroutine(WaitCheckVictory());
+    }
+
+    IEnumerator WaitCheckVictory()
+    {
+        yield return new WaitForSeconds(.1f);
+        if(_spawnElements[^1] == null && LifeManager.Instance.CurrentLife > 0)
+            Victory();
+    }
+    private void Victory()
+    {
+        print("victoire");
     }
 }

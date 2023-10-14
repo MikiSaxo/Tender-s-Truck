@@ -97,13 +97,13 @@ public class ElementToSpawn : MonoBehaviour
         // transform.Translate(_direction, Space.World);
     }
     
-
     public void OnDeathElementTrigger()
     {
         if (_frite != null && _point != null)
         {
             LoseLife?.Invoke();
         }
+        Spawner.Instance.CheckIfVictory();
         Destroy(gameObject);
     }
 

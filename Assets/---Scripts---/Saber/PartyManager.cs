@@ -14,6 +14,22 @@ public class PartyManager : MonoBehaviour
     public static PartyManager Instance;
     public WhichHanded WhichHanded => _whichHanded;
 
+    [Header("Level Infos")]
+    [SerializeField] private string _levelName;
+    [SerializeField] private string _levelFolder;
+    [Header("Sabers")]
+    [SerializeField] private float _velocityMinToCut;
+    [Header("Map height")]
+    [SerializeField] private Transform _mapTarget;
+    [SerializeField] private float _height;
+    [Space(10f)]
+    [Header("-- Spawn Element -- ")]
+    [SerializeField] private Transform _spawnTarget;
+    [SerializeField] private float _timeToReachTarget;
+    [Header("Score")]
+    [SerializeField] private int _friteScore;
+    [FormerlySerializedAs("_pointScore")] [SerializeField] private int croquetteScore;
+    [SerializeField] private int _mozzaScore;
     [Header("Choose Hand")]
     [SerializeField] private WhichHanded _whichHanded;
     [SerializeField] private GameObject[] _leftHand;
@@ -25,22 +41,9 @@ public class PartyManager : MonoBehaviour
     [SerializeField] private GameObject _bacASauce;
     [SerializeField] private GameObject _buttonsSauce;
     [SerializeField] private Transform[] _buttonsSaucePos;
-    [Header("Map height")]
-    [SerializeField] private Transform _mapTarget;
-    [SerializeField] private float _height;
-    [Header("Sabers")]
-    [SerializeField] private float _velocityMinToCut;
-    [Space(10f)]
-    [Header("-- Spawn Element -- ")]
-    [SerializeField] private Transform _spawnTarget;
-    [SerializeField] private float _timeToReachTarget;
-    [Header("Level Infos")]
-    [SerializeField] private string _levelName;
-    [SerializeField] private string _levelFolder;
-    [Header("Score")]
-    [SerializeField] private int _friteScore;
-    [FormerlySerializedAs("_pointScore")] [SerializeField] private int croquetteScore;
-    [SerializeField] private int _mozzaScore;
+ 
+
+    
 
     public Transform MapTarget => _mapTarget;
     public Transform SpawnTarget => _spawnTarget;
