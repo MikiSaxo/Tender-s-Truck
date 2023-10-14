@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Croquette : MonoBehaviour
+public class TouchType : MonoBehaviour
 {
     public ElementType Type => _type;
     

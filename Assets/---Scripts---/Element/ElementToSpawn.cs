@@ -15,7 +15,9 @@ public class ElementToSpawn : MonoBehaviour
     [Header("Objects")]
     [SerializeField] private GameObject _frite;
     [SerializeField] private GameObject _point;
-
+    [SerializeField] private GameObject _mozzaStick;
+    [SerializeField] private List<GameObject> _elements;
+    
     private ElementType _currentType;
     private bool _isEditor;
     private Transform _target;
@@ -30,21 +32,43 @@ public class ElementToSpawn : MonoBehaviour
         _target = target;
         _target.position = new Vector3(transform.position.x, transform.position.y, _target.position.z);
         _timeToReachTarget = timeToReachTarget;
+
+        var getIndex = 0;
+        foreach (var ele in _elements)
+        {
+            ele.SetActive(false);
+        }
+        
+        ElementType[] types = (ElementType[])Enum.GetValues(typeof(ElementType));
+        for (int i = 0; i < types.Length; i++)
+        {
+            if (element == types[i])
+            {
+                getIndex = i;
+                break;
+            }
+        }
         
         if (element == ElementType.Nothing)
             return;
-        if (element == ElementType.Croquette)
-        {
-            _point.SetActive(true);
-            _frite.SetActive(false);
-            _point.GetComponent<ElementChild>().Init(element, isEditor);
-        }
-        else
-        {
-            _frite.SetActive(true);
-            _point.SetActive(false);
-            _frite.GetComponent<ElementChild>().Init(element, isEditor);
-        }
+        
+        _elements[getIndex].SetActive(true);
+        _elements[getIndex].GetComponent<ElementChild>().Init(element, isEditor);
+        
+        // if (element == ElementType.Nothing)
+        //     return;
+        // if (element == ElementType.Croquette)
+        // {
+        //     _point.SetActive(true);
+        //     _frite.SetActive(false);
+        //     _point.GetComponent<ElementChild>().Init(element, isEditor);
+        // }
+        // else
+        // {
+        //     _frite.SetActive(true);
+        //     _point.SetActive(false);
+        //     _frite.GetComponent<ElementChild>().Init(element, isEditor);
+        // }
 
         _isEditor = isEditor;
         

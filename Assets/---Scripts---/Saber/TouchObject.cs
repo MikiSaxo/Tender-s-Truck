@@ -7,11 +7,11 @@ public class TouchObject : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Croquette>() != null)
+        if (other.GetComponent<TouchType>() != null)
         {
             print("touche le loup");
             LifeManager.Instance.WinLife();
-            ScoreManager.Instance.AddPoints(other.GetComponent<Croquette>().Type);
+            ScoreManager.Instance.AddPoints(other.GetComponent<TouchType>().Type);
             Destroy(other.gameObject);
         }
     }

@@ -65,5 +65,6 @@ public enum ElementType
     RedVertical = 3,
     Nothing = 4,
     Croquette = 5,
-    Mozza = 6
+    Mozza_ClockWise = 6,
+    Mozza_Anti_ClockWise = 7
 }

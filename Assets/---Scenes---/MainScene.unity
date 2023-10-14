@@ -1831,6 +1831,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 4f29caa3d1c77624db97d51d5d900fe0, type: 2}
   - {fileID: 2100000, guid: 94c72b3f8caedb446832fd51d3dab00d, type: 2}
   - {fileID: 2100000, guid: 94c72b3f8caedb446832fd51d3dab00d, type: 2}
+  - {fileID: 2100000, guid: b2c6c738ecf8eb84b8edf7f420688a68, type: 2}
+  - {fileID: 2100000, guid: b2c6c738ecf8eb84b8edf7f420688a68, type: 2}
   _sauceType: 1
   _bacASauce: {fileID: 847747843}
   _buttonsSauce: {fileID: 709963970}
@@ -1842,7 +1844,7 @@ MonoBehaviour:
   _velocityMinToCut: 0.5
   _spawnTarget: {fileID: 1411904491}
   _timeToReachTarget: 3
-  _levelName: Elektro
+  _levelName: TestMozza
   _levelFolder: EditorText
 --- !u!4 &917694716
 Transform:

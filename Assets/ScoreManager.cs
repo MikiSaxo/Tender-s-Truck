@@ -49,7 +49,7 @@ public class ScoreManager : MonoBehaviour
         {
             _currentScore += _frite * _currentCombo;
         }
-        else if (type == ElementType.Mozza)
+        else if (type == ElementType.Mozza_ClockWise ||type == ElementType.Mozza_Anti_ClockWise)
         {
             _currentScore += _mozza * _currentCombo;
         }
