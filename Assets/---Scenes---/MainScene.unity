@@ -1714,7 +1714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d71ae094cbf0c904693033c9c4292f08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _whichHanded: 0
+  _whichHanded: 1
   _leftHand:
   - {fileID: 853399039}
   - {fileID: 927428541}
@@ -3159,7 +3159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetHeight: {fileID: 922111928}
-  _height: 1
+  _height: 0.75
 --- !u!1 &1643398489
 GameObject:
   m_ObjectHideFlags: 0

@@ -339,7 +339,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.8
+  m_Radius: 0.2
   m_Height: 2.6115856
   m_Direction: 1
   m_Center: {x: 0.000000060094386, y: 0.30579022, z: -0.00000077696006}
@@ -367,17 +367,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80ea0af1df5194f4baf8e9cfa224f8c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _velocityEstimator: {fileID: 3838695577109460347}
+  _sauceStick: {fileID: 4768446924333817328}
+  _velocityToDestroy: 0.5
   _startSlicePoint: {fileID: 8730168765258116093}
   _endSlicePoint: {fileID: 3760241456007458120}
+  _cutForce: 500
+  _angleToDestroy: 125
+  _sliceMat: {fileID: 2100000, guid: 5a415cd24186d8f4a856035383ef0fd5, type: 2}
   _sliceable:
     serializedVersion: 2
     m_Bits: 128
-  _velocityEstimator: {fileID: 3838695577109460347}
-  _sliceMat: {fileID: 2100000, guid: 5a415cd24186d8f4a856035383ef0fd5, type: 2}
-  _cutForce: 500
-  _angleToDestroy: 125
   _currentType: 0
-  _sauceStick: {fileID: 4768446924333817328}
 --- !u!54 &5107145825017808758
 Rigidbody:
   m_ObjectHideFlags: 0
