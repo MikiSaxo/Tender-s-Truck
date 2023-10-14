@@ -12,20 +12,17 @@ using UnityEngine.UI;
 public class Spawner : MonoBehaviour
 {
     public static Spawner Instance;
-    
-    [Header("Element")]
-    [SerializeField] private Transform _target;
-    [SerializeField] private float _timeToReachTarget;
+
+    [Header("Element")] 
     [SerializeField] private GameObject _elementPrefab;
     [SerializeField] private InputAction _action;
 
-    [Header("Level Infos")] [SerializeField]
-    private string _levelName;
-
-    [SerializeField] private string _levelFolder;
-    
-    
     [Header("Spawners")] [SerializeField] private Transform[] _spawnersPos;
+
+    private Transform _target;
+    private float _timeToReachTarget;
+    private string _levelName;
+    private string _levelFolder;
 
     private MapConstructData _mapConstructData;
 
@@ -38,22 +35,25 @@ public class Spawner : MonoBehaviour
     private int _countByFourBPM;
     private int _countElementIndex;
     private float _timeBetweenEachTwoBPM;
-    
+
     private float _distanceTarget;
 
     private void Awake()
     {
         Instance = this;
+        _levelFolder = PartyManager.Instance.LevelFolder;
+        _levelName = PartyManager.Instance.LevelName;
     }
 
     private void Start()
     {
-        _action.Enable();
-        _action.performed += context =>
-        {
-            LaunchMap();
-        };
+        _timeToReachTarget = PartyManager.Instance.TimeToReachTarget;
+        _target = PartyManager.Instance.SpawnTarget;
         
+
+        _action.Enable();
+        _action.performed += context => { LaunchMap(); };
+
         LoadFileMap();
         _distanceTarget = Vector3.Distance(_target.position, transform.position);
     }
@@ -88,7 +88,7 @@ public class Spawner : MonoBehaviour
     {
         if (!_canGo)
             return;
-        
+
         PrepareLaunchMusic();
         SpawnByTime();
 
@@ -103,7 +103,7 @@ public class Spawner : MonoBehaviour
     private void SpawnByTime()
     {
         _timeToBPM += Time.deltaTime;
-        
+
         if (_timeToBPM >= _timeBetweenEachTwoBPM * .25f)
         {
             _timeToBPM -= _timeToBPM;
@@ -123,18 +123,19 @@ public class Spawner : MonoBehaviour
                     _countElementIndex++;
                 }
             }
+
             _countByFourBPM++;
         }
     }
 
     private void PrepareLaunchMusic()
     {
-        if(_timeSinceStart < _timeToReachTarget)
+        if (_timeSinceStart < _timeToReachTarget)
             _timeSinceStart += Time.deltaTime;
         else
             LaunchMusic();
     }
-    
+
     private void LaunchMusic()
     {
         if (_hasLaunchMusic)
@@ -159,7 +160,7 @@ public class Spawner : MonoBehaviour
             else if (spawnerIndex == BoardPosition.RightDown)
                 spawnerIndex = BoardPosition.LeftDown;
         }
-        
+
         go.transform.position = _spawnersPos[(int)spawnerIndex].position;
 
         go.GetComponent<ElementToSpawn>().Init(element, false, _target, _timeToReachTarget, _distanceTarget);

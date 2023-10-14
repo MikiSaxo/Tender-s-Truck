@@ -6,10 +6,13 @@ using UnityEngine.Serialization;
 
 public class MapHeight : MonoBehaviour
 {
-    [SerializeField] private Transform _targetHeight;
-    [SerializeField] private float _height;
+    private Transform _targetHeight;
+    private float _height;
     void Start()
     {
+        _targetHeight = PartyManager.Instance.MapTarget;
+        _height = PartyManager.Instance.Height;
+        
         float startPosY = _targetHeight.position.y - _height;
         // print(startPosY);
 

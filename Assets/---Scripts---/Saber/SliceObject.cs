@@ -11,7 +11,6 @@ public class SliceObject : MonoBehaviour
     [Header("Setup")]
     [SerializeField] private VelocityEstimator _velocityEstimator;
     [SerializeField] private GameObject _sauceStick;
-    [SerializeField] private float _velocityToDestroy;
     [Space(20f)]
     [Header("-- Old -- ")]
     [Header("Points")]
@@ -26,9 +25,11 @@ public class SliceObject : MonoBehaviour
     [SerializeField] private ElementType _currentType;
 
     private Vector3 _previousPos;
+    private float _velocityToCut;
 
     private void Start()
     {
+        _velocityToCut = PartyManager.Instance.VelocityMinToCut;
         // BacASauce.Instance.StickInSauceAction += ChangeSauceType;
         //print("pos : " + Vector3.Distance(_startSlicePoint.position, _endSlicePoint.position));
     }
@@ -82,9 +83,9 @@ public class SliceObject : MonoBehaviour
             {
                 // print("brr brr frite : " + _currentType + " / " + friteType);
                 float velo = Vector3.Magnitude(_velocityEstimator.GetVelocityEstimate());
-                print($"velo = {velo}");
+                // print($"velo = {velo}");
                 
-                if(velo >= _velocityToDestroy)
+                if(velo >= _velocityToCut)
                     Slice(other.gameObject);
             }
         }

@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class ButtonFollowVisual : MonoBehaviour
 {
     [SerializeField] private Transform _visualTarget;
     [SerializeField] private Vector3 _localAxis;
-    [SerializeField] private float _resetSpeed = 5;
-    [SerializeField] private float _foolowAngleTreshold = 45;
+    [SerializeField] private float _resetSpeed = 5; 
+    [SerializeField] private float _followAngleTreshold = 45;
 
     private XRBaseInteractable _interactable;
     private bool _isFollowing = false;
@@ -38,7 +39,7 @@ public class ButtonFollowVisual : MonoBehaviour
 
             float pokeAngle = Vector3.Angle(_offset, _visualTarget.TransformDirection(_localAxis));
 
-            if(pokeAngle < _foolowAngleTreshold)
+            if(pokeAngle < _followAngleTreshold)
             {
                 _isFollowing = true;
                 _freeze = false;

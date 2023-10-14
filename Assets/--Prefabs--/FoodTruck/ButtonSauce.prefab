@@ -23,7 +23,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3296393940741331573}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.13863268, y: 0.24226898, z: -0.187}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 158961448732647513}
   - {fileID: 6998688414185043989}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3467935529447007980
 GameObject:
@@ -220,7 +220,7 @@ MonoBehaviour:
         m_MethodName: set_material
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: e5c07508d5d3b6540ad42decf3e4bed3,
+          m_ObjectArgument: {fileID: 2100000, guid: 9e6661e5203f1ad4f8d5b7504fc1eab5,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
           m_IntArgument: 0
@@ -242,7 +242,7 @@ MonoBehaviour:
         m_MethodName: set_material
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: 98eddee81c606124cbfca72ba5006f66,
+          m_ObjectArgument: {fileID: 2100000, guid: 9e6661e5203f1ad4f8d5b7504fc1eab5,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
           m_IntArgument: 0
@@ -472,7 +472,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4220431050364960332}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.101, z: 0}
+  m_LocalPosition: {x: 0, y: -0.0739, z: 0}
   m_LocalScale: {x: 0.1, y: 0.028452, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -512,9 +512,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a99118b19f21ea841a021b5d77074304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sliceCubePrefab: {fileID: 4921909391265782869, guid: b4d89add84e6893468d286c13b03fa53,
-    type: 3}
-  _spawnPoint: {x: 0, y: 0.994, z: 0.4}
+  _whichType: 0
+  _sauce: {fileID: 0}
+  _sabers:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!54 &1739497476197229591
 Rigidbody:
   m_ObjectHideFlags: 0
