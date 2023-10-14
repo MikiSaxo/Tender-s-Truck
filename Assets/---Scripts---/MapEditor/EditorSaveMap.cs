@@ -169,12 +169,12 @@ public class EditorSaveMap : MonoBehaviour
         }
     }
 
-    private void ResetInputField()
-    {
-        _inputMapName.text = "";
-        _inputMusicName.text = "";
-        _inputMusicBPM.text = "";
-    }
+    // private void ResetInputField()
+    // {
+    //     _inputMapName.text = "";
+    //     _inputMusicName.text = "";
+    //     _inputMusicBPM.text = "";
+    // }
 
     private void UpdateInputField(string mapName, string musicName, int BPM_Number)
     {
@@ -271,7 +271,7 @@ public class EditorSaveMap : MonoBehaviour
 
         if (_mapName == "" || _musicName == "" || _musicBPM <= 0) return;
 
-        ResetInputField();
+        // ResetInputField();
 
         SaveJson();
 
