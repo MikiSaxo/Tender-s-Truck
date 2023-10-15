@@ -59,7 +59,7 @@ public class Spawner : MonoBehaviour
         LoadFileMap();
         _distanceTarget = Vector3.Distance(_target.position, transform.position);
 
-        _musicName = "120bpm";
+        _musicName = "MainMusic";
     }
 
     private void LoadFileMap()
@@ -88,6 +88,9 @@ public class Spawner : MonoBehaviour
 
         _canGo = true;
 
+        ScoreManager.Instance.ResetScore();
+        AudioManager.Instance.StopSound("MenuMusic");
+        
         LifeManager.Instance.SetupLife();
     }
 
@@ -162,7 +165,9 @@ public class Spawner : MonoBehaviour
     private void PrepareLaunchMusic()
     {
         if (_timeSinceStart <= _timeToReachTarget)
+        {
             _timeSinceStart += Time.deltaTime;
+        }
         else
             LaunchMusic();
     }
@@ -220,5 +225,14 @@ public class Spawner : MonoBehaviour
     private void Victory()
     {
         print("victoire");
+        AudioManager.Instance.StopSound(_musicName);
+        AudioManager.Instance.PlaySound("Victory");
+        StartCoroutine(WaitToLaunchMenuMusic());
+    }
+
+    IEnumerator WaitToLaunchMenuMusic()
+    {
+        yield return new WaitForSeconds(3f);
+        AudioManager.Instance.PlaySound("MenuMusic");
     }
 }

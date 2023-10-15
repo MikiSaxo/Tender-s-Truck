@@ -87,6 +87,14 @@ public class ScoreManager : MonoBehaviour
         _comboText.DOColor(Color.white, 1);
     }
 
+    public void ResetScore()
+    {
+        _currentScore = 0;
+        _currentCombo = 1;
+
+        UpdateTexts();
+    }
+
     private void OnDisable()
     {
         ElementToSpawn.LoseLife -= LoseCombo;

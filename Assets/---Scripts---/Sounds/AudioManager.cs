@@ -1,6 +1,7 @@
 using UnityEngine.Audio;
 using UnityEngine;
 using System;
+using System.Collections;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
@@ -25,10 +26,16 @@ public class AudioManager : MonoBehaviour
     {
         //Scene currentScene = SceneManager.GetActiveScene();
         //if (currentScene.name == "MainMenu")
-        //    PlaySound("MusicMain");
         //else
         //    PlaySound("MusicGame");
-        PlaySound("Pop");
+        // PlaySound("MusicMain");
+        StartCoroutine(WaitToLaunchMenuMusic());
+    }
+
+    IEnumerator WaitToLaunchMenuMusic()
+    {
+        yield return new WaitForSeconds(1f);
+        PlaySound("MenuMusic");
     }
 
     public void PlaySound(string name)

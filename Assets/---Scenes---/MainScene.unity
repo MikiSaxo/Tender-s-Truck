@@ -872,7 +872,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sounds:
-  - Name: 120bpm
+  - Name: MainMusic
     Clip: {fileID: 8300000, guid: 4048563886bca2a418964f819f56523e, type: 3}
     Volume: 1
     Loop: 0
@@ -899,8 +899,28 @@ MonoBehaviour:
     Source: {fileID: 0}
   - Name: Pop
     Clip: {fileID: 8300000, guid: 58dd16d1a2baec646aa98988bbb3d59e, type: 3}
+    Volume: 0.434
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: LoseLife
+    Clip: {fileID: 8300000, guid: e1ff4f7cba5830a42aa78b925d50ef06, type: 3}
+    Volume: 0.65
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: LoseGame
+    Clip: {fileID: 8300000, guid: 2a04028c083e09f4bbc722fb32e4379f, type: 3}
     Volume: 1
     Loop: 0
+    Source: {fileID: 0}
+  - Name: Victory
+    Clip: {fileID: 8300000, guid: a4c49558a553fad4dafcf3060d0fa249, type: 3}
+    Volume: 1
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: MenuMusic
+    Clip: {fileID: 8300000, guid: 8726af7fe48854143a7ef3e6e8f279c8, type: 3}
+    Volume: 0.573
+    Loop: 1
     Source: {fileID: 0}
 --- !u!4 &329744086
 Transform:
@@ -2136,7 +2156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d71ae094cbf0c904693033c9c4292f08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelName: TestMozza
+  _levelName: Elektro
   _levelFolder: EditorText
   _velocityMinToCut: 1
   _mapTarget: {fileID: 922111928}

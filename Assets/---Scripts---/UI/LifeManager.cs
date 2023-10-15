@@ -73,6 +73,7 @@ public class LifeManager : MonoBehaviour
     private void LoseLife()
     {
         _currentLife--;
+        AudioManager.Instance.PlaySound("LoseLife");
         
         if (_currentLife > 0)
         {
@@ -82,6 +83,7 @@ public class LifeManager : MonoBehaviour
         {
             _lifeBars[0].SetActive(false);
             Spawner.Instance.StopMusic();
+            AudioManager.Instance.PlaySound("LoseGame");
             // Debug.LogWarning("t mort mon gadjo");
         }
     }
