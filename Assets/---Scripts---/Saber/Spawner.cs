@@ -14,10 +14,9 @@ public class Spawner : MonoBehaviour
 {
     public static Spawner Instance;
 
-    [Header("Element")] 
-    [SerializeField] private GameObject _elementPrefab;
+    [Header("Element")] [SerializeField] private GameObject _elementPrefab;
     [SerializeField] private InputAction _action;
-    
+
     [Header("Spawners")] [SerializeField] private Transform[] _spawnersPos;
 
     private Transform _target;
@@ -52,7 +51,7 @@ public class Spawner : MonoBehaviour
     {
         _timeToReachTarget = PartyManager.Instance.TimeToReachTarget;
         _target = PartyManager.Instance.SpawnTarget;
-        
+
 
         _action.Enable();
         _action.performed += context => { LaunchMap(); };
@@ -85,31 +84,31 @@ public class Spawner : MonoBehaviour
 
     public void LaunchMap()
     {
-        if (!_canGo)
-        {
-            StopMusic();
-        }
+        StopMusic();
 
         _canGo = true;
-        
+
         LifeManager.Instance.SetupLife();
     }
 
     public void StopMusic()
     {
         _canGo = false;
+        _hasLaunchMusic = false;
         _timeToBPM = 0;
         _countByFourBPM = 0;
         _countBPM = 0;
         _countElementIndex = 0;
-        
+        _timeSinceStart = 0;
+
         AudioManager.Instance.StopSound(_musicName);
 
         foreach (var element in _spawnElements)
         {
-            if(element != null)
+            if (element != null)
                 Destroy(element);
         }
+
         _spawnElements.Clear();
     }
 
@@ -162,7 +161,7 @@ public class Spawner : MonoBehaviour
 
     private void PrepareLaunchMusic()
     {
-        if (_timeSinceStart < _timeToReachTarget)
+        if (_timeSinceStart <= _timeToReachTarget)
             _timeSinceStart += Time.deltaTime;
         else
             LaunchMusic();
@@ -214,9 +213,10 @@ public class Spawner : MonoBehaviour
     IEnumerator WaitCheckVictory()
     {
         yield return new WaitForSeconds(.1f);
-        if(_spawnElements[^1] == null && LifeManager.Instance.CurrentLife > 0)
+        if (_spawnElements[^1] == null && LifeManager.Instance.CurrentLife > 0)
             Victory();
     }
+
     private void Victory()
     {
         print("victoire");

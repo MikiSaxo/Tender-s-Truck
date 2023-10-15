@@ -4,25 +4,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using EzySlice;
+using TMPro;
 using Unity.VisualScripting;
 
 public class SliceObject : MonoBehaviour
 {
-    [Header("Setup")]
-    [SerializeField] private VelocityEstimator _velocityEstimator;
+    [Header("Setup")] [SerializeField] private VelocityEstimator _velocityEstimator;
     [SerializeField] private GameObject _sauceStick;
-    [Space(20f)]
-    [Header("-- Old -- ")]
-    [Header("Points")]
-    [SerializeField] private Transform _startSlicePoint;
+
+    [Space(20f)] [Header("-- Old -- ")] [Header("Points")] [SerializeField]
+    private Transform _startSlicePoint;
+
     [SerializeField] private Transform _endSlicePoint;
-    [Header("Other")]
-    [SerializeField] private float _cutForce;
+    [Header("Other")] [SerializeField] private float _cutForce;
     [SerializeField] private float _angleToDestroy;
     [SerializeField] private Material _sliceMat;
     [SerializeField] private LayerMask _sliceable;
-    [Header("Temp")]
-    [SerializeField] private ElementType _currentType;
+    [Header("Temp")] [SerializeField] private ElementType _currentType;
+    [SerializeField] private TMP_Text _debug;
 
     private Vector3 _previousPos;
     private float _velocityToCut;
@@ -30,63 +29,97 @@ public class SliceObject : MonoBehaviour
     private void Start()
     {
         _velocityToCut = PartyManager.Instance.VelocityMinToCut;
+        // StartCoroutine(OuiAngle());
+
         // BacASauce.Instance.StickInSauceAction += ChangeSauceType;
         //print("pos : " + Vector3.Distance(_startSlicePoint.position, _endSlicePoint.position));
     }
 
     void FixedUpdate()
     {
-        //CutAngle();
+        // CutAngle();
+        // print($"rota {transform.rotation.eulerAngles}");
+        //Vector3 velocity = _velocityEstimator.GetVelocityEstimate();
+        //_debug.text = $"{Math.Abs(Mathf.Round(velocity.x))}  /  {Math.Abs(Mathf.Round(velocity.y))}    /   {Math.Abs(Mathf.Round(velocity.z))}";
     }
 
-    // void CutAngle()
-    // {
-    //     bool hasHit = Physics.Linecast(_startSlicePoint.position, _endSlicePoint.position, out RaycastHit hit,
-    //         _sliceable);
-    //
-    //     if (hasHit)
-    //     {
-    //         Vector3 firstPos = transform.position - _previousPos;
-    //         Vector3 secondPos = hit.transform.up;
-    //
-    //         var elementType = hit.transform.gameObject.GetComponent<ElementChild>().CurrentType;
-    //
-    //         // print($"mine : {_currentType} / other : {elementType}");
-    //         if ((elementType is ElementType.RedHorizontal or ElementType.RedVertical
-    //              && _currentType is ElementType.RedHorizontal or ElementType.RedVertical)
-    //             || (elementType is ElementType.YellowVertical or ElementType.YellowHorizontal
-    //                 && _currentType is ElementType.YellowVertical or ElementType.YellowHorizontal))
-    //         {
-    //             print("angle : " + Vector3.Angle(firstPos, secondPos));
-    //             if (Vector3.Angle(firstPos, secondPos) > _angleToDestroy ||
-    //                 Vector3.Angle(firstPos, -secondPos) > _angleToDestroy)
-    //             {
-    //                 GameObject target = hit.transform.gameObject;
-    //                 Slice(target);
-    //             }
-    //         }
-    //     }
-    //
-    //     _previousPos = transform.position;
-    // }
-
-    private void OnTriggerEnter(Collider other)
+    private Vector3 RoundVector(Vector3 vector3, int decimalPlaces)
     {
-        if (other.gameObject.GetComponent<Frite>())
+        float multiplier = 1;
+        for (int i = 0; i < decimalPlaces; i++)
         {
-            var friteType = other.gameObject.GetComponent<ElementChild>().CurrentType;
-            if ((_currentType == ElementType.RedHorizontal &&
-                 (friteType == _currentType || friteType == ElementType.RedVertical))
-                || (_currentType == ElementType.YellowHorizontal &&
-                    (friteType == _currentType || friteType == ElementType.YellowVertical))
-               )
+            multiplier *= 10f;
+        }
+
+        return new Vector3(
+            Mathf.Round(vector3.x * multiplier) / multiplier,
+            Mathf.Round(vector3.y * multiplier) / multiplier,
+            Mathf.Round(vector3.z * multiplier) / multiplier);
+    }
+
+    void CutAngle()
+    {
+        bool hasHit = Physics.Linecast(_startSlicePoint.position, _endSlicePoint.position, out RaycastHit hit,
+            _sliceable);
+
+        if (hasHit)
+        {
+            Vector3 firstPos = transform.position - _previousPos;
+            Vector3 secondPos = hit.transform.up;
+
+            var elementType = hit.transform.gameObject.GetComponent<ElementChild>().CurrentType;
+
+            // print($"mine : {_currentType} / other : {elementType}");
+            if ((elementType is ElementType.RedHorizontal or ElementType.RedVertical
+                 && _currentType is ElementType.RedHorizontal or ElementType.RedVertical)
+                || (elementType is ElementType.YellowVertical or ElementType.YellowHorizontal
+                    && _currentType is ElementType.YellowVertical or ElementType.YellowHorizontal))
             {
-                // print("brr brr frite : " + _currentType + " / " + friteType);
-                float velo = Vector3.Magnitude(_velocityEstimator.GetVelocityEstimate());
-                // print($"velo = {velo}");
-                
-                if(velo >= _velocityToCut)
-                    Slice(other.gameObject);
+                // print("angle : " + Vector3.Angle(firstPos, secondPos));
+                // if (Vector3.Angle(firstPos, secondPos) > _angleToDestroy ||
+                //     Vector3.Angle(firstPos, -secondPos) > _angleToDestroy)
+                // {
+                // }
+                // print("angle attack : " + transform.rotation.eulerAngles.z);
+                // if (elementType is ElementType.RedHorizontal or ElementType.YellowHorizontal
+                //     && transform.rotation.eulerAngles.z is >= 50 and <= 130 ||
+                //     transform.rotation.eulerAngles.z is >= 230 and <= 310
+                //     || elementType is ElementType.RedVertical or ElementType.YellowVertical
+                //     && transform.rotation.eulerAngles.z is >= 0 and <= 40 && transform.rotation.eulerAngles.z >= 320
+                //     || transform.rotation.eulerAngles.z is >= 140 and <= 220
+                //    )
+                print("nelson bonsoir");
+                var velo = _velocityEstimator.GetVelocityEstimate();
+                if (elementType is ElementType.RedHorizontal or ElementType.YellowHorizontal
+                    && Math.Abs(velo.x) > _velocityToCut
+                    || elementType is ElementType.RedVertical or ElementType.YellowVertical
+                    && Math.Abs(velo.y) > _velocityToCut)
+                {
+                    GameObject target = hit.transform.gameObject;
+                    Slice(target);
+                }
+            }
+        }
+
+        _previousPos = transform.position;
+    }
+
+    public void TrySlice(ElementType friteType, GameObject friteObj)
+    {
+        if ((_currentType == ElementType.RedHorizontal &&
+             (friteType == ElementType.RedHorizontal || friteType == ElementType.RedVertical))
+            || (_currentType == ElementType.YellowHorizontal &&
+                (friteType == ElementType.YellowHorizontal || friteType == ElementType.YellowVertical))
+           )
+        {
+            var velo = _velocityEstimator.GetVelocityEstimate();
+            // print("bonne frite : " + velo);
+            if (friteType is ElementType.RedHorizontal or ElementType.YellowHorizontal
+                && (Math.Abs(velo.x) + Math.Abs(velo.z)) > _velocityToCut
+                || friteType is ElementType.RedVertical or ElementType.YellowVertical
+                && (Math.Abs(velo.y) + Math.Abs(velo.z)) > _velocityToCut)
+            {
+                Slice(friteObj);
             }
         }
     }
@@ -99,6 +132,8 @@ public class SliceObject : MonoBehaviour
         planeNormal.Normalize();
 
         SlicedHull hull = target.Slice(_endSlicePoint.position, planeNormal);
+        
+        AudioManager.Instance.PlaySword();
 
         if (hull != null)
         {
@@ -129,13 +164,14 @@ public class SliceObject : MonoBehaviour
         //rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
         // rb.velocity = Vector3.zero;
         sliceObj.transform.position = target.position;
-        // rb.AddExplosionForce(_cutForce, sliceObj.transform.position, 1);
+        rb.AddExplosionForce(_cutForce, sliceObj.transform.localPosition, 2);
     }
 
     public void ChangeSauceType(ElementType newType)
     {
         _currentType = newType;
         _sauceStick.GetComponent<MeshRenderer>().material = PartyManager.Instance.GetElementTypeMat((int)_currentType);
+        AudioManager.Instance.PlaySound("Pop");
     }
 
     private void OnDisable()

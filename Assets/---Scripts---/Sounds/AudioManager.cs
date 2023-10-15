@@ -2,6 +2,7 @@ using UnityEngine.Audio;
 using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class AudioManager : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class AudioManager : MonoBehaviour
         //    PlaySound("MusicMain");
         //else
         //    PlaySound("MusicGame");
+        PlaySound("Pop");
     }
 
     public void PlaySound(string name)
@@ -49,5 +51,11 @@ public class AudioManager : MonoBehaviour
             return;
         }
         s.Source.Stop();
+    }
+
+    public void PlaySword()
+    {
+        int rdm = Random.Range(1, 5);
+        PlaySound($"Sword{rdm}");
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -32,8 +33,8 @@ public class PartyManager : MonoBehaviour
     [SerializeField] private int _mozzaScore;
     [Header("Choose Hand")]
     [SerializeField] private WhichHanded _whichHanded;
-    [SerializeField] private GameObject[] _leftHand;
-    [SerializeField] private GameObject[] _rightHand;
+    [SerializeField] private GameObject[] _sabers;
+    [SerializeField] private GameObject[] _saberParents;
     [Header("Materials")]
     [SerializeField] private Material[] _elementTypes;
     [Header("Choose Gameplay")]
@@ -95,17 +96,21 @@ public class PartyManager : MonoBehaviour
         _whichHanded = (WhichHanded)index;
         if (_whichHanded == WhichHanded.Left)
         {
-            _leftHand[0].SetActive(true);
-            _leftHand[1].SetActive(false);
-            _rightHand[0].SetActive(false);
-            _rightHand[1].SetActive(true);
+            _sabers[0].transform.parent = _saberParents[0].transform;
+            _sabers[0].transform.localPosition = Vector3.zero;
+            _sabers[0].transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+            
+            _sabers[1].transform.parent = _saberParents[1].transform;
+            _sabers[1].transform.localPosition = Vector3.zero;
         }
         else
         {
-            _leftHand[0].SetActive(false);
-            _leftHand[1].SetActive(true);
-            _rightHand[0].SetActive(true);
-            _rightHand[1].SetActive(false);
+            _sabers[0].transform.parent = _saberParents[1].transform;
+            _sabers[0].transform.localPosition = Vector3.zero;
+            _sabers[0].transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+            
+            _sabers[1].transform.parent = _saberParents[0].transform;
+            _sabers[1].transform.localPosition = Vector3.zero;
         }
     }
 
