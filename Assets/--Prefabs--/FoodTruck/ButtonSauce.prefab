@@ -433,6 +433,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _visualTarget: {fileID: 6290116005898126362}
   _localAxis: {x: 0, y: -1, z: 0}
+  _minHeight: 0.183
   _resetSpeed: 5
   _followAngleTreshold: 90
 --- !u!1 &3850203263181537813
