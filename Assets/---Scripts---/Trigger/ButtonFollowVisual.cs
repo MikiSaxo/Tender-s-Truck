@@ -8,6 +8,7 @@ public class ButtonFollowVisual : MonoBehaviour
 {
     [SerializeField] private Transform _visualTarget;
     [SerializeField] private Vector3 _localAxis;
+    [SerializeField] private float _minHeight;
     [SerializeField] private float _resetSpeed = 5; 
     [SerializeField] private float _followAngleTreshold = 45;
 
@@ -73,7 +74,14 @@ public class ButtonFollowVisual : MonoBehaviour
         {
             Vector3 localTargetPos = _visualTarget.InverseTransformPoint(_pokeAttachTransform.position + _offset);
             Vector3 constraintLocalTargetPos = Vector3.Project(localTargetPos, _localAxis);
+            // var position = _visualTarget.localPosition;
             _visualTarget.position = _visualTarget.TransformPoint(constraintLocalTargetPos);
+            
+            // var getYPos = position.y;
+            // getYPos = Mathf.Clamp(getYPos, _minHeight-_startPos.y, _startPos.y);
+            // // print(getYpos);
+            // position = new Vector3(_startPos.x, getYPos, _startPos.z);
+            // _visualTarget.localPosition = position;
         }
         else
         {
@@ -83,6 +91,8 @@ public class ButtonFollowVisual : MonoBehaviour
             {
                 _visualTarget.localPosition = _startPos;
             }
+            
         }
+        
     }
 }

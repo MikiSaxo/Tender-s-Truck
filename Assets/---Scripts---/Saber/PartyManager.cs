@@ -41,7 +41,6 @@ public class PartyManager : MonoBehaviour
     [SerializeField] private GameplaySauceType _sauceType;
     [SerializeField] private GameObject _bacASauce;
     [SerializeField] private GameObject _buttonsSauce;
-    [SerializeField] private Transform[] _buttonsSaucePos;
  
 
     
@@ -80,7 +79,7 @@ public class PartyManager : MonoBehaviour
         {
             _bacASauce.SetActive(false);
             _buttonsSauce.SetActive(true);
-            _buttonsSauce.transform.position = _buttonsSaucePos[(int)_whichHanded].position;
+            // _buttonsSauce.transform.position = _buttonsSaucePos[(int)_whichHanded].position;
         } 
     }
 
