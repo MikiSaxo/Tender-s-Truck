@@ -179,6 +179,7 @@ public class Spawner : MonoBehaviour
         print("Launch la musica");
         _hasLaunchMusic = true;
         AudioManager.Instance.PlaySound(_musicName);
+        AudioManager.Instance.StopSound("MenuMusic");
     }
 
     private void SpawnElement(ElementType element, BoardPosition spawnerIndex)

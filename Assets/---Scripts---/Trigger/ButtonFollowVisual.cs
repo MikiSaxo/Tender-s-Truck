@@ -74,14 +74,14 @@ public class ButtonFollowVisual : MonoBehaviour
         {
             Vector3 localTargetPos = _visualTarget.InverseTransformPoint(_pokeAttachTransform.position + _offset);
             Vector3 constraintLocalTargetPos = Vector3.Project(localTargetPos, _localAxis);
-            var position = _visualTarget.localPosition;
-            position = _visualTarget.TransformPoint(constraintLocalTargetPos);
+            // var position = _visualTarget.localPosition;
+            _visualTarget.position = _visualTarget.TransformPoint(constraintLocalTargetPos);
             
-            var getYPos = position.y;
-            getYPos = Mathf.Clamp(getYPos, _minHeight-_startPos.y, _startPos.y);
-            // print(getYpos);
-            position = new Vector3(_startPos.x, getYPos, _startPos.z);
-            _visualTarget.localPosition = position;
+            // var getYPos = position.y;
+            // getYPos = Mathf.Clamp(getYPos, _minHeight-_startPos.y, _startPos.y);
+            // // print(getYpos);
+            // position = new Vector3(_startPos.x, getYPos, _startPos.z);
+            // _visualTarget.localPosition = position;
         }
         else
         {
