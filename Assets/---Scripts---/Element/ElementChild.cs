@@ -30,7 +30,13 @@ public class ElementChild : MonoBehaviour
 
         if (elementToSpawn is ElementType.RedVertical or ElementType.YellowVertical)
         {
-            transform.DORotate(new Vector3(0, 0, -90), 0);
+            // transform.DORotate(new Vector3(0, 0, -90), 0);
+            gameObject.GetComponent<Frite>().Init(elementToSpawn);
+        }
+
+        if (elementToSpawn is ElementType.YellowHorizontal or ElementType.RedHorizontal)
+        {
+            gameObject.GetComponent<Frite>().Init(elementToSpawn);
         }
 
         if (elementToSpawn == ElementType.Mozza_ClockWise)
