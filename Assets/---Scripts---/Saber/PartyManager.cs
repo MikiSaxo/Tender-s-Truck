@@ -35,6 +35,7 @@ public class PartyManager : MonoBehaviour
     [SerializeField] private WhichHanded _whichHanded;
     [SerializeField] private GameObject[] _sabers;
     [SerializeField] private GameObject[] _saberParents;
+    [SerializeField] private GameObject[] _fritureParents;
     [Header("Materials")]
     [SerializeField] private Material[] _elementTypes;
     [Header("Choose Gameplay")]
@@ -99,8 +100,9 @@ public class PartyManager : MonoBehaviour
             _sabers[0].transform.localPosition = Vector3.zero;
             _sabers[0].transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
             
-            _sabers[1].transform.parent = _saberParents[1].transform;
+            _sabers[1].transform.parent = _fritureParents[1].transform;
             _sabers[1].transform.localPosition = Vector3.zero;
+            _sabers[1].transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
         }
         else
         {
@@ -108,8 +110,9 @@ public class PartyManager : MonoBehaviour
             _sabers[0].transform.localPosition = Vector3.zero;
             _sabers[0].transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
             
-            _sabers[1].transform.parent = _saberParents[0].transform;
+            _sabers[1].transform.parent = _fritureParents[0].transform;
             _sabers[1].transform.localPosition = Vector3.zero;
+            _sabers[1].transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
         }
     }
 
