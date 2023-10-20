@@ -55,7 +55,7 @@ public class Frite : MonoBehaviour
          if(!isEditor)
             _frite.transform.DORotate(new Vector3(-360, 0, 90), _rotateSpeed, RotateMode.FastBeyond360).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
          else
-            _frite.transform.DORotate(new Vector3(-0, 0, 90), 0);
+            _frite.transform.DORotate(new Vector3(0, 0, 90), 0);
          
          _colliders[0].enabled = true;
          _colliders[1].enabled = false;
@@ -66,7 +66,7 @@ public class Frite : MonoBehaviour
          if(!isEditor)
             _frite.transform.DORotate(new Vector3(0, 360, 0), _rotateSpeed, RotateMode.FastBeyond360).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
          else
-            _frite.transform.DORotate(new Vector3(-0, 0, 90), 0);
+            _frite.transform.DORotate(new Vector3(0, 0, 0), 0);
          
          _colliders[0].enabled = false;
          _colliders[1].enabled = true;

@@ -115,9 +115,9 @@ public class SliceObject : MonoBehaviour
             var velo = _velocityEstimator.GetVelocityEstimate();
             // print("bonne frite : " + velo);
             if (friteType is ElementType.RedHorizontal or ElementType.YellowHorizontal
-                && (Math.Abs(velo.x) + Math.Abs(velo.z)) > _velocityToCut
+                && (Math.Abs(velo.x*2) + Math.Abs(velo.z)) > _velocityToCut
                 || friteType is ElementType.RedVertical or ElementType.YellowVertical
-                && (Math.Abs(velo.y) + Math.Abs(velo.z)) > _velocityToCut)
+                && (Math.Abs(velo.y*2) + Math.Abs(velo.z)) > _velocityToCut)
             {
                 Slice(friteObj);
             }
