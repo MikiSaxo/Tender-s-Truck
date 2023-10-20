@@ -18,13 +18,14 @@ public class SliceObject : MonoBehaviour
     [SerializeField] private Transform _endSlicePoint;
     [Header("Other")] [SerializeField] private float _cutForce;
     [SerializeField] private float _angleToDestroy;
-    [SerializeField] private Material _sliceMat;
+    [SerializeField] private Material[] _sliceMat;
     [SerializeField] private LayerMask _sliceable;
     [Header("Temp")] [SerializeField] private ElementType _currentType;
     [SerializeField] private TMP_Text _debug;
 
     private Vector3 _previousPos;
     private float _velocityToCut;
+    private Material _currentSliceMat;
 
     private void Start()
     {
@@ -119,6 +120,11 @@ public class SliceObject : MonoBehaviour
                 || friteType is ElementType.RedVertical or ElementType.YellowVertical
                 && (Math.Abs(velo.y*2) + Math.Abs(velo.z)) > _velocityToCut)
             {
+                if (friteType is ElementType.RedHorizontal or ElementType.RedVertical)
+                    _currentSliceMat = _sliceMat[1];
+                else if (friteType is ElementType.YellowHorizontal or ElementType.YellowVertical)
+                    _currentSliceMat = _sliceMat[0];
+                
                 Slice(friteObj);
             }
         }
@@ -126,24 +132,25 @@ public class SliceObject : MonoBehaviour
 
     public void Slice(GameObject target)
     {
+        var newTarget = target.GetComponent<Frite>().FriteObj;
         Vector3 velocity = _velocityEstimator.GetVelocityEstimate();
         print("ça cut ");
         Vector3 planeNormal = Vector3.Cross(_endSlicePoint.position - _startSlicePoint.position, velocity);
         planeNormal.Normalize();
 
-        SlicedHull hull = target.Slice(_endSlicePoint.position, planeNormal);
+        SlicedHull hull = newTarget.Slice(_endSlicePoint.position, planeNormal);
         
         AudioManager.Instance.PlaySword();
 
         if (hull != null)
         {
             // Be careful to not spawn frite in a object but in the world. Otherwise the hull won't have the good position
-            GameObject upperHull = hull.CreateUpperHull(target, _sliceMat);
+            GameObject upperHull = hull.CreateUpperHull(newTarget, _currentSliceMat);
             // print($"upper pos : {upperHull.transform.position} / target pos : {target.transform.position}");
-            SetupSliceComponent(upperHull, target.transform);
+            SetupSliceComponent(upperHull, newTarget.transform);
 
-            GameObject lowerHull = hull.CreateLowerHull(target, _sliceMat);
-            SetupSliceComponent(lowerHull, target.transform);
+            GameObject lowerHull = hull.CreateLowerHull(newTarget, _currentSliceMat);
+            SetupSliceComponent(lowerHull, newTarget.transform);
 
             Destroy(target);
             Destroy(upperHull, 5);

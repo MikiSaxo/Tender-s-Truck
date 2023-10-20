@@ -8,7 +8,7 @@ public class ButtonFollowVisual : MonoBehaviour
 {
     [SerializeField] private Transform _visualTarget;
     [SerializeField] private Vector3 _localAxis;
-    [SerializeField] private float _minHeight;
+    // [SerializeField] private float _minHeight;
     [SerializeField] private float _resetSpeed = 5; 
     [SerializeField] private float _followAngleTreshold = 45;
 
