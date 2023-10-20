@@ -16,7 +16,7 @@ public class Frite : MonoBehaviour
    private ElementType _type;
    private GameObject _frite;
 
-   public void Init(ElementType type)
+   public void Init(ElementType type, bool isEditor)
    {
       int rdn = Random.Range(0,3);
       _type = type;
@@ -52,14 +52,22 @@ public class Frite : MonoBehaviour
 
       if (_type is ElementType.RedHorizontal or ElementType.YellowHorizontal)
       {
-         _frite.transform.DORotate(new Vector3(-360, 0, 90), _rotateSpeed, RotateMode.FastBeyond360).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
+         if(!isEditor)
+            _frite.transform.DORotate(new Vector3(-360, 0, 90), _rotateSpeed, RotateMode.FastBeyond360).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
+         else
+            _frite.transform.DORotate(new Vector3(-0, 0, 90), 0);
+         
          _colliders[0].enabled = true;
          _colliders[1].enabled = false;
       }
 
       if (_type is ElementType.YellowVertical or ElementType.RedVertical)
       {
-         _frite.transform.DORotate(new Vector3(0, 360, 0), _rotateSpeed, RotateMode.FastBeyond360).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
+         if(!isEditor)
+            _frite.transform.DORotate(new Vector3(0, 360, 0), _rotateSpeed, RotateMode.FastBeyond360).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
+         else
+            _frite.transform.DORotate(new Vector3(-0, 0, 90), 0);
+         
          _colliders[0].enabled = false;
          _colliders[1].enabled = true;
       }

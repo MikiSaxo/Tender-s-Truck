@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 1021504757631366774}
   - component: {fileID: 4595062594494097772}
   - component: {fileID: 9020393273838215532}
+  - component: {fileID: 8906756973260181195}
   - component: {fileID: 839020100820099768}
   - component: {fileID: 5924104923076340041}
-  - component: {fileID: 8906756973260181195}
   m_Layer: 7
   m_Name: Frite
   m_TagString: Untagged
@@ -131,6 +131,38 @@ MonoBehaviour:
   _meshes: []
   _elementMesh: {fileID: 0}
   _meshRenderer: {fileID: 1021504757631366774}
+--- !u!114 &8906756973260181195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4921909391265782869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70fbac8944886804ca48f80320404951, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colliders:
+  - {fileID: 839020100820099768}
+  - {fileID: 5924104923076340041}
+  _rotateSpeed: 2
+  _yellowHorizontal:
+  - {fileID: 919132149155446097, guid: 9d9d0c71b915d824db199db9f25e7526, type: 3}
+  - {fileID: 919132149155446097, guid: a6a60a0bcd912cb4397025a552482129, type: 3}
+  - {fileID: 919132149155446097, guid: a1cfd1c0386f70c4f80ee2c5c9b24398, type: 3}
+  _yellowVertical:
+  - {fileID: 919132149155446097, guid: 038cff079108b694fb5a37935f0fe5a2, type: 3}
+  - {fileID: 919132149155446097, guid: 81c3685bdf6abed44a4f2564196a99f1, type: 3}
+  - {fileID: 919132149155446097, guid: 08e597bbede240e49a0d65f3b4d16e3d, type: 3}
+  _redHorizontal:
+  - {fileID: 919132149155446097, guid: 8cee7412cd1ed064690c86631aaa2518, type: 3}
+  - {fileID: 919132149155446097, guid: 3da3c8b7a7f88234f8a351b09d444742, type: 3}
+  - {fileID: 919132149155446097, guid: a0ee63a84017f694eb08dd895c9829e0, type: 3}
+  _redVertical:
+  - {fileID: 919132149155446097, guid: f527835602e6f3f4c94ff0177aad3dc4, type: 3}
+  - {fileID: 919132149155446097, guid: bed1792f94f24c44182ea447cfd2f3b0, type: 3}
+  - {fileID: 919132149155446097, guid: fdb6613b624e6ae47b7f9033113bd83d, type: 3}
 --- !u!65 &839020100820099768
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -173,38 +205,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.3, y: 0.4406174, z: 0.5994111}
   m_Center: {x: 0, y: 0, z: -0.1366202}
---- !u!114 &8906756973260181195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4921909391265782869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70fbac8944886804ca48f80320404951, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _colliders:
-  - {fileID: 839020100820099768}
-  - {fileID: 5924104923076340041}
-  _rotateSpeed: 1
-  _yellowHorizontal:
-  - {fileID: 919132149155446097, guid: 9d9d0c71b915d824db199db9f25e7526, type: 3}
-  - {fileID: 919132149155446097, guid: a6a60a0bcd912cb4397025a552482129, type: 3}
-  - {fileID: 919132149155446097, guid: a1cfd1c0386f70c4f80ee2c5c9b24398, type: 3}
-  _yellowVertical:
-  - {fileID: 919132149155446097, guid: 038cff079108b694fb5a37935f0fe5a2, type: 3}
-  - {fileID: 919132149155446097, guid: 81c3685bdf6abed44a4f2564196a99f1, type: 3}
-  - {fileID: 919132149155446097, guid: 08e597bbede240e49a0d65f3b4d16e3d, type: 3}
-  _redHorizontal:
-  - {fileID: 919132149155446097, guid: 8cee7412cd1ed064690c86631aaa2518, type: 3}
-  - {fileID: 919132149155446097, guid: 3da3c8b7a7f88234f8a351b09d444742, type: 3}
-  - {fileID: 919132149155446097, guid: a0ee63a84017f694eb08dd895c9829e0, type: 3}
-  _redVertical:
-  - {fileID: 919132149155446097, guid: f527835602e6f3f4c94ff0177aad3dc4, type: 3}
-  - {fileID: 919132149155446097, guid: bed1792f94f24c44182ea447cfd2f3b0, type: 3}
-  - {fileID: 919132149155446097, guid: fdb6613b624e6ae47b7f9033113bd83d, type: 3}
 --- !u!1 &7396297881973777754
 GameObject:
   m_ObjectHideFlags: 0
