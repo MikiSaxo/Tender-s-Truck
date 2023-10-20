@@ -15,6 +15,7 @@ public class Frite : MonoBehaviour
 
    private ElementType _type;
    private GameObject _frite;
+   private const float _scale = 7.5f;
 
    public GameObject FriteObj => _frite;
 
@@ -26,28 +27,28 @@ public class Frite : MonoBehaviour
       if (type == ElementType.YellowHorizontal)
       {
          GameObject go = Instantiate(_yellowHorizontal[rdn], transform);
-         go.transform.DOScale(15, 0);
+         go.transform.DOScale(_scale, 0);
          go.transform.DORotate(new Vector3(0, 0, 90), 0);
          _frite = go;
       }
       else if (type == ElementType.YellowVertical)
       {
          GameObject go = Instantiate(_yellowVertical[rdn], transform);
-         go.transform.DOScale(15, 0);
+         go.transform.DOScale(_scale, 0);
          go.transform.DORotate(new Vector3(0, 0, 0), 0);
          _frite = go;
       }
       else if (type == ElementType.RedHorizontal)
       {
          GameObject go = Instantiate(_redHorizontal[rdn], transform);
-         go.transform.DOScale(15, 0);
+         go.transform.DOScale(_scale, 0);
          go.transform.DORotate(new Vector3(0, 0, 90), 0);
          _frite = go;
       }
       else if (type == ElementType.RedVertical)
       {
          GameObject go = Instantiate(_redVertical[rdn], transform);
-         go.transform.DOScale(15, 0);
+         go.transform.DOScale(_scale, 0);
          go.transform.DORotate(new Vector3(0, 0, 0), 0);
          _frite = go;
       }
