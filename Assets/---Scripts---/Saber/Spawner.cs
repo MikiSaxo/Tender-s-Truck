@@ -27,14 +27,14 @@ public class Spawner : MonoBehaviour
     private MapConstructData _mapConstructData;
 
     private float _timeSinceStart;
-    private float _timeToBPM;
+    private float _time;
     private bool _canGo;
     private bool _hasLaunchMusic;
     private int _currentBPM;
     private int _countBPM;
     private int _countByFourBPM;
     private int _countElementIndex;
-    private float _timeBetweenEachTwoBPM;
+    private float _timeBetweenEachQuartBPM;
     private float _distanceTarget;
     private string _musicName;
     private List<GameObject> _spawnElements = new List<GameObject>();
@@ -75,7 +75,7 @@ public class Spawner : MonoBehaviour
         var lineJson = File.ReadAllText(mapPath);
         _mapConstructData = JsonUtility.FromJson<MapConstructData>(lineJson);
         _currentBPM = _mapConstructData.MusicBPM;
-        _timeBetweenEachTwoBPM = 1f / (_currentBPM / 60f);
+        _timeBetweenEachQuartBPM = (1f / (_currentBPM / 60f)) * .25f;
         // print("bpm : " + _currentBPM + " / " + _timeBetweenEachTwoBPM);
 
         // _canGo = true;
@@ -98,7 +98,7 @@ public class Spawner : MonoBehaviour
     {
         _canGo = false;
         _hasLaunchMusic = false;
-        _timeToBPM = 0;
+        _time = 0;
         _countByFourBPM = 0;
         _countBPM = 0;
         _countElementIndex = 0;
@@ -121,7 +121,6 @@ public class Spawner : MonoBehaviour
             return;
 
         PrepareLaunchMusic();
-        SpawnByTime();
 
         // if (Input.GetKeyDown(KeyCode.A))
         // if(_action.triggered)
@@ -131,13 +130,22 @@ public class Spawner : MonoBehaviour
         // }
     }
 
+    private void FixedUpdate()
+    {
+        if (!_canGo)
+            return;
+        
+        SpawnByTime();
+    }
+
     private void SpawnByTime()
     {
-        _timeToBPM += Time.deltaTime;
+        print("blabla");
+        _time += Time.fixedDeltaTime;
 
-        if (_timeToBPM >= _timeBetweenEachTwoBPM * .25f)
+        if (_time >= _timeBetweenEachQuartBPM)
         {
-            _timeToBPM -= _timeToBPM;
+            _time = 0;
 
             if (_countByFourBPM % 4 == 0)
                 _countBPM++;
@@ -164,18 +172,20 @@ public class Spawner : MonoBehaviour
 
     private void PrepareLaunchMusic()
     {
-        if (_timeSinceStart <= _timeToReachTarget)
+        if (_timeSinceStart <= _timeToReachTarget+3)
         {
             _timeSinceStart += Time.deltaTime;
         }
         else
             LaunchMusic();
+        
     }
 
     private void LaunchMusic()
     {
         if (_hasLaunchMusic)
             return;
+        
         print("Launch la musica");
         _hasLaunchMusic = true;
         AudioManager.Instance.PlaySound(_musicName);

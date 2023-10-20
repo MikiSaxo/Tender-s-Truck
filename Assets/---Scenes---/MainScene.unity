@@ -884,22 +884,22 @@ MonoBehaviour:
     Source: {fileID: 0}
   - Name: Sword1
     Clip: {fileID: 8300000, guid: 29cd06d4f5f1bee44bfc4fd87ebb60bf, type: 3}
-    Volume: 0.154
+    Volume: 0
     Loop: 0
     Source: {fileID: 0}
   - Name: Sword2
     Clip: {fileID: 8300000, guid: 3b58eb6a5bd28b14ca6d4170f1088981, type: 3}
-    Volume: 1
+    Volume: 0
     Loop: 0
     Source: {fileID: 0}
   - Name: Sword3
     Clip: {fileID: 8300000, guid: 3ddb958d39b004649b99d414ae1bd43e, type: 3}
-    Volume: 1
+    Volume: 0
     Loop: 0
     Source: {fileID: 0}
   - Name: Sword4
     Clip: {fileID: 8300000, guid: 07a6c8e1329582d4d8938577ef89e70c, type: 3}
-    Volume: 1
+    Volume: 0
     Loop: 0
     Source: {fileID: 0}
   - Name: Pop
@@ -1472,7 +1472,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &512764816
 Transform:
   m_ObjectHideFlags: 0
@@ -1895,7 +1895,7 @@ MonoBehaviour:
   _mapTarget: {fileID: 922111928}
   _height: 0.9
   _spawnTarget: {fileID: 1411904491}
-  _timeToReachTarget: 2
+  _timeToReachTarget: 3
   _friteScore: 20
   croquetteScore: 10
   _mozzaScore: 5
@@ -2064,7 +2064,7 @@ MonoBehaviour:
   m_fontSizeMin: 0
   m_fontSizeMax: 72
   m_fontStyle: 3
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -2557,7 +2557,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1411904490}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0.424}
+  m_LocalPosition: {x: 0, y: 1, z: 0.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2938,7 +2938,7 @@ PrefabInstance:
     - target: {fileID: 2691745858651430380, guid: 8560e95435a29d34eb1269e245f84575,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.324
+      value: -0.576
       objectReference: {fileID: 0}
     - target: {fileID: 2691745858651430380, guid: 8560e95435a29d34eb1269e245f84575,
         type: 3}
@@ -3937,7 +3937,7 @@ MonoBehaviour:
   m_fontSizeMin: 0
   m_fontSizeMax: 72
   m_fontStyle: 3
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -4025,6 +4025,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 986726196}
     m_Modifications:
+    - target: {fileID: 199794150847143552, guid: 96ba5e8ee0baccf46ad382458b74f6fd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 637367140833675527, guid: 96ba5e8ee0baccf46ad382458b74f6fd,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -4602,7 +4607,7 @@ PrefabInstance:
     - target: {fileID: 1695814366326269330, guid: 1c71e15aa9379c74d80159579707a445,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.6653
+      value: -0.687
       objectReference: {fileID: 0}
     - target: {fileID: 2264354468202979851, guid: 1c71e15aa9379c74d80159579707a445,
         type: 3}
@@ -4909,7 +4914,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5496445127488692047}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.2, z: 8.3}
+  m_LocalPosition: {x: 0, y: 0.2, z: 13.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5162,7 +5167,7 @@ PrefabInstance:
     - target: {fileID: 2691745858651430380, guid: 8560e95435a29d34eb1269e245f84575,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.576
+      value: 0.324
       objectReference: {fileID: 0}
     - target: {fileID: 2691745858651430380, guid: 8560e95435a29d34eb1269e245f84575,
         type: 3}

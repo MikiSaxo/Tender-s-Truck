@@ -29,7 +29,7 @@ public class PartyManager : MonoBehaviour
     [SerializeField] private float _timeToReachTarget;
     [Header("Score")]
     [SerializeField] private int _friteScore;
-    [FormerlySerializedAs("_pointScore")] [SerializeField] private int croquetteScore;
+    [SerializeField] private int croquetteScore;
     [SerializeField] private int _mozzaScore;
     [Header("Choose Hand")]
     [SerializeField] private WhichHanded _whichHanded;
