@@ -16,6 +16,8 @@ public class Frite : MonoBehaviour
    private ElementType _type;
    private GameObject _frite;
 
+   public GameObject FriteObj => _frite;
+
    public void Init(ElementType type, bool isEditor)
    {
       int rdn = Random.Range(0,3);

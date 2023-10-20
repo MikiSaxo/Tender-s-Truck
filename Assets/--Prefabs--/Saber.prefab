@@ -163,7 +163,9 @@ MonoBehaviour:
   _endSlicePoint: {fileID: 3760241456007458120}
   _cutForce: 500
   _angleToDestroy: 125
-  _sliceMat: {fileID: 2100000, guid: 5a415cd24186d8f4a856035383ef0fd5, type: 2}
+  _sliceMat:
+  - {fileID: 2100000, guid: 3d644ad48edadad4eab0fe74371d9653, type: 2}
+  - {fileID: 2100000, guid: 2a97232de296fa0448ffa8db221a25a0, type: 2}
   _sliceable:
     serializedVersion: 2
     m_Bits: 128

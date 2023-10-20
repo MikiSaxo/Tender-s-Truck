@@ -54,21 +54,7 @@ public class ElementToSpawn : MonoBehaviour
         
         _elements[getIndex].SetActive(true);
         _elements[getIndex].GetComponent<ElementChild>().Init(element, isEditor);
-        
-        // if (element == ElementType.Nothing)
-        //     return;
-        // if (element == ElementType.Croquette)
-        // {
-        //     _point.SetActive(true);
-        //     _frite.SetActive(false);
-        //     _point.GetComponent<ElementChild>().Init(element, isEditor);
-        // }
-        // else
-        // {
-        //     _frite.SetActive(true);
-        //     _point.SetActive(false);
-        //     _frite.GetComponent<ElementChild>().Init(element, isEditor);
-        // }
+
 
         _isEditor = isEditor;
         
@@ -79,6 +65,11 @@ public class ElementToSpawn : MonoBehaviour
     }
 
     private void Update()
+    {
+        Move();
+    }
+
+    private void Move()
     {
         if (!_isEditor)
         {
@@ -94,12 +85,11 @@ public class ElementToSpawn : MonoBehaviour
                 transform.position += _direction.normalized * vitesse * Time.deltaTime;
             }
         }
-        // transform.Translate(_direction, Space.World);
     }
     
     public void OnDeathElementTrigger()
     {
-        if (_frite != null && _point != null)
+        if (_frite != null && _point != null && _mozzaStick != null)
         {
             LoseLife?.Invoke();
         }

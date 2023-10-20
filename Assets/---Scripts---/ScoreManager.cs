@@ -77,14 +77,17 @@ public class ScoreManager : MonoBehaviour
 
     private void PunchTexts()
     {
-        transform.DOScale(1, 0);
-        transform.DOPunchScale(Vector3.one, .25f);
+        _comboText.gameObject.transform.DOScale(1, 0);
+        _comboText.gameObject.transform.DOPunchScale(Vector3.one, .25f);
+        
+        _scoreText.gameObject.transform.DOScale(1, 0);
+        _scoreText.gameObject.transform.DOPunchScale(Vector3.one, .25f);
     }
 
     private void RedTextCombo()
     {
         _comboText.DOColor(Color.red, 0);
-        _comboText.DOColor(Color.white, 1);
+        _comboText.DOColor(Color.black, 1);
     }
 
     public void ResetScore()
