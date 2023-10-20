@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -444,6 +444,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: No Saber Hand
       objectReference: {fileID: 0}
+    - target: {fileID: 5686134208196863108, guid: 1fd3a7c43c8190f4d8c167ebde694364,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7c4179c347ac5d644ad37feb98a53d96, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1377,6 +1382,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1643398490}
     m_Modifications:
+    - target: {fileID: 109434732392105323, guid: 65847589f926b734d9eaed6e25f0046b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7c4179c347ac5d644ad37feb98a53d96, type: 2}
     - target: {fileID: 109434732395284509, guid: 65847589f926b734d9eaed6e25f0046b,
         type: 3}
       propertyPath: m_Name
@@ -2460,7 +2470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelName: Elektro
   _levelFolder: EditorText
-  _velocityMinToCut: 1
+  _velocityMinToCut: 1.5
   _mapTarget: {fileID: 922111928}
   _height: 0.3
   _spawnTarget: {fileID: 1411904491}
@@ -5293,12 +5303,12 @@ PrefabInstance:
     - target: {fileID: 2279795762187789661, guid: 9d0f56aa1d4f86e489a65086e9918c03,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.030200005
+      value: 0.1143
       objectReference: {fileID: 0}
     - target: {fileID: 2279795762187789661, guid: 9d0f56aa1d4f86e489a65086e9918c03,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0011
+      value: 0.0592
       objectReference: {fileID: 0}
     - target: {fileID: 2279795762187789661, guid: 9d0f56aa1d4f86e489a65086e9918c03,
         type: 3}
@@ -5334,26 +5344,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4093526861088020034, guid: 9d0f56aa1d4f86e489a65086e9918c03,
-        type: 3}
-      propertyPath: m_Height
-      value: 3.4177043
-      objectReference: {fileID: 0}
-    - target: {fileID: 4093526861088020034, guid: 9d0f56aa1d4f86e489a65086e9918c03,
-        type: 3}
-      propertyPath: m_Radius
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4093526861088020034, guid: 9d0f56aa1d4f86e489a65086e9918c03,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 0.33215207
-      objectReference: {fileID: 0}
-    - target: {fileID: 4093526861088020034, guid: 9d0f56aa1d4f86e489a65086e9918c03,
-        type: 3}
-      propertyPath: m_Center.z
-      value: -0.0000028665927
       objectReference: {fileID: 0}
     - target: {fileID: 4589236926480875262, guid: 9d0f56aa1d4f86e489a65086e9918c03,
         type: 3}
