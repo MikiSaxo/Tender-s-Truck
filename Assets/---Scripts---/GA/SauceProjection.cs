@@ -32,6 +32,11 @@ public class SauceProjection : MonoBehaviour
     [SerializeField] float _maxOrientation;
     [SerializeField] float _orientationMultiplicator;
 
+    [Space(10)]
+
+    [ColorUsage(true, true)]
+    [SerializeField] List<Color> colors = new List<Color>();
+    int currentColor = 0;
 
     VisualEffect sauceEffect;
 
@@ -117,7 +122,15 @@ public class SauceProjection : MonoBehaviour
 
     }
 
-
+    public void ChangeColor()
+    {
+        currentColor++;
+        if (currentColor > colors.Count)
+        {
+            currentColor = 0;
+        }
+        sauceEffect.SetVector4("Color", colors[currentColor]);
+    }
 
 
 

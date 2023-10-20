@@ -895,3 +895,6 @@ MonoBehaviour:
   _minOrientation: 0
   _maxOrientation: 0
   _orientationMultiplicator: 0
+  colors:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
