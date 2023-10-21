@@ -35,10 +35,16 @@ public class Spawner : MonoBehaviour
     private int _countByFourBPM;
     private int _countElementIndex;
     private float _timeBetweenEachQuartBPM;
+    private float _timeBetweenTwoBPM;
     private float _distanceTarget;
     private string _musicName;
     private List<GameObject> _spawnElements = new List<GameObject>();
     private bool _firstCheckWin = false;
+
+    private float _speed;
+    private float _startTime;
+    private float _distanceToEnd;
+
 
     private void Awake()
     {
@@ -60,6 +66,8 @@ public class Spawner : MonoBehaviour
         _distanceTarget = Vector3.Distance(_target.position, transform.position);
 
         _musicName = "MainMusic";
+
+        _startTime = Time.time;
     }
 
     private void LoadFileMap()
@@ -135,7 +143,29 @@ public class Spawner : MonoBehaviour
         if (!_canGo)
             return;
         
-        SpawnByTime();
+        // SpawnByTime();
+    }
+    
+    private void MoveTimeline()
+    {
+        CalculateDistanceToEnd();
+
+        _speed = 4f * 4f / _timeBetweenTwoBPM;
+
+        float distanceCovered = (Time.time - _startTime) * _speed;
+        float totalDistance = Mathf.Abs(_distanceToEnd);
+
+        if (distanceCovered < totalDistance)
+        {
+            float newPosition = distanceCovered / totalDistance;
+
+            transform.position = Vector3.Lerp(Vector3.zero, Vector3.back * totalDistance, newPosition);
+        }
+    }
+    
+    private void CalculateDistanceToEnd()
+    {
+        // _distanceToEnd = (_counter - 1) * 4;
     }
 
     private void SpawnByTime()

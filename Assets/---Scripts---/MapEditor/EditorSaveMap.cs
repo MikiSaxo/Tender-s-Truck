@@ -16,6 +16,7 @@ public class EditorSaveMap : MonoBehaviour
 
     [SerializeField] private TMP_InputField _inputMusicName;
     [SerializeField] private TMP_InputField _inputMusicBPM;
+    [SerializeField] private TMP_InputField _inputLoapMapStart;
     [SerializeField] private TMP_InputField _inputLoapMap;
     [SerializeField] private string _folderDestination;
 
@@ -27,6 +28,7 @@ public class EditorSaveMap : MonoBehaviour
     private string _mapName;
     private string _musicName;
     private int _musicBPM;
+    private int _nbToSpawn;
     public MapConstructData _currentMCD;
     private string _hexColorGood;
     private string _hexColorNotGood;
@@ -113,10 +115,6 @@ public class EditorSaveMap : MonoBehaviour
 
     public void AddElement(int elementIndex, BoardPosition elementPos, ElementType elementType)
     {
-        // _currentMCD.ElementByPosIndex[0][0].Add(elementIndex, posType);
-        //
-        // if(_currentMCD.ElementByPosIndex.ContainsKey())
-
         _currentMCD.ElementsIndex.Add(elementIndex);
         _currentMCD.ElementsPosition.Add(elementPos);
         _currentMCD.ElementsType.Add(elementType);
@@ -124,23 +122,6 @@ public class EditorSaveMap : MonoBehaviour
 
     public void RemoveElement(int elementIndex, BoardPosition elementPos, ElementType elementType)
     {
-        // List<int> keyToRemove = new List<int>();
-        //
-        // foreach (var element in _currentMCD.ElementByPosIndex)
-        // {
-        //     if (element.Key == elementIndex 
-        //         && element.Value.ElementType == posType.ElementType 
-        //         && element.Value.BoardPosition == posType.BoardPosition)
-        //     {
-        //         keyToRemove.Add(elementIndex);
-        //     }
-        // }
-        //
-        // foreach (int element in keyToRemove)
-        // {
-        //     _currentMCD.ElementByPosIndex.Remove(element);
-        // }
-
         for (int i = 0; i < _currentMCD.ElementsIndex.Count; i++)
         {
             if (_currentMCD.ElementsIndex[i] == elementIndex
@@ -168,14 +149,7 @@ public class EditorSaveMap : MonoBehaviour
             }
         }
     }
-
-    // private void ResetInputField()
-    // {
-    //     _inputMapName.text = "";
-    //     _inputMusicName.text = "";
-    //     _inputMusicBPM.text = "";
-    // }
-
+    
     private void UpdateInputField(string mapName, string musicName, int BPM_Number)
     {
         // Reset input field Load Map
@@ -193,8 +167,12 @@ public class EditorSaveMap : MonoBehaviour
         mapName = _inputLoapMap.text;
         if (mapName == "")
         {
-            SpawnFbText($"{GetColorNotGood()}No map name written");
-            return;
+            mapName = _inputLoapMapStart.text;
+            if (mapName == "")
+            {
+                SpawnFbText($"{GetColorNotGood()}No map name written");
+                return;
+            }
         }
 
         // Get the file
@@ -214,7 +192,10 @@ public class EditorSaveMap : MonoBehaviour
         _currentMCD = JsonUtility.FromJson<MapConstructData>(lineJson);
 
         // Update all map
-        for (int i = 0; i < _currentMCD.ElementsIndex[^1] / 4 + 1; i++)
+        _nbToSpawn = (int)(BoardManager.Instance.MusicLength * (_currentMCD.MusicBPM + 1) / 60);
+        print($"{BoardManager.Instance.MusicLength} {_currentMCD.MusicBPM}");
+
+        for (int i = 0; i < _nbToSpawn; i++)
         {
             BoardManager.Instance.AddMultipleBoard();
         }
@@ -226,7 +207,9 @@ public class EditorSaveMap : MonoBehaviour
         UpdateInputField(mapName, _currentMCD.MusicName, _currentMCD.MusicBPM);
 
         // Reset the position
+        BoardManager.Instance.BPM = _currentMCD.MusicBPM;
         BoardManager.Instance.ResetPos();
+        BoardManager.Instance.HasLoadMap();
     }
 
     IEnumerator MakeItSlowly()
@@ -240,13 +223,21 @@ public class EditorSaveMap : MonoBehaviour
                 if (_currentMCD.ElementsIndex[j] == i)
                 {
                     print($"Element Number: {i} | Change element : {_currentMCD.ElementsType[j]} | Add element with this pos : {_currentMCD.ElementsPosition[j]}");
+
+                    if (_currentMCD.ElementsIndex[j] > _nbToSpawn * 4)
+                    {
+                        print("To much");
+                        yield break;
+                    }
+                    
                     gameObject.GetComponent<EditorManager>().ChangeElement((int)_currentMCD.ElementsType[j]);
                     yield return new WaitForSeconds(.01f);
-                    getAllPanel[i].GetComponent<BoardPanel>().GetBoardSign((int)_currentMCD.ElementsPosition[j]).AddElement();
+                    getAllPanel[i].GetComponent<BoardPanel>().GetBoardSign((int)_currentMCD.ElementsPosition[j])
+                        .AddElement();
                 }
             }
         }
-        
+        gameObject.GetComponent<EditorManager>().ChangeElement(4);
         print("Load Done!");
     }
 

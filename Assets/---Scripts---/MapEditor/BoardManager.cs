@@ -14,12 +14,14 @@ public class BoardManager : MonoBehaviour
     public event Action LaunchTimeline; 
 
     public int SignNbByBPM { get; set; }
+    public int BPM { get; set; }
+    public float MusicLength { get; set; }
 
     [Header("Controls")] [SerializeField] private float _dragSpeed;
 
-    [Header("Board")] [SerializeField] private int _numberToSpawn;
+    [Header("Board")]
     [SerializeField] private GameObject _boardEditorPrefab;
-    [Space(10f)] [SerializeField] private int _bpm;
+
 
     private List<GameObject> _boardsPanel = new List<GameObject>();
     private int _counter;
@@ -31,6 +33,8 @@ public class BoardManager : MonoBehaviour
     private float _timeBetweenTwoBPM;
     private float _speed;
     private float _startTime;
+    private int _BPM_NumberToSpawn;
+    private bool _hasSpawnMap;
 
     // private const float StartDistance = 1.33f;
 
@@ -43,16 +47,21 @@ public class BoardManager : MonoBehaviour
     {
         SignNbByBPM = 4;
         _currentVisibility = 4;
+        MusicLength = gameObject.GetComponent<AudioSource>().clip.length;
+    }
 
-        for (int i = 0; i < _numberToSpawn; i++)
+    public void SpawnMap()
+    {
+        _BPM_NumberToSpawn = (int)(MusicLength * (BPM + 1) / 60);
+
+        for (int i = 0; i < _BPM_NumberToSpawn; i++)
         {
             AddMultipleBoard();
         }
 
-        _timeBetweenTwoBPM = 1f / (_bpm / 60f);
-        _startTime = Time.time;
-        // print(_startTime);
+        _timeBetweenTwoBPM = 1f / (BPM / 60f);
 
+        _hasSpawnMap = true;
     }
 
     public void AddMultipleBoard()
@@ -72,6 +81,13 @@ public class BoardManager : MonoBehaviour
         }
 
         ChangeVisibility(_currentVisibility);
+    }
+
+    public void HasLoadMap()
+    {
+        _timeBetweenTwoBPM = 1f / (BPM / 60f);
+        _hasSpawnMap = true;
+        CalculateDistanceToEnd();
     }
 
     public void RemoveMultipleBoard()
@@ -139,18 +155,20 @@ public class BoardManager : MonoBehaviour
             MoveBoardsWithMouse();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && _hasSpawnMap)
         {
             _launchTimeline = !_launchTimeline;
             
             LaunchTimeline?.Invoke();
 
             if (_launchTimeline)
+            {
+                _startTime = Time.time;
                 gameObject.GetComponent<AudioSource>().Play();
+            }
             else
             {
                 gameObject.GetComponent<AudioSource>().Stop();
-                _startTime = Time.time;
             }
         }
 
@@ -162,8 +180,6 @@ public class BoardManager : MonoBehaviour
 
     private void MoveTimeline()
     {
-        CalculateDistanceToEnd();
-
         _speed = 4f * _currentVisibility / _timeBetweenTwoBPM;
 
         float distanceCovered = (Time.time - _startTime) * _speed;
