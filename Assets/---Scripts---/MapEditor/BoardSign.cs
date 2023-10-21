@@ -49,10 +49,8 @@ public class BoardSign : MonoBehaviour
         }
         else
         {
-            print("ele : " + _elementType);
             if (_elementType == ElementType.Nothing)
                 return;
-            print("remove nothing");
             RemoveElement();
         }
     }
@@ -71,7 +69,6 @@ public class BoardSign : MonoBehaviour
 
     private void RemoveElement()
     {
-        print(("remove"));
         boardPanel.RemoveElementToSave(_boardPosition, _elementType);
         _elementType = ElementType.Nothing;
     }
