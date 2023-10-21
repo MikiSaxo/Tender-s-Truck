@@ -53,8 +53,8 @@ public class BoardManager : MonoBehaviour
 
     public void SpawnMap()
     {
-        _BPM_NumberToSpawn = (int)(MusicLength * (BPM + 1) / 60);
-
+        _BPM_NumberToSpawn = (int)(MusicLength * (BPM ) / 60);
+        
         for (int i = 0; i < _BPM_NumberToSpawn; i++)
         {
             AddMultipleBoard();
@@ -179,7 +179,10 @@ public class BoardManager : MonoBehaviour
                 gameObject.GetComponent<AudioSource>().Stop();
             }
         }
+    }
 
+    private void FixedUpdate()
+    {
         if (_launchTimeline)
         {
             MoveTimeline();
@@ -201,6 +204,7 @@ public class BoardManager : MonoBehaviour
             
             TimelineDownBar.Instance.MoveCursor(newPosition*100);
         }
+        
     }
 
     private void MoveBoardsWithMouse()

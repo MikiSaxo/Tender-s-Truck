@@ -192,7 +192,7 @@ public class EditorSaveMap : MonoBehaviour
         _currentMCD = JsonUtility.FromJson<MapConstructData>(lineJson);
 
         // Update all map
-        _nbToSpawn = (int)(BoardManager.Instance.MusicLength * (_currentMCD.MusicBPM + 1) / 60);
+        _nbToSpawn = (int)(BoardManager.Instance.MusicLength * (_currentMCD.MusicBPM) / 60);
 
         for (int i = 0; i < _nbToSpawn; i++)
         {
@@ -210,36 +210,7 @@ public class EditorSaveMap : MonoBehaviour
         BoardManager.Instance.ResetPos();
         BoardManager.Instance.HasLoadMap();
     }
-
-    IEnumerator MakeItSlowly()
-    {
-        var getAllPanel = BoardManager.Instance.GetObjectList();
-
-        for (int i = 0; i < getAllPanel.Count; i++)
-        {
-            for (int j = 0; j < _currentMCD.ElementsIndex.Count; j++)
-            {
-                if (_currentMCD.ElementsIndex[j] == i)
-                {
-                    print($"Element Number: {i} | Change element : {_currentMCD.ElementsType[j]} | Add element with this pos : {_currentMCD.ElementsBoardPosition[j]}");
-
-                    if (_currentMCD.ElementsIndex[j] > _nbToSpawn * 4)
-                    {
-                        print("To much");
-                        yield break;
-                    }
-                    
-                    gameObject.GetComponent<EditorManager>().ChangeElement((int)_currentMCD.ElementsType[j]);
-                    yield return new WaitForSeconds(.01f);
-                    getAllPanel[i].GetComponent<BoardPanel>().GetBoardSign((int)_currentMCD.ElementsBoardPosition[j])
-                        .AddElement();
-                }
-            }
-        }
-        gameObject.GetComponent<EditorManager>().ChangeElement(4);
-        print("Load Done!");
-    }
-
+    
     private void SpawnAllElements()
     {
         var getAllPanel = BoardManager.Instance.GetObjectList();
@@ -250,7 +221,7 @@ public class EditorSaveMap : MonoBehaviour
             {
                 if (_currentMCD.ElementsIndex[j] == i)
                 {
-                    print($"Element Number: {i} | Change element : {_currentMCD.ElementsType[j]} | Add element with this pos : {_currentMCD.ElementsBoardPosition[j]}");
+                    // print($"Element Number: {i} | Change element : {_currentMCD.ElementsType[j]} | Add element with this pos : {_currentMCD.ElementsBoardPosition[j]}");
 
                     if (_currentMCD.ElementsIndex[j] > _nbToSpawn * 4)
                     {
@@ -259,8 +230,7 @@ public class EditorSaveMap : MonoBehaviour
                     }
                     
                     gameObject.GetComponent<EditorManager>().ChangeElement((int)_currentMCD.ElementsType[j]);
-                    getAllPanel[i].GetComponent<BoardPanel>().GetBoardSign((int)_currentMCD.ElementsBoardPosition[j])
-                        .AddElement();
+                    getAllPanel[i].GetComponent<BoardPanel>().GetBoardSign((int)_currentMCD.ElementsBoardPosition[j]).AddElement();
                 }
             }
         }

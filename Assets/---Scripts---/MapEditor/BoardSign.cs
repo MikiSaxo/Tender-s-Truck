@@ -20,9 +20,10 @@ public class BoardSign : MonoBehaviour
     private GameObject _stockElement;
     private ElementType _elementType;
 
-    private void Start()
+    private void Awake()
     {
         _elementType = ElementType.Nothing;
+        
     }
 
     private void OnMouseEnter()
@@ -48,9 +49,10 @@ public class BoardSign : MonoBehaviour
         }
         else
         {
+            print("ele : " + _elementType);
             if (_elementType == ElementType.Nothing)
                 return;
-            
+            print("remove nothing");
             RemoveElement();
         }
     }
@@ -69,6 +71,7 @@ public class BoardSign : MonoBehaviour
 
     private void RemoveElement()
     {
+        print(("remove"));
         boardPanel.RemoveElementToSave(_boardPosition, _elementType);
         _elementType = ElementType.Nothing;
     }

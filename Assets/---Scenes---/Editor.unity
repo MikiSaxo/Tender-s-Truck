@@ -1063,7 +1063,7 @@ MonoBehaviour:
     MusicName: 
     MusicBPM: 0
     ElementsIndex: 
-    ElementsPosition: 
+    ElementsBoardPosition: 
     ElementsType: 
 --- !u!1 &171489047
 GameObject:
