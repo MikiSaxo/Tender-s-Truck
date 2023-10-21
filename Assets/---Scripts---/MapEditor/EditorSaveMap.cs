@@ -56,7 +56,7 @@ public class EditorSaveMap : MonoBehaviour
         for (int i = 0; i < _currentMCD.ElementsIndex.Count; i++)
         {
             Debug.Log($"Index : {_currentMCD.ElementsIndex[i]}" +
-                      $", Pos : {_currentMCD.ElementsPosition[i]}" +
+                      $", Pos : {_currentMCD.ElementsBoardPosition[i]}" +
                       $", Type : {_currentMCD.ElementsType[i]}");
         }
     }
@@ -116,7 +116,7 @@ public class EditorSaveMap : MonoBehaviour
     public void AddElement(int elementIndex, BoardPosition elementPos, ElementType elementType)
     {
         _currentMCD.ElementsIndex.Add(elementIndex);
-        _currentMCD.ElementsPosition.Add(elementPos);
+        _currentMCD.ElementsBoardPosition.Add(elementPos);
         _currentMCD.ElementsType.Add(elementType);
     }
 
@@ -125,11 +125,11 @@ public class EditorSaveMap : MonoBehaviour
         for (int i = 0; i < _currentMCD.ElementsIndex.Count; i++)
         {
             if (_currentMCD.ElementsIndex[i] == elementIndex
-                && _currentMCD.ElementsPosition[i] == elementPos
+                && _currentMCD.ElementsBoardPosition[i] == elementPos
                 && _currentMCD.ElementsType[i] == elementType)
             {
                 _currentMCD.ElementsIndex.RemoveAt(i);
-                _currentMCD.ElementsPosition.RemoveAt(i);
+                _currentMCD.ElementsBoardPosition.RemoveAt(i);
                 _currentMCD.ElementsType.RemoveAt(i);
                 break;
             }
@@ -143,7 +143,7 @@ public class EditorSaveMap : MonoBehaviour
             if (_currentMCD.ElementsIndex[i] == elementIndex)
             {
                 _currentMCD.ElementsIndex.RemoveAt(i);
-                _currentMCD.ElementsPosition.RemoveAt(i);
+                _currentMCD.ElementsBoardPosition.RemoveAt(i);
                 _currentMCD.ElementsType.RemoveAt(i);
                 DeleteElement(elementIndex);
             }
@@ -193,7 +193,6 @@ public class EditorSaveMap : MonoBehaviour
 
         // Update all map
         _nbToSpawn = (int)(BoardManager.Instance.MusicLength * (_currentMCD.MusicBPM + 1) / 60);
-        print($"{BoardManager.Instance.MusicLength} {_currentMCD.MusicBPM}");
 
         for (int i = 0; i < _nbToSpawn; i++)
         {
@@ -201,8 +200,8 @@ public class EditorSaveMap : MonoBehaviour
         }
 
 
-        StartCoroutine(MakeItSlowly());
-
+        // StartCoroutine(MakeItSlowly());
+        SpawnAllElements();
         // Update Input Field to save the same map
         UpdateInputField(mapName, _currentMCD.MusicName, _currentMCD.MusicBPM);
 
@@ -222,7 +221,7 @@ public class EditorSaveMap : MonoBehaviour
             {
                 if (_currentMCD.ElementsIndex[j] == i)
                 {
-                    print($"Element Number: {i} | Change element : {_currentMCD.ElementsType[j]} | Add element with this pos : {_currentMCD.ElementsPosition[j]}");
+                    print($"Element Number: {i} | Change element : {_currentMCD.ElementsType[j]} | Add element with this pos : {_currentMCD.ElementsBoardPosition[j]}");
 
                     if (_currentMCD.ElementsIndex[j] > _nbToSpawn * 4)
                     {
@@ -232,7 +231,35 @@ public class EditorSaveMap : MonoBehaviour
                     
                     gameObject.GetComponent<EditorManager>().ChangeElement((int)_currentMCD.ElementsType[j]);
                     yield return new WaitForSeconds(.01f);
-                    getAllPanel[i].GetComponent<BoardPanel>().GetBoardSign((int)_currentMCD.ElementsPosition[j])
+                    getAllPanel[i].GetComponent<BoardPanel>().GetBoardSign((int)_currentMCD.ElementsBoardPosition[j])
+                        .AddElement();
+                }
+            }
+        }
+        gameObject.GetComponent<EditorManager>().ChangeElement(4);
+        print("Load Done!");
+    }
+
+    private void SpawnAllElements()
+    {
+        var getAllPanel = BoardManager.Instance.GetObjectList();
+
+        for (int i = 0; i < getAllPanel.Count; i++)
+        {
+            for (int j = 0; j < _currentMCD.ElementsIndex.Count; j++)
+            {
+                if (_currentMCD.ElementsIndex[j] == i)
+                {
+                    print($"Element Number: {i} | Change element : {_currentMCD.ElementsType[j]} | Add element with this pos : {_currentMCD.ElementsBoardPosition[j]}");
+
+                    if (_currentMCD.ElementsIndex[j] > _nbToSpawn * 4)
+                    {
+                        print("To much");
+                        break;
+                    }
+                    
+                    gameObject.GetComponent<EditorManager>().ChangeElement((int)_currentMCD.ElementsType[j]);
+                    getAllPanel[i].GetComponent<BoardPanel>().GetBoardSign((int)_currentMCD.ElementsBoardPosition[j])
                         .AddElement();
                 }
             }

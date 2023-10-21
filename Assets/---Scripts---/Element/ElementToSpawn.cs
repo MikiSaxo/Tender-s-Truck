@@ -66,7 +66,7 @@ public class ElementToSpawn : MonoBehaviour
 
     private void Update()
     {
-        Move();
+        //Move();
     }
 
     private void Move()

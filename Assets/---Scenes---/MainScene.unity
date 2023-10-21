@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4818,7 +4818,7 @@ GameObject:
   - component: {fileID: 7016132375811409747}
   - component: {fileID: 7016132375811409748}
   m_Layer: 0
-  m_Name: --SpawnersPos--
+  m_Name: ---SpawnersPos---
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4914,7 +4914,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5496445127488692047}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.2, z: 13.59}
+  m_LocalPosition: {x: 0, y: 0.504, z: 0.872}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4950,8 +4950,8 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
-      m_Id: 48d9712e-f797-4301-9205-d4b395b51975
-      m_Path: <Keyboard>/#(A)
+      m_Id: ede75430-2746-4b71-a410-43ba2682cc79
+      m_Path: <Keyboard>/b
       m_Interactions: 
       m_Processors: 
       m_Groups: 

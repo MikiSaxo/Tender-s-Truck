@@ -65,4 +65,16 @@ public class AudioManager : MonoBehaviour
         int rdm = Random.Range(1, 5);
         PlaySound($"Sword{rdm}");
     }
+
+    public float GetLengthMusic(string name)
+    {
+        Sounds s = Array.Find(Sounds, sound => sound.Name == name);
+        if (s == null)
+        {
+            Debug.LogWarning("Sound : " + name + " not found in StopSound");
+            return 0;
+        }
+
+        return s.Clip.length;
+    }
 }

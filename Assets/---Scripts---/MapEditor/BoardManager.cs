@@ -32,9 +32,10 @@ public class BoardManager : MonoBehaviour
     private float _timeToBPM;
     private float _timeBetweenTwoBPM;
     private float _speed;
-    private float _startTime;
+    private double _startTime;
     private int _BPM_NumberToSpawn;
     private bool _hasSpawnMap;
+    private double _currentSecondTimeline;
 
     // private const float StartDistance = 1.33f;
 
@@ -164,7 +165,14 @@ public class BoardManager : MonoBehaviour
             if (_launchTimeline)
             {
                 _startTime = Time.time;
-                gameObject.GetComponent<AudioSource>().Play();
+                // print(_startTime);
+                _currentSecondTimeline = TimelineDownBar.Instance.GetCursorValue();
+                
+                
+                var audioSource = gameObject.GetComponent<AudioSource>();
+
+                audioSource.time = (float)_currentSecondTimeline/100 * MusicLength;
+                audioSource.Play();
             }
             else
             {
@@ -182,14 +190,14 @@ public class BoardManager : MonoBehaviour
     {
         _speed = 4f * _currentVisibility / _timeBetweenTwoBPM;
 
-        float distanceCovered = (Time.time - _startTime) * _speed;
+        double distanceCovered = ((Time.time - _startTime) + (_currentSecondTimeline/100 * MusicLength)) * _speed;
         float totalDistance = Mathf.Abs(_distanceToEnd);
 
         if (distanceCovered < totalDistance)
         {
-            float newPosition = distanceCovered / totalDistance;
+            double newPosition = distanceCovered / totalDistance;
 
-            transform.position = Vector3.Lerp(Vector3.zero, Vector3.back * totalDistance, newPosition);
+            transform.position = Vector3.Lerp(Vector3.zero, Vector3.back * totalDistance, (float)newPosition);
             
             TimelineDownBar.Instance.MoveCursor(newPosition*100);
         }

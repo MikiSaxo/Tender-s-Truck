@@ -31,7 +31,6 @@ public class Spawner : MonoBehaviour
     private bool _canGo;
     private bool _hasLaunchMusic;
     private int _currentBPM;
-    private int _countBPM;
     private int _countByFourBPM;
     private int _countElementIndex;
     private float _timeBetweenEachQuartBPM;
@@ -44,6 +43,7 @@ public class Spawner : MonoBehaviour
     private float _speed;
     private float _startTime;
     private float _distanceToEnd;
+    private int _numberToSpawn;
 
 
     private void Awake()
@@ -88,6 +88,7 @@ public class Spawner : MonoBehaviour
 
         // _canGo = true;
         // InitializeMap();
+        SpawnAll();
     }
 
     public void LaunchMap()
@@ -100,6 +101,8 @@ public class Spawner : MonoBehaviour
         AudioManager.Instance.StopSound("MenuMusic");
         
         LifeManager.Instance.SetupLife();
+        _startTime = Time.time;
+        LaunchMusic();
     }
 
     public void StopMusic()
@@ -108,19 +111,18 @@ public class Spawner : MonoBehaviour
         _hasLaunchMusic = false;
         _time = 0;
         _countByFourBPM = 0;
-        _countBPM = 0;
         _countElementIndex = 0;
         _timeSinceStart = 0;
 
-        AudioManager.Instance.StopSound(_musicName);
+        // AudioManager.Instance.StopSound(_musicName);
 
-        foreach (var element in _spawnElements)
-        {
-            if (element != null)
-                Destroy(element);
-        }
-
-        _spawnElements.Clear();
+        // foreach (var element in _spawnElements)
+        // {
+        //     if (element != null)
+        //         Destroy(element);
+        // }
+        //
+        // _spawnElements.Clear();
     }
 
     private void Update()
@@ -128,7 +130,9 @@ public class Spawner : MonoBehaviour
         if (!_canGo)
             return;
 
-        PrepareLaunchMusic();
+        MoveElements();
+        
+        // PrepareLaunchMusic();
 
         // if (Input.GetKeyDown(KeyCode.A))
         // if(_action.triggered)
@@ -145,13 +149,24 @@ public class Spawner : MonoBehaviour
         
         // SpawnByTime();
     }
-    
-    private void MoveTimeline()
+
+    private void SpawnAll()
     {
-        CalculateDistanceToEnd();
+        _timeBetweenTwoBPM = 1f / (_currentBPM / 60f);
+        _speed = 4f / _timeBetweenTwoBPM;
+        _numberToSpawn = (int)(AudioManager.Instance.GetLengthMusic("MainMusic") * (_currentBPM + 1) / 60);
+        _distanceToEnd = (_numberToSpawn - 1) * 4;
 
-        _speed = 4f * 4f / _timeBetweenTwoBPM;
-
+        // print($"{_mapConstructData.ElementsType.Count} / {_mapConstructData.ElementsBoardPosition.Count} / {_mapConstructData.ElementsIndex.Count}");
+        for (int i = 0; i < _mapConstructData.ElementsIndex.Count; i++)
+        {
+            // print($"{_mapConstructData.ElementsType[i]} / {_mapConstructData.ElementsBoardPosition[i]} / {_mapConstructData.ElementsIndex[i]}");
+            SpawnElement(_mapConstructData.ElementsType[i], _mapConstructData.ElementsBoardPosition[i], _mapConstructData.ElementsIndex[i]);
+        }
+    }
+    
+    private void MoveElements()
+    {
         float distanceCovered = (Time.time - _startTime) * _speed;
         float totalDistance = Mathf.Abs(_distanceToEnd);
 
@@ -161,24 +176,16 @@ public class Spawner : MonoBehaviour
 
             transform.position = Vector3.Lerp(Vector3.zero, Vector3.back * totalDistance, newPosition);
         }
+        AudioManager.Instance.StopSound("MenuMusic");
     }
     
-    private void CalculateDistanceToEnd()
-    {
-        // _distanceToEnd = (_counter - 1) * 4;
-    }
-
     private void SpawnByTime()
     {
-        print("blabla");
         _time += Time.fixedDeltaTime;
 
         if (_time >= _timeBetweenEachQuartBPM)
         {
             _time = 0;
-
-            if (_countByFourBPM % 4 == 0)
-                _countBPM++;
 
             if (_countElementIndex == _mapConstructData.ElementsIndex.Count)
             {
@@ -191,7 +198,7 @@ public class Spawner : MonoBehaviour
                 if (_mapConstructData.ElementsIndex[i] == _countByFourBPM)
                 {
                     SpawnElement(_mapConstructData.ElementsType[i],
-                        _mapConstructData.ElementsPosition[i]);
+                        _mapConstructData.ElementsBoardPosition[i],0);
                     _countElementIndex++;
                 }
             }
@@ -208,7 +215,6 @@ public class Spawner : MonoBehaviour
         }
         else
             LaunchMusic();
-        
     }
 
     private void LaunchMusic()
@@ -222,12 +228,10 @@ public class Spawner : MonoBehaviour
         AudioManager.Instance.StopSound("MenuMusic");
     }
 
-    private void SpawnElement(ElementType element, BoardPosition spawnerIndex)
+    private void SpawnElement(ElementType element, BoardPosition spawnerIndex, float zPos)
     {
-        GameObject go = Instantiate(_elementPrefab);
-        _spawnElements.Add(go);
 
-        if (PartyManager.Instance.WhichHanded == WhichHanded.Left)
+        if (PartyManager.Instance.WhichHanded == WhichHanded.Right)
         {
             if (spawnerIndex == BoardPosition.LeftTop)
                 spawnerIndex = BoardPosition.RightTop;
@@ -238,12 +242,15 @@ public class Spawner : MonoBehaviour
             else if (spawnerIndex == BoardPosition.RightDown)
                 spawnerIndex = BoardPosition.LeftDown;
         }
+        
+        GameObject go = Instantiate(_elementPrefab, _spawnersPos[(int)spawnerIndex]);
+        _spawnElements.Add(go);
 
-        go.transform.position = _spawnersPos[(int)spawnerIndex].position;
+        go.transform.position += new Vector3(0, 0, zPos);
 
         go.GetComponent<ElementToSpawn>().Init(element, false, _target, _timeToReachTarget, _distanceTarget);
 
-        Destroy(go, 30);
+        // Destroy(go);
     }
 
     public void CheckIfVictory()

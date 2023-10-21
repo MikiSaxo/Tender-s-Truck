@@ -12,7 +12,7 @@ public class MapConstructData
 
     [Header("Elements Infos")]
     public List<int> ElementsIndex;
-    public List<BoardPosition> ElementsPosition;
+    public List<BoardPosition> ElementsBoardPosition;
     public List<ElementType> ElementsType;
 }
 

@@ -1,1 +1,1 @@
-{"MusicName":"120bpm","MusicBPM":120,"ElementsIndex":[4,12,20,28,36,44,8,16,24,32,40,44,44],"ElementsPosition":[3,3,3,3,3,3,5,5,5,5,5,4,5],"ElementsType":[2,2,2,3,3,3,5,5,5,5,5,5,5]}
+{"MusicName":"120bpm","MusicBPM":120,"ElementsIndex":[4,12,20,28,36,44,8,16,24,32,40,44,44],"ElementsBoardPosition":[3,3,3,3,3,3,5,5,5,5,5,4,5],"ElementsType":[2,2,2,3,3,3,5,5,5,5,5,5,5]}

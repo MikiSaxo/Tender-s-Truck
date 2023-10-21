@@ -11,6 +11,8 @@ public class TimelineDownBar : MonoBehaviour
     [SerializeField] private GameObject _cursorTimeline;
     
     private RectTransform _elementRectTransform;
+    private float _halfSize;
+    private double _currentValue;
 
     private void Awake()
     {
@@ -20,6 +22,7 @@ public class TimelineDownBar : MonoBehaviour
     private void Start()
     {
         _elementRectTransform = gameObject.GetComponent<RectTransform>();
+        _halfSize = _elementRectTransform.rect.width * .5f;
         MoveCursor(0);
     }
 
@@ -40,14 +43,18 @@ public class TimelineDownBar : MonoBehaviour
     }
 
     // Value between 0 and 100
-    public void MoveCursor(float value)
+    public void MoveCursor(double value)
     {
         // float test = Mathf.Clamp(value, -_elementRectTransform.rect.width*.5f, _elementRectTransform.rect.width*.5f);
 
-        float halfSize = _elementRectTransform.rect.width * .5f;
-        float getDistance = -halfSize + (halfSize-(-halfSize))  * value / 100;
-        
-        _cursorTimeline.transform.localPosition = new Vector2(getDistance, _cursorTimeline.transform.localPosition.y);
+        double getDistance = -_halfSize + (_halfSize-(-_halfSize))  * value / 100;
+        _currentValue = value;
 
+        _cursorTimeline.transform.localPosition = new Vector2((float)getDistance, _cursorTimeline.transform.localPosition.y);
+    }
+
+    public double GetCursorValue()
+    {
+        return _currentValue;
     }
 }
