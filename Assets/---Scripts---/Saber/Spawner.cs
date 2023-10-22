@@ -95,6 +95,7 @@ public class Spawner : MonoBehaviour
 
         _canGo = true;
 
+        SpawnAll();
         ScoreManager.Instance.ResetScore();
         AudioManager.Instance.StopSound("MenuMusic");
         
@@ -115,13 +116,13 @@ public class Spawner : MonoBehaviour
 
         // AudioManager.Instance.StopSound(_musicName);
 
-        // foreach (var element in _spawnElements)
-        // {
-        //     if (element != null)
-        //         Destroy(element);
-        // }
-        //
-        // _spawnElements.Clear();
+        foreach (var element in _spawnElements)
+        {
+            if (element != null)
+                Destroy(element);
+        }
+        
+        _spawnElements.Clear();
     }
 
     private void Update()
