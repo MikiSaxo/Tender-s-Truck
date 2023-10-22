@@ -18,6 +18,8 @@ public class Spawner : MonoBehaviour
     [SerializeField] private InputAction _action;
 
     [Header("Spawners")] [SerializeField] private Transform[] _spawnersPos;
+    [SerializeField] private Transform _targetToReachLaunchMusic;
+    [SerializeField] private Transform _allSpawners;
 
     private Transform _target;
     private float _timeToReachTarget;
@@ -55,15 +57,11 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-        _timeToReachTarget = PartyManager.Instance.TimeToReachTarget;
-        _target = PartyManager.Instance.SpawnTarget;
-
-
         _action.Enable();
         _action.performed += context => { LaunchMap(); };
 
         LoadFileMap();
-        _distanceTarget = Vector3.Distance(_target.position, transform.position);
+        _distanceTarget = Vector3.Distance(_targetToReachLaunchMusic.position, _allSpawners.position);
 
         _musicName = "MainMusic";
 
@@ -102,7 +100,8 @@ public class Spawner : MonoBehaviour
         
         LifeManager.Instance.SetupLife();
         _startTime = Time.time;
-        LaunchMusic();
+        // LaunchMusic();
+        _timeToReachTarget = _distanceTarget / _speed;
     }
 
     public void StopMusic()
@@ -132,7 +131,7 @@ public class Spawner : MonoBehaviour
 
         MoveElements();
         
-        // PrepareLaunchMusic();
+        PrepareLaunchMusic();
 
         // if (Input.GetKeyDown(KeyCode.A))
         // if(_action.triggered)
@@ -140,6 +139,7 @@ public class Spawner : MonoBehaviour
         //     print("allo");
         //     LaunchMap();
         // }
+        
     }
 
     private void FixedUpdate()
@@ -209,7 +209,7 @@ public class Spawner : MonoBehaviour
 
     private void PrepareLaunchMusic()
     {
-        if (_timeSinceStart <= _timeToReachTarget+3)
+        if (_timeSinceStart <= _timeToReachTarget)
         {
             _timeSinceStart += Time.deltaTime;
         }
@@ -247,7 +247,7 @@ public class Spawner : MonoBehaviour
 
         go.transform.position += new Vector3(0, 0, zPos);
 
-        go.GetComponent<ElementToSpawn>().Init(element, false, _target, _timeToReachTarget, _distanceTarget);
+        go.GetComponent<ElementToSpawn>().Init(element, false);
 
         // Destroy(go);
     }

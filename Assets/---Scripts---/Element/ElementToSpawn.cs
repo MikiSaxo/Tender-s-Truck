@@ -26,12 +26,12 @@ public class ElementToSpawn : MonoBehaviour
     private Vector3 _direction;
     private float _distanceTarget;
 
-    public void Init(ElementType element, bool isEditor, Transform target, float timeToReachTarget, float distanceTarget)
+    public void Init(ElementType element, bool isEditor)
     {
         // _direction.z *= speed;
-        _target = target;
-        _target.position = new Vector3(transform.position.x, transform.position.y, _target.position.z);
-        _timeToReachTarget = timeToReachTarget;
+        // _target = target;
+        // _target.position = new Vector3(transform.position.x, transform.position.y, _target.position.z);
+        // _timeToReachTarget = timeToReachTarget;
 
         var getIndex = 0;
         foreach (var ele in _elements)
@@ -60,8 +60,8 @@ public class ElementToSpawn : MonoBehaviour
         
         _currentType = element;
         
-        _direction = _target.position - transform.position;
-        _distanceTarget = distanceTarget;
+        // _direction = _target.position - transform.position;
+        // _distanceTarget = distanceTarget;
     }
 
     private void Update()

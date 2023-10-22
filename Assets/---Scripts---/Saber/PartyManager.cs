@@ -24,9 +24,6 @@ public class PartyManager : MonoBehaviour
     [SerializeField] private Transform _mapTarget;
     [SerializeField] private float _height;
     [Space(10f)]
-    [Header("-- Spawn Element -- ")]
-    [SerializeField] private Transform _spawnTarget;
-    [SerializeField] private float _timeToReachTarget;
     [Header("Score")]
     [SerializeField] private int _friteScore;
     [SerializeField] private int croquetteScore;
@@ -47,10 +44,8 @@ public class PartyManager : MonoBehaviour
     
 
     public Transform MapTarget => _mapTarget;
-    public Transform SpawnTarget => _spawnTarget;
     public float Height => _height;
     public float VelocityMinToCut => _velocityMinToCut;
-    public float TimeToReachTarget => _timeToReachTarget;
     public string LevelName => _levelName;
     public string LevelFolder => _levelFolder;
     public int FriteScore => _friteScore;
