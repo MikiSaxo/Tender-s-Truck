@@ -18,10 +18,10 @@ public class ButtonSauceMesh : MonoBehaviour
 
     private void Start()
     {
-        InitSauce();
+        ChangeSauce();
     }
 
-    private void InitSauce()
+    private void ChangeSauce()
     {
         for (int i = 0; i < _grosPot.Length; i++)
         {
@@ -33,5 +33,11 @@ public class ButtonSauceMesh : MonoBehaviour
         _grosPot[(int)_color].SetActive(true);
         _boutonPoussoir[(int)_color].SetActive(true);
         _etiquette[(int)_color].SetActive(true);
+    }
+
+    public void UpdateSauce()
+    {
+        _color = _color == ColorButton.Red ? ColorButton.Yellow : ColorButton.Red;
+        ChangeSauce();
     }
 }

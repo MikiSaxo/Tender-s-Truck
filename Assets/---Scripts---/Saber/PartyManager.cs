@@ -41,7 +41,7 @@ public class PartyManager : MonoBehaviour
     [Header("Choose Gameplay")]
     [SerializeField] private GameplaySauceType _sauceType;
     [SerializeField] private GameObject _bacASauce;
-    [SerializeField] private GameObject _buttonsSauce;
+    [SerializeField] private GameObject[] _buttonsSauce;
  
 
     
@@ -74,12 +74,14 @@ public class PartyManager : MonoBehaviour
         if (_sauceType == GameplaySauceType.BacASauce)
         {
             _bacASauce.SetActive(true);
-            _buttonsSauce.SetActive(false);
+            _buttonsSauce[0].SetActive(false);
+            _buttonsSauce[1].SetActive(false);
         }
         else
         {
             _bacASauce.SetActive(false);
-            _buttonsSauce.SetActive(true);
+            _buttonsSauce[0].SetActive(true);
+            _buttonsSauce[1].SetActive(true);
             // _buttonsSauce.transform.position = _buttonsSaucePos[(int)_whichHanded].position;
         } 
     }
@@ -114,6 +116,9 @@ public class PartyManager : MonoBehaviour
             _sabers[1].transform.localPosition = Vector3.zero;
             _sabers[1].transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
         }
+        
+        _buttonsSauce[0].GetComponent<ButtonSauceMesh>().UpdateSauce();
+        _buttonsSauce[1].GetComponent<ButtonSauceMesh>().UpdateSauce();
     }
 
     public Material GetElementTypeMat(int index)

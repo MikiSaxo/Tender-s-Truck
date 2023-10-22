@@ -1920,7 +1920,9 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b2c6c738ecf8eb84b8edf7f420688a68, type: 2}
   _sauceType: 1
   _bacASauce: {fileID: 847747843}
-  _buttonsSauce: {fileID: 858697068}
+  _buttonsSauce:
+  - {fileID: 1820850984}
+  - {fileID: 1894599098}
 --- !u!4 &917694716
 Transform:
   m_ObjectHideFlags: 0
@@ -3779,6 +3781,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1757016563}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1820850984 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3296393940741331573, guid: 8560e95435a29d34eb1269e245f84575,
+    type: 3}
+  m_PrefabInstance: {fileID: 7555964512342547247}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1837145791
 GameObject:
   m_ObjectHideFlags: 0
@@ -4476,6 +4484,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5184301581239609068, guid: 966c584731e84654e98292b1404acbae,
     type: 3}
   m_PrefabInstance: {fileID: 4931888930397142010}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1894599098 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3296393940741331573, guid: 8560e95435a29d34eb1269e245f84575,
+    type: 3}
+  m_PrefabInstance: {fileID: 1530159018}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &2724677427528949537
 Transform:
