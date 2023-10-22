@@ -67,9 +67,15 @@ public class BoardSign : MonoBehaviour
         element.transform.SetParent(transform);
     }
 
-    private void RemoveElement()
+    public void RemoveElement()
     {
         boardPanel.RemoveElementToSave(_boardPosition, _elementType);
+        _elementType = ElementType.Nothing;
+    }
+
+    public void DestroyElement()
+    {
+        Destroy(_stockElement);
         _elementType = ElementType.Nothing;
     }
 

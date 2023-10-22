@@ -228,6 +228,14 @@ public class BoardManager : MonoBehaviour
         transform.position = new Vector3(pos.x, pos.y, -_distanceToEnd * percent / 100);
     }
 
+    public void MoveEachElements(int index)
+    {
+        if (index is -1 or 1)
+        {
+            EditorSaveMap.Instance.MoveEachElements(index);
+        }
+    }
+
     private void Zoom()
     {
         // float zoomInput = Input.GetAxis("Mouse ScrollWheel");
@@ -285,6 +293,14 @@ public class BoardManager : MonoBehaviour
         _counter = 0;
 
         AddMultipleBoard();
+    }
+
+    public void ClearMap()
+    {
+        foreach (var obj in _boardsPanel)
+        {
+            obj.GetComponent<BoardPanel>().ClearAllSigns();
+        }
     }
 
     public List<GameObject> GetObjectList()

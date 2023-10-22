@@ -238,6 +238,26 @@ public class EditorSaveMap : MonoBehaviour
         print("Load Done!");
     }
 
+    public void MoveEachElements(int index)
+    {
+        for (int i = 0; i < _currentMCD.ElementsIndex.Count; i++)
+        {
+            if (_currentMCD.ElementsIndex[i] + index >= 0 &&
+                _currentMCD.ElementsIndex[i] + index < _nbToSpawn * 4)
+            {
+                // print($"currentIndex : {_currentMCD.ElementsIndex[i]} / add {index}");
+                _currentMCD.ElementsIndex[i] += index;
+            }
+            else if (_currentMCD.ElementsIndex[i] + index < 0 || _currentMCD.ElementsIndex[i] + index >= _nbToSpawn * 4)
+            {
+                _currentMCD.ElementsIndex.RemoveAt(i);
+            }
+        }
+        
+        BoardManager.Instance.ClearMap();
+        SpawnAllElements();
+    }
+
     public void SpawnFbText(string text)
     {
         // Message warning of success

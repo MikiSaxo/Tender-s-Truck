@@ -38,4 +38,12 @@ public class BoardPanel : MonoBehaviour
     {
         return _boardSigns[index];
     }
+
+    public void ClearAllSigns()
+    {
+        foreach (var sign in _boardSigns)
+        {
+            sign.DestroyElement();
+        }
+    }
 }
