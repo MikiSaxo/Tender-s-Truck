@@ -15,6 +15,7 @@ public class ButtonSauceMesh : MonoBehaviour
     [SerializeField] private GameObject[] _grosPot;
     [SerializeField] private GameObject[] _boutonPoussoir;
     [SerializeField] private GameObject[] _etiquette;
+    [SerializeField] private TriggerButtonSauce _trigger;
 
     private void Start()
     {
@@ -33,6 +34,8 @@ public class ButtonSauceMesh : MonoBehaviour
         _grosPot[(int)_color].SetActive(true);
         _boutonPoussoir[(int)_color].SetActive(true);
         _etiquette[(int)_color].SetActive(true);
+
+        _trigger.UpdateSauce(_color == ColorButton.Red ? ElementType.RedHorizontal : ElementType.YellowHorizontal);
     }
 
     public void UpdateSauce()

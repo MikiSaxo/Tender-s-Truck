@@ -117,7 +117,7 @@ Transform:
   - {fileID: 158961448732647513}
   - {fileID: 6998688414185043989}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1149686352470112160
 MonoBehaviour:
@@ -141,6 +141,7 @@ MonoBehaviour:
   _etiquette:
   - {fileID: 3089431703899683038}
   - {fileID: 8445019269282173491}
+  _trigger: {fileID: 6382834868494069091}
 --- !u!1 &3467935529447007980
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,7 +434,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _visualTarget: {fileID: 6290116005898126362}
   _localAxis: {x: 0, y: -1, z: 0}
-  _minHeight: 0.183
   _resetSpeed: 5
   _followAngleTreshold: 90
 --- !u!1 &3850203263181537813

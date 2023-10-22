@@ -14,4 +14,9 @@ public class TriggerButtonSauce : MonoBehaviour
             _sabers[0].GetComponent<SliceObject>().ChangeSauceType(_whichType);
         }
     }
+
+    public void UpdateSauce(ElementType newType)
+    {
+        _whichType = newType;
+    }
 }
