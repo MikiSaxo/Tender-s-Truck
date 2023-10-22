@@ -230,8 +230,7 @@ public class Spawner : MonoBehaviour
 
     private void SpawnElement(ElementType element, BoardPosition spawnerIndex, float zPos)
     {
-
-        if (PartyManager.Instance.WhichHanded == WhichHanded.Right)
+        if (PartyManager.Instance.WhichHanded == WhichHanded.Left)
         {
             if (spawnerIndex == BoardPosition.LeftTop)
                 spawnerIndex = BoardPosition.RightTop;

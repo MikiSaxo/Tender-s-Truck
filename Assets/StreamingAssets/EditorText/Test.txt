@@ -1,1 +1,1 @@
-{"MusicName":"ergtze","MusicBPM":134,"ElementsIndex":[2,3,4,0],"ElementsBoardPosition":[5,0,5,2],"ElementsType":[0,0,0,1]}
+{"MusicName":"ergtze","MusicBPM":134,"ElementsIndex":[2,3,0,5],"ElementsBoardPosition":[5,0,4,1],"ElementsType":[0,0,0,0]}

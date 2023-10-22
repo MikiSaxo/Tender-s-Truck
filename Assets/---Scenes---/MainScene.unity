@@ -1889,7 +1889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d71ae094cbf0c904693033c9c4292f08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelName: Tenders3
+  _levelName: Test
   _levelFolder: EditorText
   _velocityMinToCut: 0.7
   _mapTarget: {fileID: 922111928}
@@ -1899,7 +1899,7 @@ MonoBehaviour:
   _friteScore: 20
   croquetteScore: 10
   _mozzaScore: 5
-  _whichHanded: 1
+  _whichHanded: 0
   _sabers:
   - {fileID: 853399039}
   - {fileID: 1881756107}
@@ -2543,7 +2543,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1411904491}
   m_Layer: 0
-  m_Name: -SpawnElementPos-
+  m_Name: SpawnElementPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4962,9 +4962,9 @@ MonoBehaviour:
   - {fileID: 2724677427528949537}
   - {fileID: 366385732}
   - {fileID: 4947138249856082934}
-  - {fileID: 995922655}
-  - {fileID: 8902365897372186294}
   - {fileID: 703672236}
+  - {fileID: 8902365897372186294}
+  - {fileID: 995922655}
 --- !u!1001 &7069962717461855463
 PrefabInstance:
   m_ObjectHideFlags: 0
