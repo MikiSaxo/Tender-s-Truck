@@ -12,6 +12,12 @@ public class TriggerButtonSauce : MonoBehaviour
         if(other.GetComponent<TriggerDetector>() != null)
         {
             _sabers[0].GetComponent<SliceObject>().ChangeSauceType(_whichType);
+            
+            var color = 0;
+            if (_whichType == ElementType.RedHorizontal || _whichType == ElementType.RedVertical)
+                color = 1;
+            
+            SauceProjection.Instance.ChangeColor(color);
         }
     }
 

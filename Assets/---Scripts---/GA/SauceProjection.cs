@@ -6,6 +6,8 @@ using UnityEngine.VFX;
 
 public class SauceProjection : MonoBehaviour
 {
+    public static SauceProjection Instance;
+    
     [SerializeField] VelocityEstimator _velocityEstimator;
     
     [Space(10)]
@@ -36,14 +38,13 @@ public class SauceProjection : MonoBehaviour
 
     [ColorUsage(true, true)]
     [SerializeField] List<Color> colors = new List<Color>();
-    int currentColor = 0;
 
     VisualEffect sauceEffect;
 
     private void Awake()
     {
+        Instance = this;
         sauceEffect = GetComponent<VisualEffect>();
-
     }
 
     private void Update()
@@ -122,16 +123,8 @@ public class SauceProjection : MonoBehaviour
 
     }
 
-    public void ChangeColor()
+    public void ChangeColor(int index)
     {
-        currentColor++;
-        if (currentColor > colors.Count)
-        {
-            currentColor = 0;
-        }
-        sauceEffect.SetVector4("Color", colors[currentColor]);
+        sauceEffect.SetVector4("SauceColor", colors[index]);
     }
-
-
-
 }
