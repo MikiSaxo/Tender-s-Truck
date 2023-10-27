@@ -23,7 +23,7 @@ public class SauceProjection : MonoBehaviour
     [Space(10)]
 
     [SerializeField] float _minLifetime;
-    [SerializeField] float _maxLifetine;
+    [SerializeField] float _maxLifetime;
     [SerializeField] float _lifetimeMultiplicator;
 
     [Space(10)]
@@ -113,10 +113,10 @@ public class SauceProjection : MonoBehaviour
         //Set gravity w/ velocity
         float crntLifetime = Mathf.Abs(magnitude * _lifetimeMultiplicator);
 
-        if (crntLifetime > _maxGravity)
-            crntLifetime = _maxGravity;
-        if (crntLifetime <= _minGravity)
-            crntLifetime = _minGravity;
+        if (crntLifetime > _maxLifetime)
+            crntLifetime = _maxLifetime;
+        if (crntLifetime <= _minLifetime)
+            crntLifetime = _minLifetime;
 
         sauceEffect.SetFloat("Lifetime", crntLifetime);
 
