@@ -81,12 +81,13 @@ public class Spawner : MonoBehaviour
         var lineJson = File.ReadAllText(mapPath);
         _mapConstructData = JsonUtility.FromJson<MapConstructData>(lineJson);
         _currentBPM = _mapConstructData.MusicBPM;
+        BeatManager.Instance.BPM = _currentBPM;
         _timeBetweenEachQuartBPM = (1f / (_currentBPM / 60f)) * .25f;
         // print("bpm : " + _currentBPM + " / " + _timeBetweenEachTwoBPM);
 
         // _canGo = true;
         // InitializeMap();
-        SpawnAll();
+        // SpawnAll();
     }
 
     public void LaunchMap()
@@ -104,27 +105,7 @@ public class Spawner : MonoBehaviour
         // LaunchMusic();
         _timeToReachTarget = _distanceTarget / _speed;
     }
-
-    public void StopMusic()
-    {
-        _canGo = false;
-        _hasLaunchMusic = false;
-        _time = 0;
-        _countByFourBPM = 0;
-        _countElementIndex = 0;
-        _timeSinceStart = 0;
-
-        // AudioManager.Instance.StopSound(_musicName);
-
-        foreach (var element in _spawnElements)
-        {
-            if (element != null)
-                Destroy(element);
-        }
-        
-        _spawnElements.Clear();
-    }
-
+    
     private void Update()
     {
         if (!_canGo)
@@ -227,6 +208,28 @@ public class Spawner : MonoBehaviour
         _hasLaunchMusic = true;
         AudioManager.Instance.PlaySound(_musicName);
         AudioManager.Instance.StopSound("MenuMusic");
+        BeatManager.Instance.CanGo = true;
+    }
+    
+    public void StopMusic()
+    {
+        _canGo = false;
+        _hasLaunchMusic = false;
+        _time = 0;
+        _countByFourBPM = 0;
+        _countElementIndex = 0;
+        _timeSinceStart = 0;
+        BeatManager.Instance.CanGo = false;
+
+        AudioManager.Instance.StopSound(_musicName);
+
+        foreach (var element in _spawnElements)
+        {
+            if (element != null)
+                Destroy(element);
+        }
+        
+        _spawnElements.Clear();
     }
 
     private void SpawnElement(ElementType element, BoardPosition spawnerIndex, float zPos)

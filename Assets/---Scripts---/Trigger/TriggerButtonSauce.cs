@@ -17,6 +17,7 @@ public class TriggerButtonSauce : MonoBehaviour
             if (_whichType == ElementType.RedHorizontal || _whichType == ElementType.RedVertical)
                 color = 1;
             
+            AudioManager.Instance.PlaySound("ChangeSauce");
             SauceProjection.Instance.ChangeColor(color);
         }
     }

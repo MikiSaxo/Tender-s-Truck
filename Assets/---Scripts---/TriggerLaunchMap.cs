@@ -10,6 +10,7 @@ public class TriggerLaunchMap : MonoBehaviour
         if(other.GetComponent<TriggerDetector>() != null)
         {
             Spawner.Instance.LaunchMap();
+            AudioManager.Instance.PlaySound("Start");
         }
     }
 }

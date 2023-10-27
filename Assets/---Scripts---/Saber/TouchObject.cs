@@ -9,9 +9,9 @@ public class TouchObject : MonoBehaviour
     {
         if (other.GetComponent<TouchType>() != null)
         {
-            print("touche le loup");
             LifeManager.Instance.WinLife();
             ScoreManager.Instance.AddPoints(other.GetComponent<TouchType>().Type);
+            AudioManager.Instance.PlaySound("TouchMozza");
             Destroy(other.gameObject);
         }
     }

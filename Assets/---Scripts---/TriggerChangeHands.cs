@@ -9,6 +9,7 @@ public class TriggerChangeHands : MonoBehaviour
         if(other.GetComponent<TriggerDetector>() != null)
         {
             PartyManager.Instance.SwitchHandButton();
+            AudioManager.Instance.PlaySound("SwitchHands");
         }
     }
 }

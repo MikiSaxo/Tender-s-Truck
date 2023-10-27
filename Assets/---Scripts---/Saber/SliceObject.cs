@@ -178,7 +178,6 @@ public class SliceObject : MonoBehaviour
     {
         _currentType = newType;
         _sauceStick.GetComponent<MeshRenderer>().material = PartyManager.Instance.GetElementTypeMat((int)_currentType);
-        AudioManager.Instance.PlaySound("Pop");
     }
 
     private void OnDisable()

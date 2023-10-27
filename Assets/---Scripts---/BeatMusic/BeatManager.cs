@@ -9,11 +9,11 @@ public class BeatManager : MonoBehaviour
 {
     public static BeatManager Instance;
     
-    [SerializeField] private float _bpm;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private Intervals[] _intervals;
-
+    
     public bool CanGo { get; set; }
+    public int BPM  { get; set; }
             
     private void Awake()
     {
@@ -27,14 +27,9 @@ public class BeatManager : MonoBehaviour
         
         foreach (Intervals interval in _intervals) 
         {
-            float sampledTime = (_audioSource.timeSamples / (_audioSource.clip.frequency * interval.GetIntervalLength(_bpm)));
+            float sampledTime = (_audioSource.timeSamples / (_audioSource.clip.frequency * interval.GetIntervalLength(BPM)));
             interval.CheckForNewInterval(sampledTime);
         }
-    }
-
-    public void UpdateBpm(int newBpm)
-    {
-        _bpm = newBpm;
     }
 }
 
