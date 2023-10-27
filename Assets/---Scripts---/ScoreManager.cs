@@ -18,6 +18,7 @@ public class ScoreManager : MonoBehaviour
 
     private float _currentScore;
     private float _currentCombo;
+    private Color _startColor;
 
     private void Awake()
     {
@@ -31,6 +32,7 @@ public class ScoreManager : MonoBehaviour
         _frite = PartyManager.Instance.FriteScore;
         _croquette = PartyManager.Instance.CroquetteScore;
         _mozza = PartyManager.Instance.MozzaScore;
+        _startColor = _comboText.color;
     }
 
     private void Update()
@@ -86,8 +88,8 @@ public class ScoreManager : MonoBehaviour
 
     private void RedTextCombo()
     {
-        _comboText.DOColor(Color.red, 0);
-        _comboText.DOColor(Color.black, 1);
+        _comboText.DOColor(Color.black, 0);
+        _comboText.DOColor(_startColor, 1);
     }
 
     public void ResetScore()
