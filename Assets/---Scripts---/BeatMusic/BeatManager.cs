@@ -7,19 +7,38 @@ using UnityEngine.Events;
 
 public class BeatManager : MonoBehaviour
 {
+    public static BeatManager Instance;
+    
     [SerializeField] private float _bpm;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private Intervals[] _intervals;
 
+    public bool CanGo { get; set; }
+            
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void Update()
     {
+        if (!CanGo)
+            return;
+        
         foreach (Intervals interval in _intervals) 
         {
             float sampledTime = (_audioSource.timeSamples / (_audioSource.clip.frequency * interval.GetIntervalLength(_bpm)));
             interval.CheckForNewInterval(sampledTime);
         }
     }
+
+    public void UpdateBpm(int newBpm)
+    {
+        _bpm = newBpm;
+    }
 }
+
+
 
 [Serializable]
 public class Intervals
