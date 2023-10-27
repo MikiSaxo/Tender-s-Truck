@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8334011048196979096
 MonoBehaviour:
@@ -45,8 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a2c3ff4b2b23b48b79270ed9830cfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meshes: []
-  _elementMesh: {fileID: 0}
   _meshRenderer: {fileID: 0}
 --- !u!114 &3321857429047296569
 MonoBehaviour:
@@ -64,5 +62,5 @@ MonoBehaviour:
     type: 3}
   numberOfPoints: 5
   radius: 0.3
-  _depth: 1
+  _depth: 3.55
   _sideClockWise: 0
