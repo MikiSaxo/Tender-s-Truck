@@ -51,10 +51,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _FlickerIntensity: 4000
+    - _FlickerSpeed: 1
     - _Float: 0.82
     - _Hardness: 3.76
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Thickness: 0
+    - _TimeIntensity: 5
     m_Colors:
     - _Color: {r: 2.9237356, g: 6.339936, b: 6.964404, a: 0}
   m_BuildTextureStacks: []
