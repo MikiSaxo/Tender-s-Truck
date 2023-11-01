@@ -37,8 +37,8 @@ public class SignalElementComing : MonoBehaviour
                 ChangeSilhouette(true);
             else if (type == ElementType.RedVertical || type == ElementType.RedHorizontal)
                 ChangeSilhouette(false);
-            else
-                UnableBoth();
+            // else
+            //     UnableBoth();
         }
     }
 }
