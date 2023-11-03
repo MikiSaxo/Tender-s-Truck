@@ -112,7 +112,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3152362049424428605}
   m_LocalRotation: {x: -0.1227879, y: -0.6963641, z: -0.69636446, w: 0.122787826}
-  m_LocalPosition: {x: 0.008303581, y: -0.08701291, z: -0.0013637904}
+  m_LocalPosition: {x: 0.008303581, y: 0.23, z: -0.0013637904}
   m_LocalScale: {x: 1.2987009, y: 1.298701, z: 1.2987013}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -133,7 +133,7 @@ Light:
   m_Color: {r: 1, g: 0.90876806, b: 0.3537736, a: 1}
   m_Intensity: 4
   m_Range: 1.13
-  m_SpotAngle: 17
+  m_SpotAngle: 20
   m_InnerSpotAngle: 0
   m_CookieSize: 10
   m_Shadows:
@@ -196,8 +196,8 @@ MonoBehaviour:
   profileSync: 1
   useCustomBounds: 0
   bounds:
-    m_Center: {x: -0.35100007, y: 1.119, z: 0.3567998}
-    m_Extent: {x: 0.16887967, y: 0.5650001, z: 0.16887982}
+    m_Center: {x: 0.3229999, y: 1.3630999, z: 0.3567998}
+    m_Extent: {x: 0.19924952, y: 0.5650001, z: 0.19924967}
   profile: {fileID: 0}
   customRange: 1.13
   targetCamera: {fileID: 0}

@@ -18,7 +18,11 @@ public class TriggerChangeHeightMap : MonoBehaviour
         if(other.GetComponent<TriggerDetector>() != null)
         {
             _mapHeight.ChangeHeight((int)_whichSide);
-            AudioManager.Instance.PlaySound("ChangeHeight");
+            
+            if(_whichSide == SideHeight.Minus)
+                AudioManager.Instance.PlaySound("ChangeHeightDown");
+            else
+                AudioManager.Instance.PlaySound("ChangeHeightUp");
         }
     }
 }
