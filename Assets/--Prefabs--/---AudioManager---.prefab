@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &235152432278120847
 MonoBehaviour:
@@ -51,67 +51,72 @@ MonoBehaviour:
     Loop: 0
     Source: {fileID: 0}
   - Name: MenuMusic
-    Clip: {fileID: 8300000, guid: 8726af7fe48854143a7ef3e6e8f279c8, type: 3}
+    Clip: {fileID: 8300000, guid: a14aa2fae9f380040b073e5aa3655573, type: 3}
     Volume: 0.21
     Loop: 1
     Source: {fileID: 0}
   - Name: Sword1
-    Clip: {fileID: 8300000, guid: 29cd06d4f5f1bee44bfc4fd87ebb60bf, type: 3}
+    Clip: {fileID: 8300000, guid: a17ed372b91ab8043b3b63c93ce54ec6, type: 3}
     Volume: 0
     Loop: 0
     Source: {fileID: 0}
   - Name: Sword2
-    Clip: {fileID: 8300000, guid: 3b58eb6a5bd28b14ca6d4170f1088981, type: 3}
+    Clip: {fileID: 8300000, guid: 763ff251a47e2f740bb1713428bc75c8, type: 3}
     Volume: 0
     Loop: 0
     Source: {fileID: 0}
   - Name: Sword3
-    Clip: {fileID: 8300000, guid: 3ddb958d39b004649b99d414ae1bd43e, type: 3}
+    Clip: {fileID: 8300000, guid: f9b090bc838407c42821f8ee36824b88, type: 3}
     Volume: 0
     Loop: 0
     Source: {fileID: 0}
   - Name: Sword4
-    Clip: {fileID: 8300000, guid: 07a6c8e1329582d4d8938577ef89e70c, type: 3}
+    Clip: {fileID: 8300000, guid: d2cd444ab56afdc4ca7737aba6cd3789, type: 3}
     Volume: 0
     Loop: 0
     Source: {fileID: 0}
   - Name: LoseLife
-    Clip: {fileID: 8300000, guid: e1ff4f7cba5830a42aa78b925d50ef06, type: 3}
+    Clip: {fileID: 8300000, guid: 66a1242daea13c74ab4332f48633e0cd, type: 3}
     Volume: 0.65
     Loop: 0
     Source: {fileID: 0}
   - Name: LoseGame
-    Clip: {fileID: 8300000, guid: 2a04028c083e09f4bbc722fb32e4379f, type: 3}
-    Volume: 1
+    Clip: {fileID: 8300000, guid: 79b2b17f6264c3a48a9ce3e29cb05577, type: 3}
+    Volume: 0.524
     Loop: 0
     Source: {fileID: 0}
   - Name: Victory
-    Clip: {fileID: 8300000, guid: a4c49558a553fad4dafcf3060d0fa249, type: 3}
+    Clip: {fileID: 8300000, guid: 841783fd741fc5543b890e142435d3f8, type: 3}
     Volume: 1
     Loop: 0
     Source: {fileID: 0}
   - Name: ChangeSauce
-    Clip: {fileID: 8300000, guid: 58dd16d1a2baec646aa98988bbb3d59e, type: 3}
+    Clip: {fileID: 8300000, guid: 7b894cf49f141144691a04a67e289f3f, type: 3}
     Volume: 0.434
     Loop: 0
     Source: {fileID: 0}
   - Name: SwitchHands
-    Clip: {fileID: 8300000, guid: 58dd16d1a2baec646aa98988bbb3d59e, type: 3}
+    Clip: {fileID: 8300000, guid: 0f81e2421fc1152458a6ed3b625dd51e, type: 3}
     Volume: 0.573
     Loop: 0
     Source: {fileID: 0}
   - Name: Start
-    Clip: {fileID: 8300000, guid: 011c37999c2343948aeb696e7f1a9209, type: 3}
+    Clip: {fileID: 8300000, guid: ad1288ffe4007de499a04acf3d78d549, type: 3}
     Volume: 0.442
     Loop: 0
     Source: {fileID: 0}
   - Name: TouchMozza
-    Clip: {fileID: 8300000, guid: 58dd16d1a2baec646aa98988bbb3d59e, type: 3}
+    Clip: {fileID: 8300000, guid: d16a8b03788a9e5438987acc1b193b28, type: 3}
     Volume: 0.573
     Loop: 0
     Source: {fileID: 0}
-  - Name: ChangeHeight
-    Clip: {fileID: 8300000, guid: 58dd16d1a2baec646aa98988bbb3d59e, type: 3}
+  - Name: ChangeHeightUp
+    Clip: {fileID: 8300000, guid: 934511a13630c7245b85525dc9512c9c, type: 3}
+    Volume: 0.573
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: ChangeHeightDown
+    Clip: {fileID: 8300000, guid: 36233c18e2f5b0940a605243829a51f0, type: 3}
     Volume: 0.573
     Loop: 0
     Source: {fileID: 0}
