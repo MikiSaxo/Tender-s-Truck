@@ -115,7 +115,7 @@ Material:
     - _Metallic: 0
     - _NoiseScale: 500
     - _OcclusionStrength: 1
-    - _PanureIntensity: 0.2
+    - _PanureIntensity: 0.4
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0

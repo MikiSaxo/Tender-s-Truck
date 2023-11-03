@@ -11,17 +11,18 @@ public class SliceObject : MonoBehaviour
 {
     [Header("Setup")] [SerializeField] private VelocityEstimator _velocityEstimator;
     [SerializeField] private GameObject _sauceStick;
+    [SerializeField] private GameObject _slashPrefab;
 
-    [Space(20f)] [Header("-- Old -- ")] [Header("Points")] [SerializeField]
-    private Transform _startSlicePoint;
-
+    [Space(20f)] [Header("-- Old -- ")] 
+    [Header("Points")]
+    [SerializeField] private Transform _startSlicePoint;
     [SerializeField] private Transform _endSlicePoint;
     [Header("Other")] [SerializeField] private float _cutForce;
-    [SerializeField] private float _angleToDestroy;
+    // [SerializeField] private float _angleToDestroy;
     [SerializeField] private Material[] _sliceMat;
     [SerializeField] private LayerMask _sliceable;
     [Header("Temp")] [SerializeField] private ElementType _currentType;
-    [SerializeField] private TMP_Text _debug;
+    // [SerializeField] private TMP_Text _debug;
 
     private Vector3 _previousPos;
     private float _velocityToCut;
@@ -152,6 +153,9 @@ public class SliceObject : MonoBehaviour
             GameObject lowerHull = hull.CreateLowerHull(newTarget, _currentSliceMat);
             SetupSliceComponent(lowerHull, newTarget.transform);
 
+            GameObject go = Instantiate(_slashPrefab);
+            go.transform.position = target.transform.position;
+            
             Destroy(target);
             Destroy(upperHull, 5);
             Destroy(lowerHull, 5);

@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fe2309503fe11c4ab86793200c6819d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mozzaPoint: {fileID: 3339532100541236026, guid: 17cc72710a596f5449d0168b693aaaab,
+  _mozzaPoint: {fileID: 4524037582514998937, guid: 17cc72710a596f5449d0168b693aaaab,
     type: 3}
   numberOfPoints: 8
   radius: 0.3

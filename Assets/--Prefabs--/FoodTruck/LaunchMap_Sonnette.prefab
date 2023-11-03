@@ -25,9 +25,9 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8124261918985986367}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -0.0895}
-  m_LocalScale: {x: 0.10909246, y: 0.10909245, z: 0.10909246}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: -0.08929448}
+  m_LocalScale: {x: 0.10909245, y: 0.10909245, z: 0.109092444}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1888222751507315958}
@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0024, y: -0.0607}
+  m_AnchoredPosition: {x: 0.0021972656, y: -0.06561279}
   m_SizeDelta: {x: 1.035, y: 0.4377}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &3666440688630646018
@@ -369,7 +369,7 @@ PrefabInstance:
     - target: {fileID: 2691745858651430380, guid: 8560e95435a29d34eb1269e245f84575,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2691745858651430380, guid: 8560e95435a29d34eb1269e245f84575,
         type: 3}
@@ -460,6 +460,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290397982698208132, guid: 8560e95435a29d34eb1269e245f84575,
+        type: 3}
+      propertyPath: bounds.m_Center.x
+      value: -0.25880015
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290397982698208132, guid: 8560e95435a29d34eb1269e245f84575,
+        type: 3}
+      propertyPath: bounds.m_Center.y
+      value: 1.4252999
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290397982698208132, guid: 8560e95435a29d34eb1269e245f84575,
+        type: 3}
+      propertyPath: bounds.m_Center.z
+      value: -0.8842002
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290397982698208132, guid: 8560e95435a29d34eb1269e245f84575,
+        type: 3}
+      propertyPath: bounds.m_Extent.x
+      value: 0.2553807
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290397982698208132, guid: 8560e95435a29d34eb1269e245f84575,
+        type: 3}
+      propertyPath: bounds.m_Extent.z
+      value: 0.25538075
       objectReference: {fileID: 0}
     - target: {fileID: 6082838709582038796, guid: 8560e95435a29d34eb1269e245f84575,
         type: 3}
