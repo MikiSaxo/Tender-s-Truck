@@ -33,6 +33,7 @@ public class SauceProjection : MonoBehaviour
     [SerializeField] float _minOrientation;
     [SerializeField] float _maxOrientation;
     [SerializeField] float _orientationMultiplicator;
+    [SerializeField] float _orientationVelocityThreshold;
 
     [Space(10)]
 
@@ -69,12 +70,12 @@ public class SauceProjection : MonoBehaviour
         if (crntRotation > _maxOrientation)
             crntRotation = _maxOrientation;
 
-        if (crntRotation <= _minOrientation)
+        if (crntRotation <= _orientationVelocityThreshold)
         {
-            sauceEffect.SetFloat("MinRotationX", 0.2f);
-            sauceEffect.SetFloat("MaxRotationX", 0.2f);
-            sauceEffect.SetFloat("MinRotationZ", 0.2f);
-            sauceEffect.SetFloat("MaxRotationZ", 0.2f);
+            sauceEffect.SetFloat("MinRotationX", _minOrientation);
+            sauceEffect.SetFloat("MaxRotationX", _minOrientation);
+            sauceEffect.SetFloat("MinRotationZ", _minOrientation);
+            sauceEffect.SetFloat("MaxRotationZ", _minOrientation);
         }
         else
         {

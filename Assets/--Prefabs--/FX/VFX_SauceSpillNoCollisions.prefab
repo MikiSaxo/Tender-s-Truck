@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!2083052967 &6808428277606836898
 VisualEffect:
@@ -64,6 +64,18 @@ VisualEffect:
       - m_Value: 1.5
         m_Name: Lifetime
         m_Overridden: 1
+      - m_Value: 0.2
+        m_Name: MaxRotationX
+        m_Overridden: 0
+      - m_Value: 0
+        m_Name: MaxRotationZ
+        m_Overridden: 0
+      - m_Value: 0
+        m_Name: MinRotationZ
+        m_Overridden: 0
+      - m_Value: 0
+        m_Name: MinRotationX
+        m_Overridden: 0
     m_Vector2f:
       m_Array: []
     m_Vector3f:

@@ -16,7 +16,7 @@ public class TouchObject : MonoBehaviour
             Instantiate(_mozzaPaned);
             _mozzaPaned.transform.position = other.gameObject.transform.position;
             Destroy(other.gameObject);
-            Destroy(_mozzaPaned, 5);
+            // Destroy(_mozzaPaned, 5);
         }
     }
 }
