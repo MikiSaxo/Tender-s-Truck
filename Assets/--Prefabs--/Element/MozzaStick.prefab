@@ -60,7 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mozzaPoint: {fileID: 3339532100541236026, guid: 17cc72710a596f5449d0168b693aaaab,
     type: 3}
-  numberOfPoints: 22
-  radius: 0.61
+  numberOfPoints: 8
+  radius: 0.3
   _depth: 5
   _sideClockWise: 0
