@@ -112,7 +112,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3152362049424428605}
   m_LocalRotation: {x: -0.1227879, y: -0.6963641, z: -0.69636446, w: 0.122787826}
-  m_LocalPosition: {x: 0.008303581, y: 0.23, z: -0.0013637904}
+  m_LocalPosition: {x: 0, y: 0.23, z: 0}
   m_LocalScale: {x: 1.2987009, y: 1.298701, z: 1.2987013}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -196,8 +196,8 @@ MonoBehaviour:
   profileSync: 1
   useCustomBounds: 0
   bounds:
-    m_Center: {x: 0.3229999, y: 1.3630999, z: 0.3567998}
-    m_Extent: {x: 0.19924952, y: 0.5650001, z: 0.19924967}
+    m_Center: {x: 0.00000010944902, y: 0.7421, z: 0.00000016838311}
+    m_Extent: {x: 0.2553807, y: 0.5650001, z: 0.25538075}
   profile: {fileID: 0}
   customRange: 1.13
   targetCamera: {fileID: 0}
@@ -369,7 +369,7 @@ Transform:
   - {fileID: 7029790437474488425}
   - {fileID: 4812573314829938694}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1149686352470112160
 MonoBehaviour:
