@@ -1,0 +1,117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1993044374838752186
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 314744385019645394}
+  - component: {fileID: 235152432278120847}
+  m_Layer: 0
+  m_Name: ---AudioManager---
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &314744385019645394
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1993044374838752186}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &235152432278120847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1993044374838752186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aae18d4b8602d5249b02f39c34fa506f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sounds:
+  - Name: MainMusic
+    Clip: {fileID: 8300000, guid: 4048563886bca2a418964f819f56523e, type: 3}
+    Volume: 1
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: MenuMusic
+    Clip: {fileID: 8300000, guid: 8726af7fe48854143a7ef3e6e8f279c8, type: 3}
+    Volume: 0.21
+    Loop: 1
+    Source: {fileID: 0}
+  - Name: Sword1
+    Clip: {fileID: 8300000, guid: 29cd06d4f5f1bee44bfc4fd87ebb60bf, type: 3}
+    Volume: 0
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: Sword2
+    Clip: {fileID: 8300000, guid: 3b58eb6a5bd28b14ca6d4170f1088981, type: 3}
+    Volume: 0
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: Sword3
+    Clip: {fileID: 8300000, guid: 3ddb958d39b004649b99d414ae1bd43e, type: 3}
+    Volume: 0
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: Sword4
+    Clip: {fileID: 8300000, guid: 07a6c8e1329582d4d8938577ef89e70c, type: 3}
+    Volume: 0
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: LoseLife
+    Clip: {fileID: 8300000, guid: e1ff4f7cba5830a42aa78b925d50ef06, type: 3}
+    Volume: 0.65
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: LoseGame
+    Clip: {fileID: 8300000, guid: 2a04028c083e09f4bbc722fb32e4379f, type: 3}
+    Volume: 1
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: Victory
+    Clip: {fileID: 8300000, guid: a4c49558a553fad4dafcf3060d0fa249, type: 3}
+    Volume: 1
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: ChangeSauce
+    Clip: {fileID: 8300000, guid: 58dd16d1a2baec646aa98988bbb3d59e, type: 3}
+    Volume: 0.434
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: SwitchHands
+    Clip: {fileID: 8300000, guid: 58dd16d1a2baec646aa98988bbb3d59e, type: 3}
+    Volume: 0.573
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: Start
+    Clip: {fileID: 8300000, guid: 011c37999c2343948aeb696e7f1a9209, type: 3}
+    Volume: 0.442
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: TouchMozza
+    Clip: {fileID: 8300000, guid: 58dd16d1a2baec646aa98988bbb3d59e, type: 3}
+    Volume: 0.573
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: ChangeHeight
+    Clip: {fileID: 8300000, guid: 58dd16d1a2baec646aa98988bbb3d59e, type: 3}
+    Volume: 0.573
+    Loop: 0
+    Source: {fileID: 0}
